@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-WebsideCarApplication<Webside_Car>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.fptpoly.main.WebsideCarApplication",
+            "projectName": "Webside_Car",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

@@ -1,0 +1,969 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{site/layouts/dashboardLayout.html}">
+
+<head>
+
+</head>
+<body>
+<section layout:fragment="content" style="margin-top: 108px;" ng-controller="myctrl">
+
+    <script>
+        var app = angular.module('myApp', []);
+        app.controller('myctrl', function ($scope, $http) {
+            $http.get('/TotalPage').then(function (response) {
+                $scope.totalpage = response.data;
+            })
+            $http.get('/Brands').then(function (response) {
+                $scope.Brands = response.data;
+            })
+            $scope.fillHang = function(hang){
+                $http.get('/Cars?hang='+hang).then(function (response) {
+                    $scope.Cars = response.data;
+                })
+            }
+        });
+    </script>
+
+
+    <div id="page">
+        <div class="page-heading">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul>
+                                <li class="home"><a href="index-2.html" title="Go to Home Page">Trang chủ</a> <span>&rsaquo; </span>
+                                </li>
+                                <li class="category1599"><a href="grid.html" title="">Xe hơi mới</a>
+                                    <span>&rsaquo; </span></li>
+                                <li class="category1600"><a href="grid.html" title="">Audi</a> <span>&rsaquo; </span>
+                                </li>
+                                <li class="category1601"><strong>Sedans</strong></li>
+                            </ul>
+                        </div>
+                        <!--col-xs-12-->
+                    </div>
+                    <!--row-->
+                </div>
+                <!--container-->
+            </div>
+            <div class="page-title">
+                <h2>Danh sách sản phẩm</h2>
+            </div>
+        </div>
+        <!--breadcrumbs-->
+        <!-- BEGIN Main Container col2-left -->
+        <section class="main-container col2-left-layout bounceInUp animated">
+            <!-- For version 1, 2, 3, 8 -->
+            <!-- For version 1, 2, 3 -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                        <div class="pro-coloumn">
+                            <article class="col-main">
+                                <div class="toolbar">
+                                    <div class="sorter">
+                                        <div class="view-mode"><a th:href="@{/home/listcar?page=1}" title="List"
+                                                                  class="button-grid">&nbsp;</a> <span title="list"
+                                                                                                       class="button button-active button-list">&nbsp;</span>
+                                        </div>
+                                    </div>
+                                    <div id="sort-by">
+                                        <label class="left">Sắp xếp bởi: </label>
+                                        <ul>
+                                            <li><a href="#">Position<span class="right-arrow"></span></a>
+                                                <ul>
+                                                    <li><a href="#">Tên</a></li>
+                                                    <li><a href="#">Giá</a></li>
+                                                    <li><a href="#">Position</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <a class="button-asc left" href="#" title="Set Descending Direction"><span
+                                                class="top_arrow"></span></a>
+                                    </div>
+                                    <div class="pager">
+                                        <div id="limiter">
+                                            <div>
+                                                <form th:action="@{/home/listcar?page=1}" method="get">
+                                                    <input type="text" hidden name="page" value="1">
+                                                    <input type="text" placeholder="Search..." name="search">
+                                                    <button>Search</button>
+                                                </form>
+
+                                            </div>
+
+
+                                            <label>Tổng Số Trang: <th:block th:text="${AllCar.getTotalPages()}" /></label>
+                                            <!--<ul>
+                                                <li><a href="#">15<span class="right-arrow"></span></a>
+                                                    <ul>
+                                                        <li><a href="#">20</a></li>
+                                                        <li><a href="#">30</a></li>
+                                                        <li><a href="#">35</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>-->
+                                        </div>
+                                        <div class="pages">
+                                            <label>Trang:</label>
+                                            <ul class="pagination">
+                                                <li><a th:href="@{'/home/listcar?page='+${IndexPage-1<1?1:IndexPage-1}}">&laquo;</a></li>
+                                                <li class="active"><a href="#"><th:block th:text="${IndexPage}"/></a></li>
+                                                <li><a style="border: none;font-size: 15px;width: 10px" href="#">|</a></li>
+                                                <li class="active"><a href="#"><th:block th:text="${AllCar.getTotalPages()}"/></a></li>
+                                                <li><a th:href="@{'/home/listcar?page='+${IndexPage+1>AllCar.getTotalPages()?AllCar.getTotalPages():IndexPage+1}}">&raquo;</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="category-products">
+                                    <ol class="products-list" id="products-list">
+                                        <li class="item first" th:each="Car : ${AllCar}" style="padding-top: 10px">
+                                            <div class="product-image"><a th:href="@{'/home/car-detail?idcar='+${Car.idcar}}"
+                                                                          th:title="${Car.tencar}"> <img
+                                                    class="small-image" th:if="${Car.image!=null}" th:src="${Car.image}"
+                                                    alt="HTC Rhyme Sense">
+                                                <img class="small-image" th:if="${Car.image==null}"
+                                                     src="https://th.bing.com/th/id/R.423cd98ca0ee22fcb6b6e1c72fb91a8b?rik=yuVm998lNiEJbA&pid=ImgRaw&r=0"
+                                                     alt="HTC Rhyme Sense">
+                                            </a></div>
+                                            <div class="product-shop">
+                                                <h2 class="product-name"><a th:href="@{'/home/car-detail?idcar='+${Car.idcar}}"
+                                                                            th:title="${Car.tencar}"
+                                                                            th:text="${Car.tencar}"/></h2>
+                                                <div class="ratings">
+                                                    <div class="rating-box">
+                                                        <div style="width:50%" class="rating"></div>
+                                                    </div>
+                                                    <p class="rating-links"><a
+                                                            href="#/review/product/list/id/167/category/35/">1 Đánh
+                                                        giá</a> <span class="separator">|</span> <a href="#review-form">Thêm
+                                                        đánh giá</a></p>
+                                                </div>
+                                                <div class="desc std">
+                                                    <p>Sed volutpat ac massa eget
+                                                        lacinia.
+                                                        Aenean volutpat lacus at dolor blandit </p>
+                                                    <p>Sed sed interdum diam. Donec sit ametenim tempor, dapibus nunc
+                                                        eu,
+                                                        tincidunt mi. Vivamus dictum nec... <a class="link-learn"
+                                                                                               title="" href="#">Xem
+                                                            thêm</a></p>
+                                                </div>
+                                                <div class="price-box">
+                                                    <!--<p class="old-price"> <span class="price-label"></span> <span id="old-price-212" class="price"> $442.99 </span> </p>-->
+                                                    <p class="special-price"><span class="price-label"></span> <span
+                                                            id="product-price-212" class="price"
+                                                            th:text="${'$ '+Car.gia}"/></p>
+                                                </div>
+                                                <div class="actions">
+                                                    <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng"
+                                                            type="button"><span>Thêm vào giỏ hàng</span></button>
+                                                    <span class="add-to-links"> <a title="Thêm vào danh sách yêu thích"
+                                                                                   class="button link-wishlist"
+                                                                                   href="#"><span>Thêm vào danh sách yêu thích</span></a> <a
+                                                            title="Thêm vào so sánh" class="button link-compare"
+                                                            href="#"><span>Thêm vào so sánh</span></a> </span></div>
+                                            </div>
+                                        </li>
+
+                                        <!--
+                                                  <li class="item even">
+                                                    <div class="product-image"> <a href="product-detail.html" title="Microsoft Natural Keyboard"> <img class="small-image" src="/products-images/p2.jpg" alt="Microsoft Natural Keyboard"> </a> </div>
+                                                    <div class="product-shop">
+                                                      <h2 class="product-name"><a href="product-detail.html" title="Microsoft Natural Keyboard">Microsoft Natural Keyboard</a></h2>
+                                                      <div class="desc std">
+                                                        <p>Sed volutpat ac massa eget
+                                                          lacinia. Suspendisse non purus semper, tellus vel, tristique urna.
+                                                          Aenean volutpat lacus at dolor blandit. </p>
+                                                        <p>Sed sed interdum diam. Donec sit ametenim tempor, dapibus nunc eu,
+                                                          tincidunt mi. Vivamus dignissimm ... <a class="link-learn" title="" href="#">Xem thêm</a></p>
+                                                      </div>
+                                                      <div class="price-box"> <span class="regular-price" id="product-price-159"> <span class="price">$99.99</span> </span> </div>
+                                                      <div class="actions">
+                                                        <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng" type="button"><span>Thêm vào giỏ hàng</span></button>
+                                                        <span class="add-to-links"> <a title="Thêm vào danh sách yêu thích" class="button link-wishlist" href="#"><span>Thêm vào danh sách yêu thích</span></a> <a title="Thêm vào so sánh" class="button link-compare" href="#"><span>Thêm vào so sánh</span></a> </span> </div>
+                                                    </div>
+                                                  </li>
+                                                  <li class="item odd">
+                                                    <div class="product-image"> <a href="product-detail.html" title="30&quot; Flat-Panel HD Monitor"> <img class="small-image" src="/products-images/p3.jpg" alt="30&quot; Flat-Panel HD Monitor"> </a> </div>
+                                                    <div class="product-shop">
+                                                      <h2 class="product-name"><a href="product-detail.html" title="30&quot; Flat-Panel HD Monitor">30" Flat-Panel HD Monitor</a></h2>
+                                                      <div class="desc std">Computer games, digital photo
+                                                        editing and graphic applications will astound you on this huge 30"
+                                                        flat-panel monitor.
+                                                        <p>Sed sed interdum diam. Donec sit ametenim tempor, dapibus nunc eu,
+                                                          tincidunt mi. </p>
+                                                        <p>Phasellus consequat id purus in convallis. Nulla quis... <a class="link-learn" title="" href="#">Xem thêm</a></p>
+                                                      </div>
+                                                      <div class="price-box"> <span class="regular-price" id="product-price-157"> <span class="price">$699.99</span> </span> </div>
+                                                      <div class="actions">
+                                                        <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng" type="button"><span>Thêm vào giỏ hàng</span></button>
+                                                        <span class="add-to-links"> <a title="Thêm vào danh sách yêu thích" class="button link-wishlist" href="#"><span>Thêm vào danh sách yêu thích</span></a> <a title="Thêm vào so sánh" class="button link-compare" href="#"><span>Thêm vào so sánh</span></a> </span> </div>
+                                                    </div>
+                                                  </li>
+                                                  <li class="item even">
+                                                    <div class="product-image"> <a href="product-detail.html" title="19&quot; Widescreen LCD Monitor"> <img class="small-image" src="/products-images/p4.jpg" alt="19&quot; Widescreen LCD Monitor"> </a> </div>
+                                                    <div class="product-shop">
+                                                      <h2 class="product-name"><a href="product-detail.html" title="19&quot; Widescreen LCD Monitor">19" Widescreen LCD Monitor</a></h2>
+                                                      <div class="desc std">2 ms response time; 10,000:1 contrast ratio; 300 cd/m² brightness; 1440 x 900 maximum resolution; DVI-D and 15-pin D-sub inputs
+                                                        <p>Phasellus consequat id purus pretium enimnec, tristique... <a class="link-learn" title="" href="#">Xem thêm</a> </p>
+                                                      </div>
+                                                      <div class="price-box"> <span class="regular-price" id="product-price-156"> <span class="price">$399.99</span> </span> </div>
+                                                      <div class="actions">
+                                                        <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng" type="button"><span>Thêm vào giỏ hàng</span></button>
+                                                        <span class="add-to-links"> <a title="Thêm vào danh sách yêu thích" class="button link-wishlist" href="#"><span>Thêm vào danh sách yêu thích</span></a> <a title="Thêm vào so sánh" class="button link-compare" href="#"><span>Thêm vào so sánh</span></a> </span> </div>
+                                                    </div>
+                                                  </li>
+                                                  <li class="item odd">
+                                                    <div class="product-image"> <a href="product-detail.html" title="Seagate 250GB HD "> <img class="small-image" src="/products-images/p5.jpg" alt="Seagate 250GB HD "> </a> </div>
+                                                    <div class="product-shop">
+                                                      <h2 class="product-name"><a href="product-detail.html" title="Seagate 250GB HD ">Seagate 250GB HD </a></h2>
+                                                      <div class="desc std">1 TB - 7200RPM, SATA 3.0Gb/s, 32MB Cache
+                                                        <p>Maecenas vehicula volutpat elit, in interdum lacus faucibus sit amet. </p>
+                                                        <p>Sed sed interdum diam. Donec sit ametenim tempor, dapibus nunc eu,
+                                                          tincidunt mi. Vivamus dignissim nisl. Donec eget feugiat ante.
+                                                          Integerarcu libero, dictum nec congue sed, faucibus ... <a class="link-learn" title="" href="#">Xem thêm</a> </p>
+                                                      </div>
+                                                      <div class="price-box"> <span class="regular-price" id="product-price-155"> <span class="price">$99.00</span> </span> </div>
+                                                      <div class="actions">
+                                                        <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng" type="button"><span>Thêm vào giỏ hàng</span></button>
+                                                        <span class="add-to-links"> <a title="Thêm vào danh sách yêu thích" class="button link-wishlist" href="#"><span>Thêm vào danh sách yêu thích</span></a> <a title="Thêm vào so sánh" class="button link-compare" href="#"><span>Thêm vào so sánh</span></a> </span> </div>
+                                                    </div>
+                                                  </li>
+                                                  <li class="item even">
+                                                    <div class="product-image"> <a href="product-detail.html" title="Seagate 500GB HD"> <img class="small-image" src="/products-images/p6.jpg" alt="Seagate 500GB HD"> </a> </div>
+                                                    <div class="product-shop">
+                                                      <h2 class="product-name"><a href="product-detail.html" title="Seagate 500GB HD">Seagate 500GB HD</a></h2>
+                                                      <div class="desc std">1 TB - 7200RPM, SATA 3.0Gb/s, 32MB Cache
+                                                        <p>Aenean volutpat lacus at dolor blandit,
+                                                          vitae lobortisante semper. Ut
+                                                          bibendum metusfringilla, in interdum lacus faucibus sit amet. </p>
+                                                        <p> Donec eget feugiat ante.
+                                                          Integerarcu libero... <a class="link-learn" title="" href="#">Xem thêm</a> </p>
+                                                      </div>
+                                                      <div class="price-box"> <span class="regular-price" id="product-price-154"> <span class="price">$299<span class="sub">.00</span></span> </span> </div>
+                                                      <div class="actions">
+                                                        <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng" type="button"><span>Thêm vào giỏ hàng</span></button>
+                                                        <span class="add-to-links"> <a title="Thêm vào danh sách yêu thích" class="button link-wishlist" href="#"><span>Thêm vào danh sách yêu thích</span></a> <a title="Thêm vào so sánh" class="button link-compare" href="#"><span>Thêm vào so sánh</span></a> </span> </div>
+                                                    </div>
+                                                  </li>
+                                                  <li class="item odd">
+                                                    <div class="product-image"> <a href="product-detail.html" title="Intel Core 2 Extreme QX9775"> <img class="small-image" src="/products-images/p7.jpg" alt="Intel Core 2 Extreme QX9775"> </a> </div>
+                                                    <div class="product-shop">
+                                                      <h2 class="product-name"><a href="product-detail.html" title="Intel Core 2 Extreme QX9775">Intel Core 2 Extreme QX9775</a></h2>
+                                                      <div class="desc std">Intel Core 2 Extreme QX9775
+                                                        Processor BX80574QX9775 - 45nm, 3.20GHz, 12MB Cache, 1600MHz FSB,
+                                                        <p>Vivamus dignissim nisl eu euismod ullamcorper. Donec
+                                                          pellentesque diam id est tristique vestibulum. Donec eget feugiat ante.
+                                                          Integerarcu libero, dictum nec congue sed, faucibus sit amet lectus. </p>
+                                                        <p>Phasellus consequat... <a class="link-learn" title="" href="#">Xem thêm</a> </p>
+                                                      </div>
+                                                      <div class="price-box"> <span class="regular-price" id="product-price-153"> <span class="price">$2,049.99</span> </span> </div>
+                                                      <div class="actions">
+                                                        <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng" type="button"><span>Thêm vào giỏ hàng</span></button>
+                                                        <span class="add-to-links"> <a title="Thêm vào danh sách yêu thích" class="button link-wishlist" href="#"><span>Thêm vào danh sách yêu thích</span></a> <a title="Thêm vào so sánh" class="button link-compare" href="#"><span>Thêm vào so sánh</span></a> </span> </div>
+                                                    </div>
+                                                  </li>
+                                                  <li class="item even">
+                                                    <div class="product-image"> <a href="product-detail.html" title="24&quot; Widescreen LCD Monitor"> <img class="small-image" src="/products-images/p8.jpg" alt="24&quot; Widescreen LCD Monitor"> </a> </div>
+                                                    <div class="product-shop">
+                                                      <h2 class="product-name"><a href="product-detail.html" title="24&quot; Widescreen LCD Monitor">24" Widescreen LCD Monitor</a></h2>
+                                                      <div class="desc std">5 ms response time; 10,000:1 contrast ratio; 400 cd/m² brightness; 1920 x 1200 maximum resolution; DVI-D and 15-pin D-sub inputs
+                                                        <p> tellus vel, tristique urna. </p>
+                                                        <p>Phasellus consequat id purus in convallis. Nulla quis nunc auctor,
+                                                          pretium enimnec, tristique magna... <a class="link-learn" title="" href="#">Xem thêm</a> </p>
+                                                      </div>
+                                                      <div class="price-box"> <span class="regular-price" id="product-price-152"> <span class="price">$699.99</span> </span> </div>
+                                                      <div class="actions">
+                                                        <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng" type="button"><span>Thêm vào giỏ hàng</span></button>
+                                                        <span class="add-to-links"> <a title="Thêm vào danh sách yêu thích" class="button link-wishlist" href="#"><span>Thêm vào danh sách yêu thích</span></a> <a title="Thêm vào so sánh" class="button link-compare" href="#"><span>Thêm vào so sánh</span></a> </span> </div>
+                                                    </div>
+                                                  </li>
+                                                  <li class="item odd">
+                                                    <div class="product-image"> <a href="product-detail.html" title="Logitech Optical Trackman"> <img class="small-image" src="/products-images/p9.jpg" alt="Logitech Optical Trackman"> </a> </div>
+                                                    <div class="product-shop">
+                                                      <h2 class="product-name"><a href="product-detail.html" title="Logitech Optical Trackman">Logitech Optical Trackman</a></h2>
+                                                      <div class="desc std">Our most advanced trackball yet.
+
+                                                        Save space and eliminate desktop clutter.
+                                                        <p>Donec eget feugiat ante.
+                                                          Integerarcu libero, dictum nec congue sed, faucibus sit amet lectus. </p>
+                                                        <p>Vivamus vitae arcu faucibus, dictum
+                                                          magna vel, adipiscing... <a class="link-learn" title="" href="#">Xem thêm</a> </p>
+                                                      </div>
+                                                      <div class="price-box"> <span class="regular-price" id="product-price-160"> <span class="price">$79.99</span> </span> </div>
+                                                      <div class="actions">
+                                                        <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng" type="button"><span>Thêm vào giỏ hàng</span></button>
+                                                        <span class="add-to-links"> <a title="Thêm vào danh sách yêu thích" class="button link-wishlist" href="#"><span>Thêm vào danh sách yêu thích</span></a> <a title="Thêm vào so sánh" class="button link-compare" href="#"><span>Thêm vào so sánh</span></a> </span> </div>
+                                                    </div>
+                                                  </li>
+                                                  <li class="item last even">
+                                                    <div class="product-image"> <a href="product-detail.html" title="Logitech diNovo Edge Keyboard"> <img class="small-image" src="/products-images/p10.jpg" alt="Logitech diNovo Edge Keyboard"> </a> </div>
+                                                    <div class="product-shop">
+                                                      <h2 class="product-name"><a href="product-detail.html" title="Logitech diNovo Edge Keyboard">Logitech diNovo Edge Keyboard</a></h2>
+                                                      <div class="ratings">
+                                                        <div class="rating-box">
+                                                          <div style="width:80%" class="rating"></div>
+                                                        </div>
+                                                        <p class="rating-links"> <a href="#/review/product/list/id/167/category/35/">1 Đánh giá</a> <span class="separator">|</span> <a href="#/review/product/list/id/167/category/35/#review-form">Thêm đánh giá</a> </p>
+                                                      </div>
+                                                      <div class="desc std">Li-Ion powered.
+                                                        <p>Sed volutpat ac massa eget lacinia. Suspendisse non purus semper,
+                                                          vitae lobortisante semper. </p>
+                                                        <p>Integerarcu libero, dictum nec congue sed, faucibus sit... <a class="link-learn" title="" href="#">Xem thêm</a> </p>
+                                                      </div>
+                                                      <div class="price-box"> <span class="regular-price" id="product-price-161"> <span class="price">$239.99</span> </span> </div>
+                                                      <div class="actions">
+                                                        <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng" type="button"><span>Thêm vào giỏ hàng</span></button>
+                                                        <span class="add-to-links"> <a title="Thêm vào danh sách yêu thích" class="button link-wishlist" href="#"><span>Thêm vào danh sách yêu thích</span></a> <a title="Thêm vào so sánh" class="button link-compare" href="#"><span>Thêm vào so sánh</span></a> </span> </div>
+                                                    </div>
+                                                  </li>-->
+                                    </ol>
+                                </div>
+                                <div class="toolbar bottom">
+
+                                    <div id="sort-by">
+                                        <label class="left">Sắp xếp bởi: </label>
+                                        <ul>
+                                            <li><a href="#">Position<span class="right-arrow"></span></a>
+                                                <ul>
+                                                    <li><a href="#">Tên</a></li>
+                                                    <li><a href="#">Giá</a></li>
+                                                    <li><a href="#">Position</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                        <a class="button-asc left" href="#" title="Set Descending Direction"><span
+                                                class="top_arrow"></span></a></div>
+                                    <div class="pager">
+                                        <div id="limiter">
+                                            <label>Lượt xem: </label>
+                                            <ul>
+                                                <li><a href="#">15<span class="right-arrow"></span></a>
+                                                    <ul>
+                                                        <li><a href="#">20</a></li>
+                                                        <li><a href="#">30</a></li>
+                                                        <li><a href="#">35</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="pages">
+                                            <label>Trang:</label>
+                                            <ul class="pagination">
+                                                <li><a href="#">&laquo;</a></li>
+                                                <li class="active"><a href="#">1</a></li>
+                                                <li><a href="#">2</a></li>
+                                                <li><a href="#">3</a></li>
+                                                <li><a href="#">4</a></li>
+                                                <li><a href="#">5</a></li>
+                                                <li><a href="#">&raquo;</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </article>
+                        </div>
+                        <!--	///*///======    End article  ========= //*/// -->
+                    </div>
+                    <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
+                        <div class="section-filter">
+                            <div class="b-filter__inner bg-grey">
+                                <h2>TÌM CHIẾC XE PHÙ HỢP VỚI BẠN</h2>
+                                <form th:action="@{/home/listcar?page=1}" class="b-filter" method="get">
+                                    <div class="btn-group bootstrap-select" style="width: 100%;">
+                                        <select name="typecar" class="selectpicker" data-width="100%" tabindex="-98">
+                                            <option value="">Chọn Hãng Xe</option>
+                                            <option th:each="brand :${Brands}" th:value="${brand.getMa()}"><th:block th:text="${brand.getTenhang()}"/></option>
+                                            <!--<option>Make 2</option>
+                                            <option>Make 3</option>-->
+                                        </select>
+                                    </div>
+                                    <div class="btn-group bootstrap-select" style="width: 100%;">
+                                        <input name="Year" placeholder="Năm Sản Xuất" style="width:250px;margin-bottom:5px" class="selectpicker" data-width="100%" tabindex="-98" />
+                                    </div>
+                                    <div class="btn-group bootstrap-select" style="width: 100%;">
+                                        <select name="model" class="selectpicker" data-width="100%" tabindex="-98">
+                                            <option value="">Chọn kiểu xe</option>
+                                            <option th:each="model :${Types}" th:value="${model.getMaloai()}"><th:block th:text="${model.getTenloai()}" /></option>
+                                        </select>
+                                    </div>
+                                    <div class="btn-group bootstrap-select" style="width: 100%;">
+                                        <select class="selectpicker" data-width="100%" tabindex="-98">
+                                            <option value="">Chọn hộp số</option>
+                                            <option>Số Tự Động</option>
+                                            <option>Số Sàn</option>
+                                        </select>
+                                    </div>
+                                    <!--<div class="btn-group bootstrap-select" style="width: 100%;">
+                                        <select class="selectpicker" data-width="100%" tabindex="-98">
+                                            <option>Chọn năm</option>
+                                            <option>2017</option>
+                                            <option>2016</option>
+                                            <option>2015</option>
+                                        </select>
+                                    </div>-->
+<!--                                    <div class="ui-filter-slider">
+                                        <div class="sidebar-widget-body m-t-10">
+                                            <div class="price-range-holder"><span class="min-max"> <span
+                                                    class="pull-left">$200.00</span> <span
+                                                    class="pull-right">$800.00</span> </span>
+                                                <input type="text" class="price-slider" value="" style="display:block">
+                                            </div>
+                                            &lt;!&ndash; /.price-range-holder &ndash;&gt;
+                                        </div>
+                                    </div>-->
+                                    <div>
+                                        <div class="b-filter__btns">
+                                            <button style="position: relative;" class="btn btn-lg btn-primary">Tìm xe</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- BEGIN SIDE-NAV-CATEGORY -->
+                        <div class="side-nav-categories">
+                            <div class="block-title"> Danh mục</div>
+                            <!--block-title-->
+                            <!-- BEGIN BOX-CATEGORY -->
+                            <div class="box-content box-category">
+                                <ul>
+                                    <li><a class="active" href="grid.html">Âm thanh</a> <span
+                                            class="subDropdown minus"></span>
+                                        <ul class="level0_415" style="display:block">
+                                            <li><a href="grid.html"> Bộ khuyếch đại </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html"> Bộ phận lắp đặt‎ </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html"> Diễn giả </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html">Âm thanh nổi </a> <span class=""></span>
+                                            <li><a href="grid.html">Loa siêu trầm </a> <span class=""></span></li>
+
+                                            <!--level1-->
+                                            </li>
+                                        </ul>
+                                        <!--level0-->
+
+                                    </li>
+                                    <!--level 0-->
+                                    <li><a href="grid.html">Phụ kiện thân xe</a> <span class="subDropdown plus"></span>
+                                        <ul class="level0_455" style="display:none">
+                                            <li><a href="grid.html"> Bộ đệm </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html"> Cửa </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html"> Chắn bùn </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html"> Lưới </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html">Máy hút mùi </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+
+                                            <!--level1-->
+                                            </li>
+
+                                        </ul>
+                                        <!--level0-->
+                                    </li>
+                                    <!--level 0-->
+                                    <li><a href="#.html">Ngoại thất</a> <span class="subDropdown plus"></span>
+                                        <ul class="level0_482" style="display:none">
+                                            <li><a href="grid.html"> Phụ kiện giường ngủ </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html">Đồ bó sát </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html">Lưới tùy chỉnh </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html"> Bao xe </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+                                            <li><a href="grid.html"> Bộ đệm địa hình </a> <span class=""></span>
+
+                                                <!--level1-->
+                                            </li>
+                                            <!--level1-->
+
+                                            </li>
+                                            <!--level1-->
+                                        </ul>
+                                        <!--level0-->
+                                    </li>
+                                    <!--level 0-->
+                                    <li><a href="grid.html">Nội thất</a> <span class="subDropdown plus"></span>
+                                        <ul class="level0_482" style="display:none">
+                                            <li><a href="grid.html"> Đồng hồ đo tùy chỉnh </a> <span class=""></span>
+                                            </li>
+                                            <li><a href="grid.html"> Bộ dụng cụ Dash </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Bọc ghế </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Tay lái </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Sun Shades</a> <span class=""></span></li>
+                                            </li>
+                                            <!--level 0-->
+
+                                        </ul>
+                                        <!--level 0-->
+                                    <li><a href="grid.html">Thắp sáng</a> <span class="subDropdown plus"></span>
+                                        <ul class="level0_482" style="display:none">
+                                            <li><a href="grid.html"> Đèn sương mù </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Đèn pha </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Đèn LED </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Đèn địa hình </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Đèn tín hiệu </a> <span class=""></span></li>
+                                            </li>
+                                            <!--level 0-->
+
+                                        </ul>
+                                        <!--level 0-->
+                                    <li><a href="grid.html">Hiệu suất</a> <span class="subDropdown plus"></span>
+                                        <ul class="level0_482" style="display:none">
+                                            <li><a href="grid.html"> Hệ thống lấy khí </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Phanh </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Hệ thống ống xả </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Power Adders </a> <span class=""></span></li>
+                                            <li><a href="grid.html"> Đồ bảo hộ </a> <span class=""></span></li>
+                                            </li>
+                                            <!--level 0-->
+
+                                        </ul>
+                            </div>
+                            <!--box-content box-category-->
+                        </div>
+                        <!--side-nav-categories-->
+
+                        <div class="custom-slider">
+                            <div>
+                                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li class="active" data-target="#carousel-example-generic"
+                                            data-slide-to="0"></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                        <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="item active"><img src="/images/slide3.jpg" alt="slide3">
+                                            <div class="carousel-caption">
+                                                <h3><a title=" Sample Product" href="product-detail.html">Giảm 50%</a>
+                                                </h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                <a class="link" href="#">Mua ngay</a></div>
+                                        </div>
+                                        <div class="item"><img src="/images/slide1.jpg" alt="slide1">
+                                            <div class="carousel-caption">
+                                                <h3><a title=" Sample Product" href="product-detail.html">Bộ sưu tập nổi
+                                                    hot</a></h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            </div>
+                                        </div>
+                                        <div class="item"><img src="/images/slide2.jpg" alt="slide2">
+                                            <div class="carousel-caption">
+                                                <h3><a title=" Sample Product" href="product-detail.html">Bộ sưu tập mùa
+                                                    hè</a></h3>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                        <span class="sr-only">Trước</span> </a> <a class="right carousel-control"
+                                                                                   href="#carousel-example-generic"
+                                                                                   data-slide="next"> <span
+                                        class="sr-only">Tiếp theo</span> </a></div>
+                            </div>
+                        </div>
+
+                        <div class="block block-list block-cart">
+                            <div class="block-title"> Giỏ hàng</div>
+                            <div class="block-content">
+                                <div class="summary">
+                                    <p class="amount">Có <a href="#">1 sản phẩm</a> trong giỏ hàng của bạn</p>
+                                    <p class="subtotal"><span class="label">Tổng giỏ hàng:</span> <span class="price">$299.00</span>
+                                    </p>
+                                </div>
+                                <div class="ajax-checkout">
+                                    <button type="button" title="Checkout" class="button button-checkout" onClick="#">
+                                        <span>Thanh toán</span></button>
+                                </div>
+                                <p class="block-subtitle">Các mục được thêm gần đây</p>
+                                <ul id="cart-sidebar" class="mini-products-list">
+                                    <li class="item">
+                                        <div class="item-inner"><a href="#" class="product-image"><img
+                                                src="/products-images/p1.jpg" width="80" alt="product"></a>
+                                            <div class="product-details">
+                                                <div class="access"><a href="#" class="btn-remove1">Hủy bỏ</a>
+                                                    <a href="#" title="Edit item" class="btn-edit">
+                                                        <i class="icon-pencil"></i><span class="hidden">Chỉnh sửa sản phẩm</span></a>
+                                                </div>
+                                                <!--access-->
+
+                                                <strong>1</strong> x <span class="price">$299.00</span>
+                                                <p class="product-name"><a href="#">Gorgeous Mercedes-Benz E-Class
+                                                    All-Terrain Luxury</a></p>
+                                            </div>
+                                            <!--product-details-bottoms-->
+                                        </div>
+                                    </li>
+                                    <li class="item  last1">
+                                        <div class="item-inner"><a href="#" class="product-image"><img
+                                                src="/products-images/p2.jpg" width="80" alt="product"></a>
+                                            <div class="product-details">
+                                                <div class="access"><a href="#" class="btn-remove1">Hủy bỏ</a>
+                                                    <a href="#" title="Edit item" class="btn-edit">
+                                                        <i class="icon-pencil"></i><span class="hidden">Chỉnh sửa sản phẩm</span></a>
+                                                </div>
+                                                <!--access-->
+
+                                                <strong>1</strong> x <span class="price">$299.00</span>
+                                                <p class="product-name"><a href="#">Gorgeous Mercedes-Benz E-Class
+                                                    All-Terrain Luxury</a></p>
+                                            </div>
+                                            <!--product-details-bottoms-->
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="block block-compare">
+                            <div class="block-title"> So sánh sản phẩm</div>
+                            <div class="block-content">
+                                <ol id="compare-items">
+                                    <li class="item odd">
+                                        <a href="#" class="btn-remove1" onClick="#"></a>
+                                        <a class="product-name" href="#">Gorgeous Mercedes-Benz E-Class All-Terrain
+                                            Luxury</a></li>
+                                    <li class="item odd">
+                                        <a href="#" class="btn-remove1" onClick="#"></a>
+                                        <a class="product-name" href="#">Gorgeous Mercedes-Benz E-Class All-Terrain
+                                            Luxury</a></li>
+                                    <li class="item odd">
+                                        <a href="#" class="btn-remove1" onClick="#"></a>
+                                        <a class="product-name" href="#">Gorgeous Mercedes-Benz E-Class All-Terrain
+                                            Luxury</a></li>
+
+                                </ol>
+
+                                <div class="ajax-checkout">
+                                    <button type="button" title="Compare" class="button button-compare" onClick="#">
+                                        <span>So sánh</span></button>
+                                    <button class="button button-clear" href="#"><span>Làm mới</span></button>
+                                </div><!--ajax-checkout-->
+                            </div>
+                            <!--block-content-->
+                        </div>
+                        <!--block block-list block-compare-->
+
+
+                    </aside>
+                    <!--col-right sidebar-->
+                </div>
+                <!--row-->
+            </div>
+            <!--container-->
+        </section>
+        <!--main-container col2-left-layout-->
+
+
+        <!-- End For version 1,2,3,4,6 -->
+
+    </div>
+    <!--page-->
+    <!-- Mobile Menu-->
+    <div id="mobile-menu">
+        <ul>
+            <li>
+                <div class="mm-search">
+                    <form id="search1" name="search">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                            <input type="text" class="form-control simple" placeholder="Search ..." name="srch-term"
+                                   id="srch-term">
+                        </div>
+                    </form>
+                </div>
+            </li>
+            <li class="active"><a class="level-top" href="#"><span>Home</span></a></li>
+            <li><a href="grid1.html">Accessories</a>
+                <!--mega menu-->
+                <ul class="level0">
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Audio</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Amplifiers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Installation Parts</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Speakers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Stereos</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Subwoofers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Body Parts</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bumpers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Doors</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Fenders</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Grilles</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Hoods</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Exterior</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bed Accessories</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Body Kits</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Custom Grilles</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Car Covers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Off-Road Bumpers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Interior</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Custom Gauges</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Dash Kits</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Seat Covers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Steering Wheels</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Sun Shades</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Lighting</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Fog Lights</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Headlights</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>LED Lights</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Off-Road Lights</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Signal Lights</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Performance</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Air Intake Systems</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Brakes</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Exhaust Systems</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Power Adders</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Racing Gear</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                </ul>
+                <!--level0-->
+            </li>
+            <li><a href="#">Listing‎</a>
+                <ul class="level1">
+                    <li class="level1 first"><a href="grid.html"><span>Car Grid</span></a></li>
+                    <li class="level1 nav-10-2"><a href="list.html"> <span>Car List</span> </a></li>
+                    <li class="level1 nav-10-3"><a href="grid1.html"> <span>Accessories Grid</span> </a></li>
+                    <li class="level1 nav-10-4"><a href="list1.html"> <span>Accessories List</span> </a></li>
+                    <li class="level1 first parent"><a href="car-detail.html"><span>Car Detail</span></a></li>
+                    <li class="level1 first parent"><a
+                            href="accessories-detail.html"><span>Accessories Detail</span></a></li>
+                </ul>
+            </li>
+            <li><a href="grid.html">Blog</a>
+                <ul class="level1">
+                    <li class="level1 first"><a href="blog.html"><span>Blog List</span></a></li>
+                    <li class="level1 nav-10-2"><a href="blog-detail.html"> <span>Blog Detail</span> </a></li>
+                </ul>
+            </li>
+            <li><a href="compare.html">Sandwiches‎</a></li>
+            <li><a href="#">Pages</a>
+                <ul class="level1">
+                    <li class="level1"><a href="about-us.html"> <span>About us</span> </a></li>
+                    <li class="level1 nav-10-4"><a href="shopping-cart.html"> <span>Cart Page</span> </a></li>
+                    <li class="level1 first parent"><a href="checkout.html"><span>Checkout</span></a>
+                        <!--sub sub category-->
+                        <ul class="level2 right-sub">
+                            <li class="level2 nav-2-1-1 first"><a href="checkout-method.html"><span>Method</span></a>
+                            </li>
+                            <li class="level2 nav-2-1-5 last"><a
+                                    href="checkout-billing-info.html"><span>Billing Info</span></a></li>
+                        </ul>
+                        <!--sub sub category-->
+                    </li>
+                    <li class="level1 nav-10-4"><a href="wishlist.html"> <span>Wishlist</span> </a></li>
+                    <li class="level1"><a href="dashboard.html"> <span>Dashboard</span> </a></li>
+                    <li class="level1"><a href="multiple-addresses.html"> <span>Multiple Addresses</span> </a></li>
+                    <li class="level1"><a href="contact-us.html"><span>Contact us</span></a></li>
+                    <li class="level1"><a href="404error.html"><span>404 Error Page</span></a></li>
+                    <li class="level1"><a href="login.html"><span>Login Page</span></a></li>
+                    <li class="level1"><a href="quickview.html"><span>Quick View</span></a></li>
+                    <li class="level1"><a href="newsletter.html"><span>Newsletter</span></a></li>
+                </ul>
+            </li>
+            <li><a href="#">Custom</a></li>
+        </ul>
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('#rev_slider_4').show().revolution({
+                dottedOverlay: 'none',
+                delay: 5000,
+                startwidth: 1170,
+                startheight: 650,
+
+                hideThumbs: 200,
+                thumbWidth: 200,
+                thumbHeight: 50,
+                thumbAmount: 2,
+
+                navigationType: 'thumb',
+                navigationArrows: 'solo',
+                navigationStyle: 'round',
+
+                touchenabled: 'on',
+                onHoverStop: 'on',
+
+                swipe_velocity: 0.7,
+                swipe_min_touches: 1,
+                swipe_max_touches: 1,
+                drag_block_vertical: false,
+
+                spinner: 'spinner0',
+                keyboardNavigation: 'off',
+
+                navigationHAlign: 'center',
+                navigationVAlign: 'bottom',
+                navigationHOffset: 0,
+                navigationVOffset: 20,
+
+                soloArrowLeftHalign: 'left',
+                soloArrowLeftValign: 'center',
+                soloArrowLeftHOffset: 20,
+                soloArrowLeftVOffset: 0,
+
+                soloArrowRightHalign: 'right',
+                soloArrowRightValign: 'center',
+                soloArrowRightHOffset: 20,
+                soloArrowRightVOffset: 0,
+
+                shadow: 0,
+                fullWidth: 'on',
+                fullScreen: 'off',
+
+                stopLoop: 'off',
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
+
+                shuffle: 'off',
+
+                autoHeight: 'off',
+                forceFullWidth: 'on',
+                fullScreenAlignForce: 'off',
+                minFullScreenHeight: 0,
+                hideNavDelayOnMobile: 1500,
+
+                hideThumbsOnMobile: 'off',
+                hideBulletsOnMobile: 'off',
+                hideArrowsOnMobile: 'off',
+                hideThumbsUnderResolution: 0,
+
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                startWithSlide: 0,
+                fullScreenOffsetContainer: ''
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function HideMe() {
+            jQuery('.popup1').hide();
+            jQuery('#fade').hide();
+        }
+    </script>
+</section>
+</body>
+
+</html>

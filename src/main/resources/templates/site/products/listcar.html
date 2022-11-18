@@ -1,0 +1,1878 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{site/layouts/dashboardLayout.html}">
+
+<head>
+
+</head>
+
+<body>
+    <section layout:fragment="content" ng-controller="myctrl">
+
+        <script>
+            var app = angular.module('myApp', []);
+            app.controller('myctrl', function ($scope, $http) {
+
+            });
+
+        </script>
+
+        <div id="page">
+            <div class="page-heading" style="height: 400px">
+                <div class="breadcrumbs">
+                    <div class="container">
+                        <div class="row" style="margin-top: 10%">
+                            <div class="col-xs-12">
+                                <ul>
+                                    <li class="home"><a href="index-2.html" title="Go to Home Page">Trang chủ</a>
+                                        <span>&rsaquo; </span>
+                                    </li>
+                                    <li class="category1599"><a href="grid.html" title="">Xe hơi mới</a>
+                                        <span>&rsaquo; </span>
+                                    </li>
+                                    <li class="category1600"><a href="grid.html" title="">Audi</a> <span>&rsaquo;
+                                        </span>
+                                    </li>
+                                    <li class="category1601"><strong>Sedans</strong></li>
+                                </ul>
+                            </div>
+                            <!--col-xs-12-->
+                        </div>
+                        <!--row-->
+                    </div>
+                    <!--container-->
+                </div>
+                <div class="page-title">
+                    <h2>Danh sách sản phẩm</h2>
+                </div>
+            </div>
+            <!--breadcrumbs-->
+            <!-- BEGIN Main Container col2-left -->
+            <section class="main-container col2-left-layout bounceInUp animated">
+
+                <!-- For version 1, 2, 3, 8 -->
+                <!-- For version 1, 2, 3 -->
+                <div class="container" style="margin-top: 20px;cursor: pointer;">
+                    <div class="row">
+                        <div class="section-filter">
+                            <div class="b-filter__inner bg-grey container">
+                                <div uk-slider>
+                                    <ul class="uk-slider-items uk-child-width-1-2 uk-child-width-1-1@s uk-child-width-1-6@m uk-light"
+                                        uk-grid
+                                        uk-scrollspy="cls: uk-animation-slide-bottom; target: .uk-card; delay: 300; repeat: true">
+                                        <li th:each="brand :${Brands}" class=" uk-transition-toggle"
+                                            uk-scrollspy-class="uk-animation-slide-top" tabindex="0">
+                                            <a th:href="@{'/home/listcar/'+${brand.ma}}">
+                                                <div ng-click="fillHang(Brand.ma)">
+                                                    <div class="uk-card">
+                                                        <img th:src="${brand.logo}" width="300" height="300" alt=""
+                                                            style="border-radius: 10px;border: 1px solid red">
+                                                        <div class="uk-position-center uk-panel">
+                                                            <h1 class="uk-transition-slide-bottom-small uk-text-bold"
+                                                                th:text="${brand.tenhang}" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <!--<ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>-->
+                                </div>
+                            </div>
+                        </div>
+                        <!--TYPE CAR-->
+                        <div class="logo-brand container">
+                            <div class="brand-title">
+                                <h2>Các Thể Loại Xe</h2>
+                            </div>
+                            <div class="uk-slider-container-offset" uk-slider>
+
+                                <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1">
+
+                                    <ul class="uk-slider-items uk-child-width-1-6@s uk-grid">
+                                        <li th:each="type :${Types}">
+                                            <a th:href="@{'/home/listcar/'+${type.maloai}}"
+                                                style="background: white;border: none">
+                                                <div style="text-align: center;font-family:Algerian;">
+                                                    <img th:src="${type.logo}" width="100" height="150" alt="">
+                                                    <h4 class="uk-text-bold" style="color: black"
+                                                        th:text="${type.tenloai}" />
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--END TYPE CAR-->
+                        <div class="col-main col-sm-9 col-sm-push-3 product-grid">
+                            <div class="pro-coloumn">
+                                <article class="col-main">
+                                    <div class="toolbar">
+                                        <div class="sorter">
+                                            <div class="view-mode"><span title="Grid"
+                                                    class="button button-active button-grid">&nbsp;</span><a
+                                                    th:href="@{/home/luoicar?page=1}" title="List"
+                                                    class="button-list">&nbsp;</a>
+                                            </div>
+                                        </div>
+                                        <div id="sort-by">
+                                            <label class="left">Sắp xếp theo: </label>
+                                            <ul>
+                                                <li><a href="#">Position<span class="right-arrow"></span></a>
+                                                    <ul>
+                                                        <li><a href="#">Tên</a></li>
+                                                        <li><a href="#">Giá</a></li>
+                                                        <li><a href="#">Position</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <a class="button-asc left" href="#" title="Set Descending Direction"><span
+                                                    class="top_arrow"></span></a>
+                                        </div>
+                                        <div class="pager">
+                                            <div id="limiter">
+                                                <label>Lượt xem: </label>
+                                                <ul>
+                                                    <li><a href="#">15<span class="right-arrow"></span></a>
+                                                        <ul>
+                                                            <li><a href="#">20</a></li>
+                                                            <li><a href="#">30</a></li>
+                                                            <li><a href="#">35</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="pages">
+                                                <label>Trang:</label>
+                                                <ul class="pagination">
+                                                    <li><a href="#">&laquo;</a></li>
+                                                    <li class="active"><a href="#">1</a></li>
+                                                    <li><a href="#">2</a></li>
+                                                    <li><a href="#">3</a></li>
+                                                    <li><a href="#">4</a></li>
+                                                    <li><a href="#">5</a></li>
+                                                    <li><a href="#">&raquo;</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="category-products">
+                                        <ul class="products-grid">
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6"
+                                                th:each="Car : ${AllCar}">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a
+                                                                th:href="@{'/home/car-detail?idcar='+${Car.idcar}}"
+                                                                title="Retis lapen casen" class="product-image">
+                                                                <img th:if="${Car.image!=null}" th:src="${Car.image}"
+                                                                    alt="">
+                                                                <img th:if="${Car.image==null}"
+                                                                    src="https://th.bing.com/th/id/R.423cd98ca0ee22fcb6b6e1c72fb91a8b?rik=yuVm998lNiEJbA&pid=ImgRaw&r=0"
+                                                                    alt="">
+                                                            </a>
+                                                            <div class="new-label new-top-left">Đã sủ dụng</div>
+                                                            <div class="sale-label sale-top-left">-15%</div>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sach yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen" th:text="${Car.tencar}" />
+                                                            </div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:100%">
+                                                                            </div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box">
+                                                                        <span class="regular-price">
+                                                                            <strong class="price"
+                                                                                th:text="${'$ '+Car.gia}"></strong>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i
+                                                                            class="fa fa-tachometer"></i><strong
+                                                                            th:text="${Car.sokm}"></strong>
+                                                                    </div>
+                                                                    <div class="col-engine"><i
+                                                                            class="fa fa-gear"></i><strong
+                                                                            th:text="${Car.hopso}"></strong>
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i><strong
+                                                                            th:text="${Car.namsx}"></strong>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p2.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p3.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p4.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p5.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="new-label new-top-left">New</div>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p6.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p7.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p8.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p9.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p10.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p11.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p18.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p17.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p16.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="item col-lg-4 col-md-3 col-sm-4 col-xs-6">
+                                                <div class="item-inner">
+                                                    <div class="item-img">
+                                                        <div class="item-img-info"><a href="product-detail.html"
+                                                                title="Retis lapen casen" class="product-image"><img
+                                                                    src="/products-images/p12.jpg"
+                                                                    alt="Retis lapen casen"></a>
+                                                            <div class="item-box-hover">
+                                                                <div class="box-inner">
+                                                                    <div class="add_cart">
+                                                                        <button class="button btn-cart"
+                                                                            type="button"></button>
+                                                                    </div>
+                                                                    <div class="product-detail-bnt"><a
+                                                                            class="button detail-bnt"><span>Xem
+                                                                                nhanh</span></a>
+                                                                    </div>
+                                                                    <div class="actions"><span class="add-to-links"><a
+                                                                                href="#" class="link-wishlist"
+                                                                                title="Add to Wishlist"><span>Thêm vào
+                                                                                    danh sách yêu thích</span></a>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-info">
+                                                        <div class="info-inner">
+                                                            <div class="item-title"><a href="product-detail.html"
+                                                                    title="Retis lapen casen">Gorgeous
+                                                                    Mercedes-Benz E-Class All-Terrain Luxury</a></div>
+                                                            <div class="item-content">
+                                                                <div class="rating">
+                                                                    <div class="ratings">
+                                                                        <div class="rating-box">
+                                                                            <div class="rating" style="width:80%"></div>
+                                                                        </div>
+                                                                        <p class="rating-links"><a href="#">1 Đánh
+                                                                                giá</a>
+                                                                            <span class="separator">|</span> <a
+                                                                                href="#">Thêm
+                                                                                đánh giá</a>
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item-price">
+                                                                    <div class="price-box"><span
+                                                                            class="regular-price"><span
+                                                                                class="price">$49000.00</span> </span>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="other-info">
+                                                                    <div class="col-km"><i class="fa fa-tachometer"></i>
+                                                                        4875km
+                                                                    </div>
+                                                                    <div class="col-engine"><i class="fa fa-gear"></i>
+                                                                        Tự
+                                                                        động
+                                                                    </div>
+                                                                    <div class="col-date"><i class="fa fa-calendar"
+                                                                            aria-hidden="true"></i> 2018
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="toolbar bottom">
+
+                                        <div id="sort-by">
+                                            <label class="left">Sắp xếp theo: </label>
+                                            <ul>
+                                                <li><a href="#">Position<span class="right-arrow"></span></a>
+                                                    <ul>
+                                                        <li><a href="#">Tên</a></li>
+                                                        <li><a href="#">Giá</a></li>
+                                                        <li><a href="#">Position</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                            <a class="button-asc left" href="#" title="Set Descending Direction"><span
+                                                    class="top_arrow"></span></a>
+                                        </div>
+                                        <div class="pager">
+                                            <div id="limiter">
+                                                <label>Lượt xem: </label>
+                                                <ul>
+                                                    <li><a href="#">15<span class="right-arrow"></span></a>
+                                                        <ul>
+                                                            <li><a href="#">20</a></li>
+                                                            <li><a href="#">30</a></li>
+                                                            <li><a href="#">35</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="pages">
+                                                <label>Trang:</label>
+                                                <ul class="pagination">
+                                                    <li><a href="#">&laquo;</a></li>
+                                                    <li class="active"><a href="#">1</a></li>
+                                                    <li><a href="#">2</a></li>
+                                                    <li><a href="#">3</a></li>
+                                                    <li><a href="#">4</a></li>
+                                                    <li><a href="#">5</a></li>
+                                                    <li><a href="#">&raquo;</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </article>
+                            </div>
+                            <!--	///*///======    End article  ========= //*/// -->
+                        </div>
+
+                        <aside class="col-left sidebar col-sm-3 col-xs-12 col-sm-pull-9 wow bounceInUp animated">
+                            <form class="b-filter" th:action="@{/home/listcar}" th:object="${fill}" method="post">
+                                <div class="section-filter">
+                                    <div class="b-filter__inner bg-grey">
+                                        <h2>Tìm chiếc xe phù hợp với bạn</h2>
+                                        <div class="btn-group bootstrap-select" style="width: 100%;">
+                                            <select ng-model="fillCar.nam" th:field="*{nam}" class="selectpicker"
+                                                data-width="100%" tabindex="-98">
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                            </select>
+                                        </div>
+                                        <div class="btn-group bootstrap-select" style="width: 100%;">
+                                            <select class="selectpicker" data-width="100%" tabindex="-98">
+                                                <option ng-repeat="car in Cars|limitTo:10" value="{{car.tencar}}">
+                                                    {{car.tencar}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="btn-group bootstrap-select" style="width: 100%;">
+                                            <select class="selectpicker" data-width="100%" tabindex="-98">
+                                                <option>Chọn kiểu xe</option>
+                                                <option>Model 1</option>
+                                                <option>Model 2</option>
+                                                <option>Model 3</option>
+                                            </select>
+                                        </div>
+                                        <div class="btn-group bootstrap-select" style="width: 100%;">
+                                            <select class="selectpicker" data-width="100%" tabindex="-98">
+                                                <option>Chọn tất cả vị trí</option>
+                                                <option>Location 1</option>
+                                                <option>Location 2</option>
+                                                <option>Location 3</option>
+                                            </select>
+                                        </div>
+                                        <div class="btn-group bootstrap-select" style="width: 100%;">
+                                            <select class="selectpicker" data-width="100%" tabindex="-98">
+                                                <option>Chọn năm</option>
+                                                <option>2017</option>
+                                                <option>2016</option>
+                                                <option>2015</option>
+                                            </select>
+                                        </div>
+                                        <div class="ui-filter-slider">
+                                            <div class="sidebar-widget-body m-t-10">
+                                                <div class="price-range-holder"><span class="min-max"> <span
+                                                            class="pull-left">$200.00</span> <span
+                                                            class="pull-right">$800.00</span> </span>
+                                                    <input type="text" class="price-slider" value=""
+                                                        style="display:block">
+                                                </div>
+                                                <!-- /.price-range-holder -->
+                                            </div>
+                                        </div>
+                                        <div ng-click="fil()" style="margin-top: 50px;z-index: 100">
+                                            <div class="b-filter__btns">
+                                                <button ng-click="fil()" class="btn btn-lg btn-primary">Tìm xe</button>
+                                            </div>
+                                        </div>
+                                        <button ng-click="fil()" class="btn btn-lg btn-primary">Tìm xe</button>
+                                    </div>
+                                    <button ng-click="fil()" class="btn btn-lg btn-primary">Tìm xe</button>
+                            </form>
+
+                    </div>
+
+
+                    <!-- BEGIN SIDE-NAV-CATEGORY -->
+                    <div class="side-nav-categories">
+                        <div class="block-title"> Danh mục</div>
+                        <!--block-title-->
+                        <!-- BEGIN BOX-CATEGORY -->
+                        <div class="box-content box-category">
+                            <ul>
+                                <li><a class="active" href="grid.html">Âm thanh</a> <span
+                                        class="subDropdown minus"></span>
+                                    <ul class="level0_415" style="display:block">
+                                        <li><a href="grid.html"> Bộ khuyếch đại </a> <span class=""></span>
+
+                                            <!--level1-->
+                                        </li>
+                                        <!--level1-->
+                                        <li><a href="grid.html"> Bộ phận lắp đặt‎ </a> <span class=""></span>
+
+                                            <!--level1-->
+                                        </li>
+                                        <!--level1-->
+                                        <li><a href="grid.html"> Diễn giả </a> <span class=""></span>
+
+                                            <!--level1-->
+                                        </li>
+                                        <!--level1-->
+                                        <li><a href="grid.html">Âm thanh nổi </a> <span class=""></span>
+                                        <li><a href="grid.html">Loa siêu trầm </a> <span class=""></span></li>
+
+                                        <!--level1-->
+                                </li>
+                            </ul>
+                            <!--level0-->
+
+                            </li>
+                            <!--level 0-->
+                            <li><a href="grid.html">Phụ kiện thân xe</a> <span class="subDropdown plus"></span>
+                                <ul class="level0_455" style="display:none">
+                                    <li><a href="grid.html"> Bộ đệm </a> <span class=""></span>
+
+                                        <!--level1-->
+                                    </li>
+                                    <!--level1-->
+                                    <li><a href="grid.html"> Cửa </a> <span class=""></span>
+
+                                        <!--level1-->
+                                    </li>
+                                    <!--level1-->
+                                    <li><a href="grid.html"> Chắn bùn </a> <span class=""></span>
+
+                                        <!--level1-->
+                                    </li>
+                                    <!--level1-->
+                                    <li><a href="grid.html"> Lưới </a> <span class=""></span>
+
+                                        <!--level1-->
+                                    </li>
+                                    <!--level1-->
+                                    <li><a href="grid.html">Máy hút mùi </a> <span class=""></span>
+
+                                        <!--level1-->
+                                    </li>
+                                    <!--level1-->
+
+                                    <!--level1-->
+                            </li>
+
+                            </ul>
+                            <!--level0-->
+                            </li>
+                            <!--level 0-->
+                            <li><a href="#.html">Ngoại thất</a> <span class="subDropdown plus"></span>
+                                <ul class="level0_482" style="display:none">
+                                    <li><a href="grid.html"> Phụ kiện giường ngủ </a> <span class=""></span>
+
+                                        <!--level1-->
+                                    </li>
+                                    <!--level1-->
+                                    <li><a href="grid.html">Đồ bó sát </a> <span class=""></span>
+
+                                        <!--level1-->
+                                    </li>
+                                    <!--level1-->
+                                    <li><a href="grid.html">Lưới tùy chỉnh </a> <span class=""></span>
+
+                                        <!--level1-->
+                                    </li>
+                                    <!--level1-->
+                                    <li><a href="grid.html"> Bao xe </a> <span class=""></span>
+
+                                        <!--level1-->
+                                    </li>
+                                    <!--level1-->
+                                    <li><a href="grid.html"> Bộ đệm địa hình </a> <span class=""></span>
+
+                                        <!--level1-->
+                                    </li>
+                                    <!--level1-->
+
+                            </li>
+                            <!--level1-->
+                            </ul>
+                            <!--level0-->
+                            </li>
+                            <!--level 0-->
+                            <li><a href="grid.html">Nội thất</a> <span class="subDropdown plus"></span>
+                                <ul class="level0_482" style="display:none">
+                                    <li><a href="grid.html"> Đồng hồ đo tùy chỉnh </a> <span class=""></span>
+                                    </li>
+                                    <li><a href="grid.html"> Bộ dụng cụ Dash </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Bọc ghế </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Tay lái </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Sun Shades</a> <span class=""></span></li>
+                            </li>
+                            <!--level 0-->
+
+                            </ul>
+                            <!--level 0-->
+                            <li><a href="grid.html">Thắp sáng</a> <span class="subDropdown plus"></span>
+                                <ul class="level0_482" style="display:none">
+                                    <li><a href="grid.html"> Đèn sương mù </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Đèn pha </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Đèn LED </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Đèn địa hình </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Đèn tín hiệu </a> <span class=""></span></li>
+                            </li>
+                            <!--level 0-->
+
+                            </ul>
+                            <!--level 0-->
+                            <li><a href="grid.html">Hiệu suất</a> <span class="subDropdown plus"></span>
+                                <ul class="level0_482" style="display:none">
+                                    <li><a href="grid.html"> Hệ thống lấy khí </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Phanh </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Hệ thống ống xả </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Power Adders </a> <span class=""></span></li>
+                                    <li><a href="grid.html"> Đồ bảo hộ </a> <span class=""></span></li>
+                            </li>
+                            <!--level 0-->
+
+                            </ul>
+                        </div>
+                        <!--box-content box-category-->
+                    </div>
+                    <!--side-nav-categories-->
+
+                    <div class="custom-slider">
+                        <div>
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li class="active" data-target="#carousel-example-generic" data-slide-to="0"></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                                </ol>
+                                <div class="carousel-inner">
+                                    <div class="item active"><img src="/images/slide3.jpg" alt="slide3">
+                                        <div class="carousel-caption">
+                                            <h3><a title=" Sample Product" href="product-detail.html">Giảm 50%</a>
+                                            </h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                            <a class="link" href="#">Mua ngay</a>
+                                        </div>
+                                    </div>
+                                    <div class="item"><img src="/images/slide1.jpg" alt="slide1">
+                                        <div class="carousel-caption">
+                                            <h3><a title=" Sample Product" href="product-detail.html">Bộ sưu tập nổi
+                                                    hot</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                    </div>
+                                    <div class="item"><img src="/images/slide2.jpg" alt="slide2">
+                                        <div class="carousel-caption">
+                                            <h3><a title=" Sample Product" href="product-detail.html">Bộ sưu tập mùa
+                                                    hè</a></h3>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                    <span class="sr-only">Trước</span> </a> <a class="right carousel-control"
+                                    href="#carousel-example-generic" data-slide="next"> <span class="sr-only">Tiếp
+                                        theo</span> </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="block block-list block-cart">
+                        <div class="block-title"> Giỏ hàng</div>
+                        <div class="block-content">
+                            <div class="summary">
+                                <p class="amount">Có <a href="#">1 sản phẩm</a> trong giỏ hàng của bạn</p>
+                                <p class="subtotal"><span class="label">Tổng giỏ hàng:</span> <span
+                                        class="price">$299.00</span>
+                                </p>
+                            </div>
+                            <div class="ajax-checkout">
+                                <button type="button" title="Checkout" class="button button-checkout">
+                                    <span>Thanh toán</span></button>
+                            </div>
+                            <p class="block-subtitle">Các mục được thêm gần đây</p>
+                            <ul id="cart-sidebar" class="mini-products-list">
+                                <li class="item">
+                                    <div class="item-inner"><a href="#" class="product-image"><img
+                                                src="/products-images/p1.jpg" width="80" alt="product"></a>
+                                        <div class="product-details">
+                                            <div class="access"><a href="#" class="btn-remove1">Hủy bỏ</a>
+                                                <a href="#" title="Edit item" class="btn-edit">
+                                                    <i class="icon-pencil"></i><span class="hidden">Chỉnh sửa sản
+                                                        phẩm</span></a>
+                                            </div>
+                                            <!--access-->
+
+                                            <strong>1</strong> x <span class="price">$299.00</span>
+                                            <p class="product-name"><a href="#">Gorgeous Mercedes-Benz E-Class
+                                                    All-Terrain Luxury</a></p>
+                                        </div>
+                                        <!--product-details-bottoms-->
+                                    </div>
+                                </li>
+                                <li class="item  last1">
+                                    <div class="item-inner"><a href="#" class="product-image"><img
+                                                src="/products-images/p2.jpg" width="80" alt="product"></a>
+                                        <div class="product-details">
+                                            <div class="access"><a href="#" class="btn-remove1">Hủy bỏ</a>
+                                                <a href="#" title="Edit item" class="btn-edit">
+                                                    <i class="icon-pencil"></i><span class="hidden">Chỉnh sửa sản
+                                                        phẩm</span></a>
+                                            </div>
+                                            <!--access-->
+
+                                            <strong>1</strong> x <span class="price">$299.00</span>
+                                            <p class="product-name"><a href="#">Gorgeous Mercedes-Benz E-Class
+                                                    All-Terrain Luxury</a></p>
+                                        </div>
+                                        <!--product-details-bottoms-->
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="block block-compare">
+                        <div class="block-title"> So sánh sản phẩm</div>
+                        <div class="block-content">
+                            <ol id="compare-items">
+                                <li class="item odd">
+                                    <a href="#" class="btn-remove1"></a>
+                                    <a class="product-name" href="#">Gorgeous Mercedes-Benz E-Class All-Terrain
+                                        Luxury</a>
+                                </li>
+                                <li class="item odd">
+                                    <a href="#" class="btn-remove1"></a>
+                                    <a class="product-name" href="#">Gorgeous Mercedes-Benz E-Class All-Terrain
+                                        Luxury</a>
+                                </li>
+                                <li class="item odd">
+                                    <a href="#" class="btn-remove1"></a>
+                                    <a class="product-name" href="#">Gorgeous Mercedes-Benz E-Class All-Terrain
+                                        Luxury</a>
+                                </li>
+
+                            </ol>
+
+                            <div class="ajax-checkout">
+                                <button type="button" title="Compare" class="button button-compare">
+                                    <span>So sánh</span></button>
+                                <button class="button button-clear" href="#"><span>Làm mới</span></button>
+                            </div>
+                            <!--ajax-checkout-->
+                        </div>
+                        <!--block-content-->
+                    </div>
+                    <!--block block-list block-compare-->
+
+
+                    </aside>
+                    <!--col-right sidebar-->
+                </div>
+                <!--row-->
+        </div>
+        <!--container-->
+    </section>
+    <!--main-container col2-left-layout-->
+
+
+    <!-- End For version 1,2,3,4,6 -->
+
+    </div>
+    <!--page-->
+    <!-- Mobile Menu-->
+    <div id="mobile-menu">
+        <ul>
+            <li>
+                <div class="mm-search">
+                    <form id="search1" name="search">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                            <input type="text" class="form-control simple" placeholder="Search ..." name="srch-term"
+                                id="srch-term">
+                        </div>
+                    </form>
+                </div>
+            </li>
+            <li class="active"><a class="level-top" href="#"><span>Trang chủ</span></a></li>
+            <li><a href="grid1.html">Accessories</a>
+                <!--mega menu-->
+                <ul class="level0">
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Âm thanh</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bộ khuyếch đại</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bộ phận lắp đặt</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Diễn giả</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Âm thanh nổi</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Loa siêu trầm</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Phụ kiện thân xe</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bộ đệm</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Cửa</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Chắn bùn</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Lưới</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Máy hút mùi</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Ngoại thất</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Phụ kiện giường ngủ</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Đồ bó sát</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Lưới tùy chỉnh</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bao xe</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bộ đệm địa hình</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Nội thất</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Đồng hồ đo tùy chỉnh</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bộ dụng cụ Dash</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bọc ghế</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Tay lái</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Sun Shades</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Thắp sáng</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Đèn sương mù</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Đèn pha</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Đèn LED</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Đèn địa hình</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Đèn tín hiệu</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Hiệu suất</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Hệ thống lấy khí</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Phanh</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Hệ thống ống xả</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Power Adders</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Đồ bảo hộ</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                </ul>
+                <!--level0-->
+            </li>
+            <li><a href="#">Danh sách</a>
+                <ul class="level1">
+                    <li class="level1 first"><a href="grid.html"><span>Lưới ôtô</span></a></li>
+                    <li class="level1 nav-10-2"><a href="list.html"> <span>Danh sách xe</span> </a></li>
+                    <li class="level1 nav-10-3"><a href="grid1.html"> <span>Lưới phụ kiện</span> </a></li>
+                    <li class="level1 nav-10-4"><a href="list1.html"> <span>Danh sách phụ kiện</span> </a></li>
+                    <li class="level1 first parent"><a href="car-detail.html"><span>Chi tiết xe</span></a></li>
+                    <li class="level1 first parent"><a href="accessories-detail.html"><span>Chi tiết phụ kiện</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="grid.html">Diễn đàn</a>
+                <ul class="level1">
+                    <li class="level1 first"><a href="blog.html"><span>Danh sách diễn đàn</span></a></li>
+                    <li class="level1 nav-10-2"><a href="blog-detail.html"> <span>Chi tiết diễn đàn</span> </a></li>
+                </ul>
+            </li>
+            <li><a href="compare.html">So sánh ô tô</a></li>
+            <li><a href="#">Pages</a>
+                <ul class="level1">
+                    <li class="level1"><a href="about-us.html"> <span>Về chúng tôi</span> </a></li>
+                    <li class="level1 nav-10-4"><a href="shopping-cart.html"> <span>Trang giỏ hàng</span> </a></li>
+                    <li class="level1 first parent"><a href="checkout.html"><span>Thanh toán</span></a>
+                        <!--sub sub category-->
+                        <ul class="level2 right-sub">
+                            <li class="level2 nav-2-1-1 first"><a href="checkout-method.html"><span>Method</span></a>
+                            </li>
+                            <li class="level2 nav-2-1-5 last"><a href="checkout-billing-info.html"><span>Billing
+                                        Info</span></a></li>
+                        </ul>
+                        <!--sub sub category-->
+                    </li>
+                    <li class="level1 nav-10-4"><a href="wishlist.html"> <span>Danh sách yêu thích</span> </a></li>
+                    <li class="level1"><a href="dashboard.html"> <span>Bảng điều khiển</span> </a></li>
+                    <li class="level1"><a href="multiple-addresses.html"> <span>Các chi nhánh</span> </a></li>
+                    <li class="level1"><a href="contact-us.html"><span>Liên hệ chúng tôi</span></a></li>
+                    <li class="level1"><a href="404error.html"><span>Không tìm thấy trang</span></a></li>
+                    <li class="level1"><a href="login.html"><span>Trang đăng nhập</span></a></li>
+                    <li class="level1"><a href="quickview.html"><span>Xem nhanh</span></a></li>
+                    <li class="level1"><a href="newsletter.html"><span>Bản tin</span></a></li>
+                </ul>
+            </li>
+            <li><a href="#">Tùy chọn</a></li>
+        </ul>
+    </div>
+
+
+    <script>
+        jQuery(document).ready(function () {
+            jQuery('#rev_slider_4').show().revolution({
+                dottedOverlay: 'none',
+                delay: 5000,
+                startwidth: 1170,
+                startheight: 650,
+
+                hideThumbs: 200,
+                thumbWidth: 200,
+                thumbHeight: 50,
+                thumbAmount: 2,
+
+                navigationType: 'thumb',
+                navigationArrows: 'solo',
+                navigationStyle: 'round',
+
+                touchenabled: 'on',
+                onHoverStop: 'on',
+
+                swipe_velocity: 0.7,
+                swipe_min_touches: 1,
+                swipe_max_touches: 1,
+                drag_block_vertical: false,
+
+                spinner: 'spinner0',
+                keyboardNavigation: 'off',
+
+                navigationHAlign: 'center',
+                navigationVAlign: 'bottom',
+                navigationHOffset: 0,
+                navigationVOffset: 20,
+
+                soloArrowLeftHalign: 'left',
+                soloArrowLeftValign: 'center',
+                soloArrowLeftHOffset: 20,
+                soloArrowLeftVOffset: 0,
+
+                soloArrowRightHalign: 'right',
+                soloArrowRightValign: 'center',
+                soloArrowRightHOffset: 20,
+                soloArrowRightVOffset: 0,
+
+                shadow: 0,
+                fullWidth: 'on',
+                fullScreen: 'off',
+
+                stopLoop: 'off',
+                stopAfterLoops: -1,
+                stopAtSlide: -1,
+
+                shuffle: 'off',
+
+                autoHeight: 'off',
+                forceFullWidth: 'on',
+                fullScreenAlignForce: 'off',
+                minFullScreenHeight: 0,
+                hideNavDelayOnMobile: 1500,
+
+                hideThumbsOnMobile: 'off',
+                hideBulletsOnMobile: 'off',
+                hideArrowsOnMobile: 'off',
+                hideThumbsUnderResolution: 0,
+
+                hideSliderAtLimit: 0,
+                hideCaptionAtLimit: 0,
+                hideAllCaptionAtLilmit: 0,
+                startWithSlide: 0,
+                fullScreenOffsetContainer: ''
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function HideMe() {
+            jQuery('.popup1').hide();
+            jQuery('#fade').hide();
+        }
+    </script>
+    </section>
+</body>
+
+</html>

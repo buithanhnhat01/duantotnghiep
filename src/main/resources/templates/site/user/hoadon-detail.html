@@ -1,0 +1,342 @@
+﻿<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" tmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{site/layouts/dashboardLayout.html}">
+
+<head>
+
+</head>
+<body>
+<section layout:fragment="content" style="margin-top: 108px;">
+    <div id="page">
+
+        <div class="page-heading">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="page-title">
+                            <h2>Chi tiết đơn hàng</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BEGIN Main Container col2-right -->
+        <section class="main-container col2-right-layout">
+            <div class="main container">
+                <div class="row">
+                    <section class="col-main col-sm-9 col-xs-12 wow bounceInUp animated animated"
+                             style="visibility: visible;">
+                        <div class="my-account">
+
+                            <!--page-title-->
+                            <!-- BEGIN DASHBOARD-->
+                            <div class="myorder-content myorder-detail-content clearfix">
+                                <h1 class="title"><span>Đơn hàng của tôi</span></h1>
+                                <div class="myorder-block">
+                                    <div class="row-title docs">Đơn hàng của <a href="#">Nhat Thanh</a><b
+                                            th:text="${'(#'+billdetail.get(0).getBillaccessoriesByMahd().getMahd()+')'}"/>
+                                        lúc <strong><span class="grey"
+                                                          th:text="${#dates.format(billdetail.get(0).getBillaccessoriesByMahd().getNgaymua(),'HH:mm:ss dd-MM-yyyy')}"/>
+                                        </strong></div>
+                                    <div class="table-responsive clearfix myorder-info">
+                                        <table class="table table-mycart">
+                                            <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th colspan="2">Tên sản phẩm</th>
+                                                <th>Mã sản phẩm</th>
+                                                <th>Giá</th>
+                                                <th>Số lượng</th>
+                                                <th>Thành tiền</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="bill,vitri : ${billdetail}">
+                                                <td><b th:text="${vitri.index+1}" /></td>
+                                                <td>
+                                                    <h2 style="font-size: 15px" class="uk-text-bold product-name">
+                                                        <a th:href="@{'/home/phukien-detail?idlk='+${bill.getAccessoriesByMalk().getMalk()}}"><strong
+                                                                th:text="${bill.getAccessoriesByMalk().ten}"/></a>
+                                                    </h2>
+                                                </td>
+                                                <td>
+                                                    <span href="/san-pham/ford-escape.html">Linh kiện</span>
+                                                    <!-- ngIf: it.IsVariant==true -->
+                                                </td>
+                                                <td><strong th:text="${bill.getAccessoriesByMalk().malk}"/></td>
+                                                <td><strong
+                                                        th:text="${#strings.replace(#strings.replace(#numbers.formatCurrency(bill.getAccessoriesByMalk().gia),'$',''),'.00','')+' VNĐ'}"/>
+                                                </td>
+                                                <td><strong th:text="${bill.getSoluong()}"/></td>
+                                                <td><strong
+                                                        th:text="${#strings.replace(#strings.replace(#numbers.formatCurrency(bill.getAccessoriesByMalk().gia * bill.getSoluong()),'$',''),'.00','')+' VNĐ'}"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="border-right" colspan="3">
+                                                    <div class="box-customer-content">
+                                                        <div class="title docs"><span>Thông tin giao hàng</span></div>
+                                                        <div>[Anh/Chị] <b th:text="${billdetail.get(0).getBillaccessoriesByMahd().accountByMatv.getHoten()}" /></div>
+                                                        <div> <b th:text="${billdetail.get(0).getBillaccessoriesByMahd().getAccountByMatv().getEmail()}" /> || <b th:text="${billdetail.get(0).getBillaccessoriesByMahd().getAccountByMatv().getSdt()}" /></div>
+                                                        <div>[ Địa Chỉ ] | <b th:text="${billdetail.get(0).getBillaccessoriesByMahd().getAccountByMatv().diachi}" /></div>
+                                                    </div>
+                                                    <div class="box-customer-content">
+                                                        <div class="title"><span>Thông tin thanh toán</span></div>
+                                                        <div>[Anh/Chị]<b>Nhat Thanh</b></div>
+                                                        <div>
+                                                            nhat123@gmail.com |
+                                                            Đà nẵng |
+                                                            0373947017
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td colspan="4">
+                                                    <table class="table">
+                                                        <tbody>
+                                                        <tr>
+                                                            <td class="text-left"><b>Tổng tiền thanh toán</b></td>
+                                                            <td class="text-right ">
+                                                                <b class="total-payment"
+                                                                   th:text="${#strings.replace(#strings.replace(#numbers.formatCurrency(billdetail.get(0).getBillaccessoriesByMahd().tongtien),'$',''),'.00','')+' VNĐ'}"/>
+                                                                <div class="help-block">Bao gồm VAT</div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr class="text-center order-stt"
+                                                            style="background-color: #c6d535;">
+                                                            <td colspan="2">
+                                                                <div class="docs">Trạng thái đơn hàng</div>
+                                                                <div class="docs"><b th:text="${billdetail.get(0).getBillaccessoriesByMahd().trangthai}" /></div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class=" button-1 text-right" style="padding: 10px 20px 8px 20px">
+                                        <a class="btn btn-default" th:href="@{/home/dashboard}">Trở về danh sách đơn
+                                            hàng</a>
+                                        <a class="btn btn-primary" th:href="@{/home/listphukien}">Tiếp tục mua hàng</a>
+                                    </div>
+                                </div>
+                                <style>
+                                    .title {
+                                        font-weight: 600;
+                                    }
+
+                                    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+                                        vertical-align: inherit;
+                                    }
+
+                                    .image {
+                                        width: auto;
+                                        height: 70px;
+                                    }
+                                </style>
+                            </div>
+                    </section>
+                    <!--col-main col-sm-9 wow bounceInUp animated-->
+                    <div th:replace="site/layouts/category::category">
+
+                    </div>
+                    <!--col-right sidebar col-sm-3 wow bounceInUp animated-->
+                </div>
+                <!--row-->
+            </div>
+            <!--main container-->
+        </section>
+        <!--main-container col2-left-layout-->
+
+
+        <!-- For version 1,2,3,4,6 -->
+
+
+        <!-- End For version 1,2,3,4,6 -->
+
+    </div>
+    <!--page-->
+    <!-- Mobile Menu-->
+    <div id="mobile-menu">
+        <ul>
+            <li>
+                <div class="mm-search">
+                    <form id="search1" name="search">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                            </div>
+                            <input type="text" class="form-control simple" placeholder="Search ..." name="srch-term"
+                                   id="srch-term">
+                        </div>
+                    </form>
+                </div>
+            </li>
+            <li class="active"><a class="level-top" href="#"><span>Home</span></a></li>
+            <li><a href="grid1.html">Accessories</a>
+                <!--mega menu-->
+                <ul class="level0">
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Audio</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Amplifiers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Installation Parts</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Speakers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Stereos</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Subwoofers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Body Parts</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bumpers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Doors</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Fenders</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Grilles</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Hoods</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Exterior</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Bed Accessories</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Body Kits</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Custom Grilles</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Car Covers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Off-Road Bumpers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Interior</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Custom Gauges</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Dash Kits</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Seat Covers</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Steering Wheels</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Sun Shades</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Lighting</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Fog Lights</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Headlights</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>LED Lights</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Off-Road Lights</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Signal Lights</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                    <li class="level3 nav-6-1 parent item"><a href="grid.html"><span>Performance</span></a>
+                        <!--sub sub category-->
+                        <ul class="level1">
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Air Intake Systems</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Brakes</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Exhaust Systems</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Power Adders</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                            <li class="level2 nav-6-1-1"><a href="grid.html"><span>Racing Gear</span></a></li>
+                            <!--level2 nav-6-1-1-->
+                        </ul>
+                        <!--level1-->
+                        <!--sub sub category-->
+                    </li>
+                    <!--level3 nav-6-1 parent item-->
+                </ul>
+                <!--level0-->
+            </li>
+            <li><a href="#">Listing‎</a>
+                <ul class="level1">
+                    <li class="level1 first"><a href="grid.html"><span>Car Grid</span></a></li>
+                    <li class="level1 nav-10-2"><a href="list.html"> <span>Car List</span> </a></li>
+                    <li class="level1 nav-10-3"><a href="grid1.html"> <span>Accessories Grid</span> </a></li>
+                    <li class="level1 nav-10-4"><a href="list1.html"> <span>Accessories List</span> </a></li>
+                    <li class="level1 first parent"><a href="car-detail.html"><span>Car Detail</span></a></li>
+                    <li class="level1 first parent"><a
+                            href="accessories-detail.html"><span>Accessories Detail</span></a></li>
+                </ul>
+            </li>
+            <li><a href="grid.html">Blog</a>
+                <ul class="level1">
+                    <li class="level1 first"><a href="blog.html"><span>Blog List</span></a></li>
+                    <li class="level1 nav-10-2"><a href="blog-detail.html"> <span>Blog Detail</span> </a></li>
+                </ul>
+            </li>
+            <li><a href="compare.html">Sandwiches‎</a></li>
+            <li><a href="#">Pages</a>
+                <ul class="level1">
+                    <li class="level1"><a href="about-us.html"> <span>About us</span> </a></li>
+                    <li class="level1 nav-10-4"><a href="shopping-cart.html"> <span>Cart Page</span> </a></li>
+                    <li class="level1 first parent"><a href="checkout.html"><span>Checkout</span></a>
+                        <!--sub sub category-->
+                        <ul class="level2 right-sub">
+                            <li class="level2 nav-2-1-1 first"><a href="checkout-method.html"><span>Method</span></a>
+                            </li>
+                            <li class="level2 nav-2-1-5 last"><a
+                                    href="checkout-billing-info.html"><span>Billing Info</span></a></li>
+                        </ul>
+                        <!--sub sub category-->
+                    </li>
+                    <li class="level1 nav-10-4"><a href="wishlist.html"> <span>Wishlist</span> </a></li>
+                    <li class="level1"><a href="dashboard.html"> <span>Dashboard</span> </a></li>
+                    <li class="level1"><a href="multiple-addresses.html"> <span>Multiple Addresses</span> </a></li>
+                    <li class="level1"><a href="contact-us.html"><span>Contact us</span></a></li>
+                    <li class="level1"><a href="404error.html"><span>404 Error Page</span></a></li>
+                    <li class="level1"><a href="login.html"><span>Login Page</span></a></li>
+                    <li class="level1"><a href="quickview.html"><span>Quick View</span></a></li>
+                    <li class="level1"><a href="newsletter.html"><span>Newsletter</span></a></li>
+                </ul>
+            </li>
+            <li><a href="#">Custom</a></li>
+        </ul>
+    </div>
+</section>
+
+
+</body>
+
+</html>

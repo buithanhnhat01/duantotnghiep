@@ -871,13 +871,13 @@
                             <th>Status</th>
                             <th>Ngày Mua</th>
                             <th>Email</th>
-                            <th>Signed up</th>
-                            <th>User ID</th>
+                            <th>Ngày Nhận</th>
+                            <th>Tổng Tiền</th>
                         </tr>
                         </thead>
 
                         <tbody>
-                        <tr>
+                        <tr th:each="donhang : ${donhangs}">
                             <td class="table-column-pr-0">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="usersDataCheck2">
@@ -891,453 +891,38 @@
                                              alt="Image Description">
                                     </div>
                                     <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Amanda Harvey <i
+                                        <span class="h5 text-hover-primary mb-0">
+                                        <a th:text="${donhang.accountByMatv.hoten}"></a>
+                                        <i
                                                 class="tio-verified text-primary" data-toggle="tooltip"
                                                 data-placement="top" title="Top endorsed"></i></span>
                                     </div>
                                 </a>
                             </td>
                             <td>
-                                <span class="legend-indicator bg-success"></span>Successful
+                                <span class="legend-indicator bg-success"></span>[[${donhang.trangthai}]]
                             </td>
-                            <td>Unassigned</td>
-                            <td>amanda@example.com</td>
-                            <td>1 year ago</td>
-                            <td>67989</td>
+                            <td>[[${donhang.ngaymua}]]</td>
+                            <td><a th:text="${donhang.accountByMatv.email}"></a></td>
+                            <td>[[${donhang.ngaynhan}]]</td>
+                            <td>[[${donhang.tongtien}]]</td>
                         </tr>
 
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck3">
-                                    <label class="custom-control-label" for="usersDataCheck3"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-soft-primary avatar-circle mr-2">
-                                        <span class="avatar-initials">A</span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Anne Richard</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-success"></span>Successful
-                            </td>
-                            <td>Subscription</td>
-                            <td>anne@example.com</td>
-                            <td>6 months ago</td>
-                            <td>67326</td>
-                        </tr>
+                      
+                      
+              
 
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck4">
-                                    <label class="custom-control-label" for="usersDataCheck4"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-circle mr-2">
-                                        <img class="avatar-img" src="assets\img\160x160\img3.jpg"
-                                             alt="Image Description">
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">David Harrison</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-danger"></span>Overdue
-                            </td>
-                            <td>Non-subscription</td>
-                            <td>david@example.com</td>
-                            <td>6 months ago</td>
-                            <td>55821</td>
-                        </tr>
+                     
 
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck5">
-                                    <label class="custom-control-label" for="usersDataCheck5"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-circle mr-2">
-                                        <img class="avatar-img" src="assets\img\160x160\img5.jpg"
-                                             alt="Image Description">
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Finch Hoot</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-warning"></span>Pending
-                            </td>
-                            <td>Subscription</td>
-                            <td>finch@example.com</td>
-                            <td>1 year ago</td>
-                            <td>85214</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck6">
-                                    <label class="custom-control-label" for="usersDataCheck6"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-soft-dark avatar-circle mr-2">
-                                        <span class="avatar-initials">B</span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Bob Dean</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-success"></span>Successful
-                            </td>
-                            <td>Subscription</td>
-                            <td>bob@example.com</td>
-                            <td>6 months ago</td>
-                            <td>75470</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck7">
-                                    <label class="custom-control-label" for="usersDataCheck7"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-circle mr-2">
-                                        <img class="avatar-img" src="assets\img\160x160\img9.jpg"
-                                             alt="Image Description">
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Ella Lauda <i
-                                                class="tio-verified text-primary" data-toggle="tooltip"
-                                                data-placement="top" title="Top endorsed"></i></span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-warning"></span>Pending
-                            </td>
-                            <td>Subscription</td>
-                            <td>Ella@example.com</td>
-                            <td>1 year ago</td>
-                            <td>37534</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck8">
-                                    <label class="custom-control-label" for="usersDataCheck8"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-circle mr-2">
-                                        <img class="avatar-img" src="assets\img\160x160\img4.jpg"
-                                             alt="Image Description">
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Sam Kart</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-success"></span>Successful
-                            </td>
-                            <td>Non-subscription</td>
-                            <td>sam@example.com</td>
-                            <td>1 year ago</td>
-                            <td>57300</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck9">
-                                    <label class="custom-control-label" for="usersDataCheck9"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-circle mr-2">
-                                        <img class="avatar-img" src="assets\img\160x160\img6.jpg"
-                                             alt="Image Description">
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Costa Quinn</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-danger"></span>Overdue
-                            </td>
-                            <td>Unassigned</td>
-                            <td>costa@example.com</td>
-                            <td>1 year ago</td>
-                            <td>71288</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck10">
-                                    <label class="custom-control-label" for="usersDataCheck10"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-soft-primary avatar-circle mr-2">
-                                        <span class="avatar-initials">R</span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Rachel Doe</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-warning"></span>Pending
-                            </td>
-                            <td>Unassigned</td>
-                            <td>rachel@example.com</td>
-                            <td>6 months ago</td>
-                            <td>95211</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck11">
-                                    <label class="custom-control-label" for="usersDataCheck11"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-soft-dark avatar-circle mr-2">
-                                        <span class="avatar-initials">B</span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Brian Halligan</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-warning"></span>Pending
-                            </td>
-                            <td>Subscription</td>
-                            <td>brian@example.com</td>
-                            <td>1 year ago</td>
-                            <td>58643</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck12">
-                                    <label class="custom-control-label" for="usersDataCheck12"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-circle mr-2">
-                                        <img class="avatar-img" src="assets\img\160x160\img8.jpg"
-                                             alt="Image Description">
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Linda Bates</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-warning"></span>Pending
-                            </td>
-                            <td>Subscription</td>
-                            <td>linda@example.com</td>
-                            <td>1 year ago</td>
-                            <td>44414</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck13">
-                                    <label class="custom-control-label" for="usersDataCheck13"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-soft-info avatar-circle mr-2">
-                                        <span class="avatar-initials">C</span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Chris Mathew <i
-                                                class="tio-verified text-primary" data-toggle="tooltip"
-                                                data-placement="top" title="Top endorsed"></i></span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-success"></span>Successful
-                            </td>
-                            <td>Non-subscription</td>
-                            <td>chris@example.com</td>
-                            <td>1 year ago</td>
-                            <td>12569</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck14">
-                                    <label class="custom-control-label" for="usersDataCheck14"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-soft-dark avatar-circle mr-2">
-                                        <span class="avatar-initials">L</span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Lewis Clarke</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-danger"></span>Overdue
-                            </td>
-                            <td>Non-subscription</td>
-                            <td>lewis@example.com</td>
-                            <td>1 year ago</td>
-                            <td>54621</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck15">
-                                    <label class="custom-control-label" for="usersDataCheck15"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-circle mr-2">
-                                        <img class="avatar-img" src="assets\img\160x160\img7.jpg"
-                                             alt="Image Description">
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Clarice Boone <i
-                                                class="tio-verified text-primary" data-toggle="tooltip"
-                                                data-placement="top" title="Top endorsed"></i></span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-success"></span>Successful
-                            </td>
-                            <td>Non-subscription</td>
-                            <td>clarice@example.com</td>
-                            <td>6 months ago</td>
-                            <td>23485</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck16">
-                                    <label class="custom-control-label" for="usersDataCheck16"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-soft-danger avatar-circle mr-2">
-                                        <span class="avatar-initials">M</span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Mark Colbert</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-success"></span>Successful
-                            </td>
-                            <td>Subscription</td>
-                            <td>mark@example.com</td>
-                            <td>6 months ago</td>
-                            <td>78463</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck17">
-                                    <label class="custom-control-label" for="usersDataCheck17"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-soft-info avatar-circle mr-2">
-                                        <span class="avatar-initials">J</span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Johnny Appleseed</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-warning"></span>Pending
-                            </td>
-                            <td>Subscription</td>
-                            <td>johnny@example.com</td>
-                            <td>1 year ago</td>
-                            <td>23564</td>
-                        </tr>
-
-                        <tr>
-                            <td class="table-column-pr-0">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="usersDataCheck18">
-                                    <label class="custom-control-label" for="usersDataCheck18"></label>
-                                </div>
-                            </td>
-                            <td class="table-column-pl-0">
-                                <a class="media align-items-center" href="user-profile.html">
-                                    <div class="avatar avatar-sm avatar-soft-primary avatar-circle mr-2">
-                                        <span class="avatar-initials">P</span>
-                                    </div>
-                                    <div class="media-body">
-                                        <span class="h5 text-hover-primary mb-0">Phileas Fogg</span>
-                                    </div>
-                                </a>
-                            </td>
-                            <td>
-                                <span class="legend-indicator bg-warning"></span>Pending
-                            </td>
-                            <td>Subscription</td>
-                            <td>phileas@example.com</td>
-                            <td>6 months ago</td>
-                            <td>39199</td>
-                        </tr>
+                   
                         </tbody>
                     </table>
                 </div>
                 <!-- End Table -->
+                    
+              
+
+
 
                 <!-- Footer -->
                 <div class="card-footer">
@@ -1380,7 +965,99 @@
                 <!-- End Footer -->
             </div>
             <!-- End Card -->
+ <style>
+                    .graphBox{
+                    position: relative;	
+                    width: 100%;
+                    padding: 20px;
+                    display: grid;
+                    grid-template-columns:1fr 2fr;
+                    grid-gap:30px;
+                    min-height: 200px;
+                    }
+                    .graphBox .box{
+                    position: relative;
+                    background: #fff;
+                    padding: 20px;
+                    width: 100%;
+                    box-shadow: 0 7px 25px rgba(0,0,0,0.08);
+                    border-radius: 20px;
+                    }
+                    
+                    </style>
+                    
+                    <div class="graphBox">
+                
+                    <div class="box"> 
+                    <div>
+  <canvas id="myChart"></canvas>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Donhang', 'LinhKien', 'tongtien'],
+      datasets: [{
+        label: 'Traffic Source',
+        data: [14, 9, 5],
+        backgroundColor: [
+'rgba(255,92,26,1)',
+'rgba(55,125,116,1)',
+'rgba(252,278,26,1)'
+                ],
+      
+      
+      }]
+    },
+    options: {
+     responsive:true,
+    }
+  });
+</script>
+                    </div>
+          <div class="box">
+                     <div>
+  <canvas id="earning"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const earning = document.getElementById('earning');
+
+  new Chart(earning, {
+    type: 'polarArea',
+    data: {
+      labels: ['xe', 'linhkien', 'tong', 'hoadon'],
+      datasets: [{
+        label: 'Traffic Source',
+        data: [7, 9, 3, 2],
+        backgroundColor: [
+        	'rgba(255,92,26,1)',
+        	'rgba(68,125,126,1)',
+        	'rgba(46,292,26,1)',
+        	'rgba(225,225,26,1)',
+        	                ],
+        	      
+      
+      }]
+    },
+    options: {
+    	 elements: {
+    	      line: {
+    	        borderWidth: 3
+    	      }
+    	    }
+      
+    },	
+  });
+</script></div>
+                     </div>
 
             <div class="row gx-2 gx-lg-3">
                 <div class="col-lg-5 mb-3 mb-lg-5">
@@ -1673,6 +1350,9 @@
                         <!-- End Header -->
 
                         <!-- Body -->
+                        
+                        
+                        
                         <div class="card-body">
                             <!-- Chart -->
                             <div class="chartjs-custom mx-auto" style="height: 20rem;">

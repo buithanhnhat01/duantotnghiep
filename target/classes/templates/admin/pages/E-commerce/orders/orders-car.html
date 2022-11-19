@@ -350,7 +350,7 @@
               </thead>
 
               <tbody>
-                <tr>
+                <tr th:each=" item : ${billcar}">
                   <td class="table-column-pr-0">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" class="custom-control-input" id="ordersCheck1">
@@ -358,31 +358,31 @@
                     </div>
                   </td>
                   <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
+                    <a href="ecommerce-order-details.html">[[${item.mahd}]]</a>
                   </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
+                  <td>[[${item.ngayban}]]</td>
                   <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
+                    <a class="text-body" href="ecommerce-customer-details.html" th:text="${item.accountByMatv.matv}"></a>
                   </td>
                   <td>
                     <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
+                      <span class="legend-indicator bg-success"></span>[[${item.trangthai}]]
                     </span>
                   </td>
                   <td>
                     <span class="badge badge-soft-info">
-                      <span class="legend-indicator bg-info"></span>124512
+                      <span class="legend-indicator bg-info" th:text="${item.car.idcar}"></span>
                     </span>
                   </td>
                   <td>
                     <div class="d-flex align-items-center">
                       <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\mastercard.svg}" alt="Image Description">
-                      <span class="text-dark">NV0124</span>
+                      <span class="text-dark" th:text="${item.accountByMatv.matv}"></span>
                       <!-- &bull;&bull;&bull;&bull; -->
                     </div>
                   </td>
-                  <td>$256.39</td>
-                  <td>$256.39</td>
+                  <td>[[${item.tiencoc}]]</td>
+                  <td>[[${item.tongtien}]]</td>
                   <td>
                     <div class="btn-group" role="group">
                       <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">

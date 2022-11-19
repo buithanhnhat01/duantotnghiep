@@ -44,7 +44,7 @@
 
 
 
-    <main id="content" role="main" class="main">
+    <main id="content" role="main" class="main" style="padding-top: 50px;">
       <!-- Content -->
       <div class="content container-fluid">
         <!-- Page Header -->
@@ -371,7 +371,7 @@
               </thead>
 
               <tbody>
-                <tr>
+                <tr th:each=" item : ${bills}" >
                   <td class="table-column-pr-0">
                     <div class="custom-control custom-checkbox">
                       <input type="checkbox" class="custom-control-input" id="ordersCheck1">
@@ -379,22 +379,25 @@
                     </div>
                   </td>
                   <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
+                    <a href="ecommerce-order-details.html">
+
+                      [[${item.mahd}]]</a>
                   </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
+                  <td>[[${item.ngaymua}]]</td>
                   <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
+                    <a class="text-body" href="ecommerce-customer-details.html"
+                      th:text="${item.accountByMatv.matv}"></a>
                   </td>
                   <td>
                     <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
+                      <span class="legend-indicator bg-success"></span>[[${item.trangthai}]]
                     </span>
                   </td>
-                  <td>$200.00</td>
+                  <td>[[${item.tongtien}]]</td>
                   <td>
                     <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" th:href="@{/admin/orders-accessories-detail}">
-                        <i class="tio-visible-outlined"></i> View
+                      <a class="btn btn-sm btn-white"  >
+                        <i class="tio-visible-outlined"></i> Xác nhân
                       </a>
 
                       <!-- Unfold -->
@@ -410,13 +413,13 @@
                           class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
                           <span class="dropdown-header">Options</span>
                           <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
+                            <img class="avatar avatar-xss avatar-4by3 mr-2"
+                              th:src="@{\assets\svg\illustrations\copy.svg}" alt="Image Description">
                             Copy
                           </a>
                           <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
+                            <img class="avatar avatar-xss avatar-4by3 mr-2"
+                              th:src="@{\assets\svg\illustrations\print.svg}" alt="Image Description">
                             Print
                           </a>
                           <div class="dropdown-divider"></div>
@@ -446,987 +449,277 @@
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
-
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
-
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
+                <div class="popup2" style="display: none;">
+                  <div class="ask-question-block">
+                    <h3>Xác nhận đơn hàng</h3>
+                    <div class="form-inner"><img th:src="@{/images/close-icon.png}" alt="close" class="x"
+                        onClick="HideMe1();">
+                      <div class="box" action="/admin/orders-accessories" modelAttribute="bill" method="post">
+                        <div class="box1">
+                          <div class="form-block"><label path="item.mahd">Order</label>
+                            <input name="" type="text" path="item.mahd"> 
+                          </div>
+                          <div class="form-block"><label>Khách hàng</label>
+                            <input name="" type="text">
+                          </div>
+                          
+                          <div class="form-block"><label>Tổng giá</label>
+                            <input name="" type="text">
+                          </div>
                         </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
-
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
-
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
+                        <div class="box2">
+                          <div class="form-block "><label>Ngày mua<main></main></label>
+                            <input class="date1" name="" type="date">
+                          </div>
+                          <div class="form-block"><label>Địa chỉ</label>
+                            <input name="" type="text">
+                          </div>
+                          <div><label>Trạng thái</label>
+                            <div class="time">
+                              <div class="time-s">
+                                <div class="time1">
+                                  <input type="radio"> Awaiting 
+                                </div>
+                                <div class="time1">
+                                  <input type="radio"> Packing
+                                </div>
+                                <div class="time1">
+                                  <input type="radio"> Transported
+                                </div>
+                              </div>
+                              <div class="time-c">
+                                <div class="time1">
+                                  <input type="radio"> Delivery
+                                </div>
+                                <div class="time1">
+                                  <input type="radio"> Delivery failed
+                                </div>
+                                <div class="time1">
+                                  <input type="radio"> Cancel order
+                                </div>
+                               
+                              </div>
+                            </div>
+                          </div>
+                          
                         </div>
+                        <style>
+                          .popup2 {
+                            width: 100%;
+                            margin: 0 auto;
+                            display: none;
+                            z-index: 101;
+                          }
+
+                          #fade {
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: #000;
+                            filter: alpha(opacity=70);
+                            -moz-opacity: 0.8;
+                            -khtml-opacity: 0.8;
+                            opacity: 0.8;
+                            z-index: 1001;
+                            display: none;
+                          }
+
+                          .ask-question-block {
+                            left: 40%;
+                            margin: auto;
+                            min-height: 150px;
+                            position: fixed;
+                            top: 5%;
+                            width: 600px;
+                            z-index: 10000;
+                            margin-left: -150px;
+                            background: #fff;
+                          }
+
+                          .ask-question-block .form-inner {
+                            width: auto;
+                            background: #fff;
+                            padding: 0px 25px 18px 25px;
+                            position: relative
+                          }
+
+                          .ask-question-block .form-inner .form-block {
+                            margin-bottom: 10px
+                          }
+
+                          .ask-question-block .form-inner .form-block label {
+                            font-size: 13px;
+                            color: #888;
+                            display: block;
+                            font-weight: normal
+                          }
+
+                          .ask-question-block .form-inner .form-block input {
+                            display: block;
+                            margin-right: 0px;
+                            padding: 10px 10px;
+                            width: 250px;
+                            border: 1px solid #ddd;
+                            text-align: left;
+                          }
+
+                          .form-block textarea {
+                            display: block;
+                            margin-right: 0px;
+                            padding: 10px 10px;
+                            width: 250px;
+                            border: 1px solid #ddd;
+                            text-align: left;
+                          }
+
+                          .form-block strong {
+                            display: block;
+                            margin-right: 0px;
+                            padding: 10px 10px;
+                            width: 250px;
+                            border: 1px solid #ddd;
+                            text-align: left;
+                          }
+
+                          .ask-question-block .form-inner .form-block button.button {
+                            width: 100%;
+                            font-size: 20px;
+                            padding: 12px 15px;
+                            margin-top: 10px;
+                            background-color: #3e6274;
+                            color: #fff;
+                            border-color: #111417
+                          }
+
+                          .ask-question-block h3 {
+                            color: #121212;
+                            font-size: 22px;
+                            font-weight: 500;
+                            margin-bottom: 0px;
+                            padding: 15px 25px 15px 25px;
+                            position: relative;
+                            display: inline-block;
+                            font-family: 'Saira Condensed', sans-serif;
+                            letter-spacing: 1px;
+                            text-transform: uppercase;
+                            background: rgb(230, 230, 230);
+                            margin-top: 0px;
+                            min-width: 250px;
+                            margin-bottom: 20px
+                          }
+
+                          .ask-question-block h3:after {
+                            content: '';
+                            position: absolute;
+                            width: 60px;
+                            height: 100%;
+                            transform: skew(-35deg);
+                            right: -35px;
+                            top: 0;
+                            background-color: inherit;
+                            z-index: 0;
+                          }
+
+                          .ask-question-block .x {
+                            position: absolute;
+                            right: -15px;
+                            top: -85px;
+                            z-index: 10000;
+                          }
+
+                          .box {
+                            display: flex;
+                            position: relative;
+                            justify-content: space-between;
+                          }
+
+                          .date1 {
+                            width: auto;
+                            height: 43px;
+                          }
+
+                          .box1 {
+                            margin: 0 10px;
+                          }
+
+                          .box2 {
+                            margin: 0 10px;
+                          }
+
+                          .time {
+                            width: 249px;
+                            height: 97px;
+                            display: flex;
+                            position: relative;
+                            justify-content: space-between;
+
+                          }
+
+                          .time1 {
+                            text-align: left;
+                            width: 121px;
+                            height: 20px;
+                            border: 1px solid rgba(0, 0, 0, 0.05);
+                            border-radius: 2px;
+                            margin-bottom: 10px;
+                            margin-left: 10px;
+                            cursor: pointer;
+                            background-color: white;
+                            text-decoration: none;
+                          }
+
+                          .time1:hover {
+                            background-color: #ccc;
+                          }
+                        </style>
                       </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
-
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
-
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
+                      <div class="form-block">
+                        <button type="submit" title="submit" class="button"><span>Xác nhận</span></button>
                       </div>
-                      <!-- End Unfold -->
                     </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
+                  </div>
+                </div>
+                <div id="fade"></div>
+                <script type="text/javascript">
+                  function HideMe() {
+                    jQuery('.popup1').hide();
+                    jQuery('#fade').hide();
 
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
 
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
+                  }
 
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
+                  function ShowMe() {
+                    jQuery('.popup2').show();
+                    jQuery('#fade').show();
 
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
+                  }
 
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
+                  function ShowMe1() {
+                    jQuery('.popup3').show();
+                    jQuery('#fade').show();
 
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
+                  }
 
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
+                  function HideMe1() {
+                    jQuery('.popup2').hide();
+                    jQuery('#fade').hide();
 
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
 
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
+                  }
 
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
+                  function HideMe2() {
+                    jQuery('.popup3').hide();
+                    jQuery('#fade').hide();
 
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
 
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
+                  }
+                </script>
 
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
 
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
 
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
 
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
-
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
-
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="table-column-pr-0">
-                    <div class="custom-control custom-checkbox">
-                      <input type="checkbox" class="custom-control-input" id="ordersCheck1">
-                      <label class="custom-control-label" for="ordersCheck1"></label>
-                    </div>
-                  </td>
-                  <td class="table-column-pl-0">
-                    <a href="ecommerce-order-details.html">#35463</a>
-                  </td>
-                  <td>Aug 17, 2020, 5:48 (ET)</td>
-                  <td>
-                    <a class="text-body" href="ecommerce-customer-details.html">Jase Marley</a>
-                  </td>
-                  <td>
-                    <span class="badge badge-soft-success">
-                      <span class="legend-indicator bg-success"></span>Paid
-                    </span>
-                  </td>
-                  <td>$200.00</td>
-                  <td>
-                    <div class="btn-group" role="group">
-                      <a class="btn btn-sm btn-white" href="ecommerce-order-details.html">
-                        <i class="tio-visible-outlined"></i> View
-                      </a>
-
-                      <!-- Unfold -->
-                      <div class="hs-unfold btn-group">
-                        <a class="js-hs-unfold-invoker btn btn-icon btn-sm btn-white dropdown-toggle dropdown-toggle-empty"
-                          href="javascript:;" data-hs-unfold-options='{
-                             "target": "#ordersExportDropdown1",
-                             "type": "css-animation",
-                             "smartPositionOffEl": "#datatable"
-                           }'></a>
-
-                        <div id="ordersExportDropdown1"
-                          class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                          <span class="dropdown-header">Options</span>
-                          <a class="js-export-copy dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\copy.svg}"
-                              alt="Image Description">
-                            Copy
-                          </a>
-                          <a class="js-export-print dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\illustrations\print.svg}"
-                              alt="Image Description">
-                            Print
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <span class="dropdown-header">Download options</span>
-                          <a class="js-export-excel dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\excel.svg}"
-                              alt="Image Description">
-                            Excel
-                          </a>
-                          <a class="js-export-csv dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2"
-                              th:src="@{\assets\svg\components\placeholder-csv-format.svg}" alt="Image Description">
-                            .CSV
-                          </a>
-                          <a class="js-export-pdf dropdown-item" href="javascript:;">
-                            <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\pdf.svg}"
-                              alt="Image Description">
-                            PDF
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="javascript:;">
-                            <i class="tio-delete-outlined dropdown-item-icon"></i> Delete
-                          </a>
-                        </div>
-                      </div>
-                      <!-- End Unfold -->
-                    </div>
-                  </td>
-                </tr>
-
-                
-
-               
-
-                
               </tbody>
             </table>
           </div>

@@ -45,6 +45,8 @@ public class WebMainController {
     BillaccessoriesRepository billaccessoriesRepository;
     @Autowired
     BillaccessoriesdetailRepository billaccessoriesdetailRepository;
+    @Autowired
+    BillcarRepository billcarRepository;
     public static String hangxe = null;
     public static fillCar fill;
     public static String idcar;
@@ -332,6 +334,7 @@ public class WebMainController {
         model.addAttribute("billdetail", billaccessoriesdetailRepository.findAllByBillaccessoriesByMahd_Mahd(idhd));
         return "site/user/hoadon-detail";
     }
+    
 
     @GetMapping("home/LichHen")
     public String appointment(Model model,Principal principal) {
@@ -367,6 +370,24 @@ public class WebMainController {
         model.addAttribute("checked",status.orElse("PENDING"));
         return "site/user/donhang";
     }
+     //ordercar tai lam
+ @GetMapping("admin/orders-car1")
+ public String listCar(Model model) {
+     List<Billcar> list = billcarRepository.findAll();
+     model.addAttribute("billcar",list);
+     return "admin/pages/E-commerce/orders/orders-car";
+     
+ }
+ //orderaccess tai lam
+ @GetMapping("admin/orders-accessories1")
+ public String bill(Model model){
+     Billaccessories bill = new Billaccessories();
+     model.addAttribute("bill", bill);
+     List<Billaccessories> bills = billaccessoriesRepository.findAll();
+     model.addAttribute("bills", bills);
+      return "admin/pages/E-commerce/orders/orders-accessories";
+ }
+
 
     @GetMapping("home/donhang")
     public String donhang(Model model) {

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="658c0a03-d7c8-4d88-8b4a-0c8dc292d4c1" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/aws.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/redis-manager-config.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fptpoly/main/Controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fptpoly/main/Controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fptpoly/main/Security/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fptpoly/main/Security/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fptpoly/main/Util/_MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fptpoly/main/Util/_MailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Controller/AdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Controller/Index.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Controller/Index.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Controller/WebMainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Controller/WebMainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/AccessoriesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/AccessoriesRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/AccountRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/AccountRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/AppointmentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/AppointmentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/BillaccessoriesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/BillaccessoriesRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/BillaccessoriesdetailRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/BillaccessoriesdetailRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/BillcarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/BillcarRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/BrandRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/BrandRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/CarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/CarRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/CartaccessoriesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/CartaccessoriesRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/CartcarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/CartcarRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/FeedbackRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/FeedbackRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/ImagesaccessoriesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/ImagesaccessoriesRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/ImagescarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/ImagescarRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/TypecarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/TypecarRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/VoteaccessoriesRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/VoteaccessoriesRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/VotecarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Dao/VotecarRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Accessories.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Accessories.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Account.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Account.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Appointment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Appointment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Billaccessories.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Billaccessories.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Billaccessoriesdetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Billaccessoriesdetail.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Billcar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Billcar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Brand.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Brand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Car.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Car.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Cartaccessories.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Cartaccessories.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Cartcar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Cartcar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Feedback.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Feedback.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Imagesaccessories.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Imagesaccessories.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Imagescar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Imagescar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Typecar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Typecar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Voteaccessories.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Voteaccessories.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Votecar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/Votecar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/fillCar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Entity/fillCar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Exception/IndexException.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Exception/IndexException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Restcontroller/AdminRestcontroller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Restcontroller/AdminRestcontroller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Security/UserDetailsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Security/UserDetailsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Security/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Security/WebSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Util/_CookieService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Util/_CookieService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Util/_MailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Util/_MailService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Util/_ParamService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Util/_ParamService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Util/_SessionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/Util/_SessionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fptpoly/main/WebsideCarApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fptpoly/main/WebsideCarApplication.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="myId2FirstActivated">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="true" />
+      </map>
+    </option>
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.jpb.jpaStructure" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2Hl4gQ2jOYfN9l8ZNK4Qd3drhrc" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Do_an/thecarssbtc"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="WebsideCarApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="Webside_Car" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.fptpoly.main.WebsideCarApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="658c0a03-d7c8-4d88-8b4a-0c8dc292d4c1" name="Changes" comment="" />
+      <created>1668846451646</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1668846451646</updated>
+      <workItem from="1668846458191" duration="4327000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

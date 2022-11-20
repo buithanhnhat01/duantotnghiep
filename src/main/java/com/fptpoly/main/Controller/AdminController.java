@@ -3,11 +3,24 @@ package com.fptpoly.main.Controller;
 
 import com.fptpoly.main.Dao.*;
 import com.fptpoly.main.Entity.Billaccessories;
+import com.fptpoly.main.Entity.Brand;
+import com.fptpoly.main.Entity.Car;
+import com.fptpoly.main.Entity.Accessories;
+import com.fptpoly.main.Entity.Account;
+import com.fptpoly.main.service.AccessoriesService;
+import com.fptpoly.main.service.AccountService;
+import com.fptpoly.main.service.CarService;
+
 import groovy.util.logging.Slf4j;
+import lombok.AllArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ServerWebInputException;
 
 import java.util.Date;
 import java.util.Optional;
@@ -35,6 +48,16 @@ public class AdminController {
     BillaccessoriesRepository billaccessoriesRepository;
     @Autowired
     BillaccessoriesdetailRepository billaccessoriesdetailRepository;
+    
+    
+    @Autowired
+    CarService carService;
+    
+    @Autowired
+    AccessoriesService accessoriesService;
+    
+    @Autowired
+    AccountService accountService;
 
     /*@GetMapping("/Admin")
     public String admin(Model model){
@@ -90,35 +113,97 @@ public class AdminController {
     }
 
     // Product
-    @RequestMapping("admin/product-car")
-    public String product_car(Model model) {
+    
+    @GetMapping("Admin/product-car")
+    public String addProduct(Model model) {
+    	model.addAttribute("listCars", carService.getAllCars());	
         return "admin/pages/E-commerce/products/product-car";
     }
-
-    @RequestMapping("admin/product-phukien")
-    public String product_phukien(Model model) {
-        return "admin/pages/E-commerce/products/product-phukien";
-    }
-
-    @RequestMapping("admin/car-detail")
-    public String car_detail(Model model) {
-        return "admin/pages/E-commerce/products/car-details";
-    }
-
-    @RequestMapping("admin/access-detail")
-    public String access_detail(Model model) {
-        return "admin/pages/E-commerce/products/access-details";
-    }
-
-    @RequestMapping("admin/add-car")
-    public String car_add(Model model) {
+    
+    @GetMapping("/Admin/add-car")
+    public String product_car(Model model) {
+    	Car car =  new Car();
+    	model.addAttribute("addBrand", brandRepository.findAll());
+    	model.addAttribute("addType", typecarRepository.findAll());
+    	model.addAttribute("addCars", car);	
         return "admin/pages/E-commerce/products/add-car";
     }
+    
+    @PostMapping("/saveCar")
+    public String saveCar(@Validated @ModelAttribute("addCars") Car car,BindingResult bindingResult) {
+    	if(bindingResult.hasErrors()){
+    		return "admin/pages/E-commerce/products/add-car";
+    	}
+    	carService.saveCars(car);
+    	return "redirect:Admin/product-car";
+    }
+    
+    @GetMapping("/showFormUpdateCar/{id}")
+    public String showFormUpdateCar(@PathVariable (value = "id") String id, Model model) {
+    	// lấy car from service
+    	Car car = carService.getCarById(id);
+    	
+    	// set car as a model
+    	model.addAttribute("addBrand", brandRepository.findAll());
+    	model.addAttribute("addType", typecarRepository.findAll());
+    	model.addAttribute("car", car);
+    	return "admin/pages/E-commerce/products/UpdateCar";
+    	
+    }
+    
+    @RequestMapping(value = "/deleteCar", method = RequestMethod.GET)  
+    public String deleteCar(@RequestParam("id") String id, Model model) {  
+      carService.deleteCar(id);
+      return "redirect:/Admin/product-car";  
+    }  
+    
+    //------------------- Accessories ---------------------
 
-    @RequestMapping("admin/add-access")
-    public String access_add(Model model) {
+    @GetMapping("Admin/product-phukien")
+    public String product_phukien(Model model) {
+    	model.addAttribute("Accessories", accessoriesService.getAllAccessories());
+        return "admin/pages/E-commerce/products/product-phukien";
+    }
+    
+    @GetMapping("/Admin/add-accessories")
+    public String Accessories(Model model) {
+    	Accessories accessories = new Accessories();
+    	
+    	model.addAttribute("Cars", carService.getAllCars());
+    	model.addAttribute("Accessories", accessories);
         return "admin/pages/E-commerce/products/add-access";
     }
+    
+    @PostMapping("/saveAccessories")
+    public String saveAccessories(@ModelAttribute("Accessories") Accessories accessories) {
+//    	if(bindingResult.hasErrors()){
+//    		return "admin/pages/E-commerce/products/add-car";
+//    	}
+    	accessoriesService.saveAccessories(accessories);
+    	return "redirect:Admin/product-phukien";
+    }
+    
+    
+    @GetMapping("/showUpdateAccessories/{malk}")
+    public String showUpdateAccessories(@PathVariable (value = "malk") String malk, Model model) {
+    	// lấy accessories from service
+    
+    	Accessories accessories = accessoriesService.getAccessoriesByMaLk(malk);
+    	
+    	// set accessories as a model
+    	model.addAttribute("Cars", carService.getAllCars());
+    	model.addAttribute("Accessories", accessories);
+    	return "admin/pages/E-commerce/products/UpdateAccessories";
+    	
+    }
+    
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)  
+    public String deleteAccessories(@RequestParam("malk") String malk, Model model) {  
+      accessoriesService.deleteAccessories(malk) ;
+      return "redirect:/Admin/product-phukien";  
+    }  
+    
 
     // Oders
     @RequestMapping("admin/orders-car")
@@ -131,16 +216,31 @@ public class AdminController {
         return "admin/pages/E-commerce/orders/orders-accessories";
     }
 
-    // users
-    @RequestMapping("admin/users-add")
+    //--------------- Employee----------------
+    @GetMapping("Admin/users")
+    public String users(Model model) {
+    	
+    	model.addAttribute("Employees", accountService.getAllAccount());
+    	return "admin/pages/users/users";
+    }
+    
+    @GetMapping("Admin/users-add")
     public String users_add(Model model) {
+    	Account account = new Account();
+    	
+    	model.addAttribute("role", accountService.getAllAccount());
+    	model.addAttribute("Employee", account);
+    	
         return "admin/pages/users/users-add-user";
     }
-
-    @RequestMapping("admin/users")
-    public String users(Model model) {
-        return "admin/pages/users/users";
+    
+    @PostMapping("/saveEmployee")
+    public String saveEmployee(@ModelAttribute("Employee") Account account) {
+    	accountService.saveAccount(account);
+    	
+    	return "redirect:Admin/users";
     }
+
 
     @RequestMapping("admin/user-profile")
     public String user_profile(Model model) {

@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface AccessoriesRepository extends JpaRepository<Accessories, String> {
     Accessories findAllByMalk(String malk);
+    
 }

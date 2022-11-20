@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	tmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/layouts/dashboardLayout.html}">
+<head>
+
+</head>
+
+<body class="footer-offset">
+
+	<section layout:fragment="content">
+		<!-- Search Form -->
+		<div id="searchDropdown"
+			class="hs-unfold-content dropdown-unfold search-fullwidth d-md-none">
+			<form class="input-group input-group-merge input-group-borderless">
+				<div class="input-group-prepend">
+					<div class="input-group-text">
+						<i class="tio-search"></i>
+					</div>
+				</div>
+
+				<input class="form-control rounded-0" type="search"
+					placeholder="Search in front" aria-label="Search in front">
+
+				<div class="input-group-append">
+					<div class="input-group-text">
+						<div class="hs-unfold">
+							<a class="js-hs-unfold-invoker" href="javascript:;"
+								data-hs-unfold-options='{
+                   "target": "#searchDropdown",
+                   "type": "css-animation",
+                   "animationIn": "fadeIn",
+                   "hasOverlay": "rgba(46, 52, 81, 0.1)",
+                   "closeBreakpoint": "md"
+                 }'>
+								<i class="tio-clear tio-lg"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+
+		<main id="content" role="main" class="main">
+			<!-- Content -->
+			<div class="content container-fluid">
+				<!-- Page Header -->
+				<div class="page-header">
+					<div class="row align-items-center">
+						<div class="col-sm mb-2 mb-sm-0">
+							<nav aria-label="breadcrumb">
+								<ol class="breadcrumb breadcrumb-no-gutter">
+									<li class="breadcrumb-item"><a class="breadcrumb-link"
+										href="ecommerce-products.html">Products</a></li>
+									<li class="breadcrumb-item active" aria-current="page">Update Car</li>
+								</ol>
+							</nav>
+
+							<h1 class="page-header-title">Update Car</h1>
+						</div>
+					</div>
+					<!-- End Row -->
+				</div>
+				<!-- End Page Header -->
+				<form action="#" th:action="@{/saveCar}" th:object="${car}"
+					method="POST">
+					<div class="row">
+						<div class="col-lg-8">
+							<!-- Card -->
+							<div class="card mb-3 mb-lg-5">
+								<!-- Header -->
+								<div class="card-header">
+									<h4 class="card-header-title">Thông tin sản phẩm</h4>
+								</div>
+								<!-- End Header -->
+
+								<!-- Body -->
+								<div class="card-body">
+									<!-- Form Group -->
+									<div class="form-group">
+										<label for="productNameLabel" class="input-label">Tên
+											<i class="tio-help-outlined text-body ml-1"
+											data-toggle="tooltip" data-placement="top"
+											title="Products are the goods or services you sell."></i>
+										</label> <input type="text" th:field="*{tencar}" class="form-control"
+											name="tencar" id="productNameLabel" placeholder="Tên xe"
+											aria-label="Tên xe">
+									</div>
+									<!-- End Form Group -->
+
+									<div class="row">
+
+										
+										<div class="col-sm-6">
+											<!-- Form Group -->
+											<div class="form-group">
+												<label for="SKULabel" class="input-label">Mã xe</label>
+												<!--  <input type="text"  class="form-control" name="SKU" id="SKULabel" placeholder="" aria-label=""> -->
+
+												<select th:field="*{brandByMa.ma}"
+													class="js-select2-custom custom-select" size="1"
+													style="opacity: 0;" id="collectionsLabel"
+													data-hs-select2-options='{
+						                                "minimumResultsForSearch": "Infinity","placeholder": ""}'>
+													<option th:each="brand : ${addBrand}" th:value="${brand.ma}"
+														th:text="${brand.ma}"></option>
+
+												</select>
+
+											</div>
+											<!-- End Form Group -->
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="datelable" class="input-label">Năm sản xuất</label> 
+													<input type="text" th:field="*{namsx}" class="form-control" name="date" id="date"
+													placeholder="1998" aria-label="1998">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<label for="collectionsLabel" class="input-label">Hãng xe</label> 
+													
+												<select th:field="*{brandByMa.tenhang}"
+													class="js-select2-custom custom-select" size="1"
+													style="opacity: 0;" id=" "
+													data-hs-select2-options='{
+								                                 "minimumResultsForSearch": "Infinity","placeholder": "Mer"}'>
+													<option th:each="brand : ${addBrand}"
+														value="${brand.tenhang}" th:text="${brand.tenhang}"></option>
+
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<!-- Form Group -->
+											<div class="form-group">
+												<label for="categoryLabel" class="input-label">Loạixe</label> 
+											
+												<select
+													th:field="*{typecarByLoaixe.maloai}" class="js-select2-custom custom-select" size="1"
+													style="opacity: 0;" id="categoryLabel"
+													data-hs-select2-options='{
+							                        "minimumResultsForSearch": "Infinity",
+								                        "placeholder": "Mer"}'>
+													<option th:each="type : ${addType}"
+														th:value="${type.maloai}" th:text="${type.maloai}"></option>
+													
+												</select>
+											</div>
+											<!-- End Form Group -->
+										</div>
+
+
+									</div>
+									<!-- End Row -->
+
+									<label class="input-label">Ghi chú </label> 
+									<input class="form-control" th:field="*{ghichu}" type="text" name="">
+									<!-- Quill -->
+									<div class="quill-custom">
+										<div class="js-quill" style="min-height: 15rem;"
+											data-hs-quill-options='{
+                          "placeholder": "Type your description..."
+                         }'>
+										</div>
+									</div>
+									<!-- End Quill -->
+								</div>
+								<!-- Body -->
+							</div>
+							<!-- End Card -->
+
+							<!-- Card -->
+							<div class="card mb-3 mb-lg-5">
+								<!-- Header -->
+								<div class="card-header">
+									<h4 class="card-header-title">Mô tả</h4>
+
+									<!-- Unfold -->
+									<div class="hs-unfold">
+										<a class="js-hs-unfold-invoker btn btn-sm btn-ghost-secondary"
+											href="javascript:;"
+											data-hs-unfold-options='{
+                       "target": "#mediaDropdown",
+                       "type": "css-animation"
+                     }'>
+											Add media from URL <i class="tio-chevron-down"></i>
+										</a>
+
+										<div id="mediaDropdown"
+											class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
+											<a class="dropdown-item" href="javascript:;"
+												data-toggle="modal" data-target="#addImageFromURLModal">
+												<i class="tio-link dropdown-item-icon"></i> Add image from
+												URL
+											</a> <a class="dropdown-item" href="javascript:;"
+												data-toggle="modal" data-target="#embedVideoModal"> <i
+												class="tio-youtube-outlined dropdown-item-icon"></i> Embed
+												video
+											</a>
+										</div>
+									</div>
+									<!-- End Unfold -->
+								</div>
+								<!-- End Header -->
+
+								<!-- Body -->
+								<div class="card-body">
+									<!-- Dropzone -->
+									<div id="attachFilesNewProjectLabel"
+										class="js-dropzone dropzone-custom custom-file-boxed">
+										<div class="dz-message custom-file-boxed-label">
+											<img class="avatar avatar-xl avatar-4by3 mb-3"
+												th:src="@{\assets\svg\illustrations\browse.svg}"
+												alt="Image Description">
+											<h5 class="mb-1">Choose files to upload</h5>
+											<p class="mb-2">or</p>
+											<span class="btn btn-sm btn-primary">Browse files</span>
+										</div>
+									</div>
+									<!-- End Dropzone -->
+								</div>
+								<!-- Body -->
+							</div>
+
+						</div>
+						<!-- End Card -->
+
+
+						<!------------------------------------------- Side bar --------------------------- -->
+
+						<div class="col-lg-4">
+							<!-- Card -->
+							<div class="card mb-3 mb-lg-5">
+								<!-- Header -->
+								<div class="card-header">
+									<h4 class="card-header-title">Pricing</h4>
+								</div>
+								<!-- End Header -->
+
+								<!-- Body -->
+								<div class="card-body">
+									<!-- Form Group -->
+									<div class="form-group">
+										<label for="priceNameLabel" class="input-label">Price</label>
+										<div class="input-group">
+											<input type="text" th:field="*{gia}" class="form-control"
+												name="priceName" id="priceNameLabel" placeholder="0.00"
+												aria-label="0.00">
+										</div>
+									</div>
+									<!-- Body -->
+								</div>
+								<!-- End Card -->
+
+								<!-- Card -->
+								<div class="card">
+									<!-- Header -->
+									<div class="card-header">
+										<h4 class="card-header-title">Thông số kỹ thuật</h4>
+									</div>
+									<!-- End Header -->
+
+									<!-- Body -->
+									<div class="card-body">
+										<!-- Form Group -->
+										<div class="form-group">
+											<label for="vendorLabel" class="input-label">Động cơ</label>
+											<input type="text" th:field="*{dongco}" class="form-control"
+												name="vendor" id="vendorLabel" placeholder="" aria-label="">
+										</div>
+
+										<div class="form-group">
+											<label for="vendorLabel" class="input-label">Hộp số</label> <input
+												type="text" th:field="*{hopso}" class="form-control"
+												name="vendor" id="vendorLabel" placeholder="" aria-label="">
+										</div>
+
+										<!-- <div class="form-group">
+                  <label for="vendorLabel" class="input-label">Phanh</label>
+                  <input type="text" th:field="*{hopso}" class="form-control" name="vendor" id="vendorLabel" placeholder="" aria-label="">
+                </div>
+               -->
+
+										<div class="form-group">
+											<label for="vendorLabel" class="input-label">Nhiên
+												liệu</label> <input type="text" th:field="*{nhienlieu}"
+												class="form-control" name="vendor" id="vendorLabel"
+												placeholder="" aria-label="">
+										</div>
+										<!-- End Form Group -->
+
+										<!-- Form Group -->
+										<div class="form-group">
+											<label for="vendorLabel" class="input-label">Số KM</label> <input
+												type="text" th:field="*{sokm}" class="form-control"
+												name="vendor" id="vendorLabel" placeholder="" aria-label="">
+										</div>
+										<!-- Form Group -->
+
+									</div>
+									<!-- End Body -->
+								</div>
+								<!-- End Card -->
+							</div>
+						</div>
+					</div>
+					<!-- ------------------------End Side Bar ------------------------->
+
+					<div
+						class="position-fixed bottom-0 content-centered-x w-100 z-index-99 mb-3"
+						style="max-width: 40rem;">
+						<!-- Card -->
+						<div class="card card-sm bg-dark border-dark mx-2">
+							<div class="card-body">
+								<div
+									class="row justify-content-center justify-content-sm-between">
+									<div class="col-auto">
+										<!--   <button type="button" class="btn btn-ghost-light mr-2">Discard</button> -->
+										<button type="submit" class="btn btn-primary">Update</button>
+									</div>
+								</div>
+								<!-- End Row -->
+							</div>
+						</div>
+						<!-- End Card -->
+					</div>
+			</div>
+			<!-- End Content -->
+			</form>
+
+		</main>
+		<!-- ========== END MAIN CONTENT ========== -->
+
+	</section>
+
+</body>
+</html>

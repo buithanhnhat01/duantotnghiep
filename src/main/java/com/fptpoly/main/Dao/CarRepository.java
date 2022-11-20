@@ -14,6 +14,7 @@ public interface CarRepository extends JpaRepository<Car, String> {
     List<Car> findAllByBrandByMa(String hang);
     List<Car> findAllByTypecarByLoaixe(String loai);
     List<Car> findAllByNamsx(int nam);
+    
 
     /*Page<Car> findTencar(String idcar, Pageable pageable);*/
 

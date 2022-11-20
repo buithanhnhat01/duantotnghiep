@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/java/com/fptpoly/main/Controller/AdminController.java=UTF-8
+encoding//src/main/java/com/fptpoly/main/Entity/Car.java=UTF-8
+encoding//src/main/java/com/fptpoly/main/service/Impl/AccessoriesServiceImpl.java=UTF-8
+encoding//src/main/java/com/fptpoly/main/service/Impl/CarServiceImpl.java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/resources/templates/admin/pages/E-commerce/products/UpdateCar.html=UTF-8
+encoding//src/main/resources/templates/admin/pages/E-commerce/products/add-access.html=UTF-8
+encoding//src/main/resources/templates/admin/pages/E-commerce/products/add-car.html=UTF-8
+encoding//src/main/resources/templates/admin/pages/E-commerce/products/product-car.html=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8

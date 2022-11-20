@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+
 import java.util.List;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +21,7 @@ public class Car {
 
     @Id
     @Column(name = "Idcar")
+    @NotEmpty(message = "Vui lòng Nhập Mã Xe")
     private String idcar;
     @Basic
     @Column(name = "Tencar")

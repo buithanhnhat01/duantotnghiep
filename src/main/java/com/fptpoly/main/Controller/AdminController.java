@@ -168,13 +168,9 @@ public class AdminController {
 
     //------------------- Accessories ---------------------
 
-    @GetMapping("admin/orders-car")
-    public String orders_car(Model model) {
+   
 
-        return "admin/pages/E-commerce/orders/orders-car";
-    }
-
-    @RequestMapping("admin/product-phukien")
+   
     @GetMapping("Admin/product-phukien")
     public String product_phukien(Model model) {
     	model.addAttribute("Accessories", accessoriesService.getAllAccessories());

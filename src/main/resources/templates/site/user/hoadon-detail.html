@@ -66,11 +66,11 @@
                                                 </td>
                                                 <td><strong th:text="${bill.getAccessoriesByMalk().malk}"/></td>
                                                 <td><strong
-                                                        th:text="${#strings.replace(#strings.replace(#numbers.formatCurrency(bill.getAccessoriesByMalk().gia),'$',''),'.00','')+' VNĐ'}"/>
+                                                        th:text="${#numbers.formatInteger(bill.getAccessoriesByMalk().gia,0,'COMMA')}"/>
                                                 </td>
                                                 <td><strong th:text="${bill.getSoluong()}"/></td>
                                                 <td><strong
-                                                        th:text="${#strings.replace(#strings.replace(#numbers.formatCurrency(bill.getAccessoriesByMalk().gia * bill.getSoluong()),'$',''),'.00','')+' VNĐ'}"/>
+                                                        th:text="${#numbers.formatInteger(bill.getAccessoriesByMalk().gia * bill.getSoluong(),0,'COMMA')}"/>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -83,11 +83,10 @@
                                                     </div>
                                                     <div class="box-customer-content">
                                                         <div class="title"><span>Thông tin thanh toán</span></div>
-                                                        <div>[Anh/Chị]<b>Nhat Thanh</b></div>
+                                                        <div>[Anh/Chị]<b th:text="${billdetail.get(0).getBillaccessoriesByMahd().accountByMatv.getHoten()}" /></div>
                                                         <div>
-                                                            nhat123@gmail.com |
-                                                            Đà nẵng |
-                                                            0373947017
+                                                            Thanh Toán Khi Nhận Hàng |
+                                                            <b th:text="${billdetail.get(0).getBillaccessoriesByMahd().getVanchuyen()}" /> |
                                                         </div>
                                                     </div>
                                                 </td>
@@ -97,9 +96,12 @@
                                                         <tr>
                                                             <td class="text-left"><b>Tổng tiền thanh toán</b></td>
                                                             <td class="text-right ">
+                                                                <div class="help-block">
+                                                                    Phí Vận Chuyển :<strong th:text="${#numbers.formatInteger(billdetail.get(0).getBillaccessoriesByMahd().getPhivanvchuyen(),0,'COMMA')}" />
+                                                                </div>
                                                                 <b class="total-payment"
-                                                                   th:text="${#strings.replace(#strings.replace(#numbers.formatCurrency(billdetail.get(0).getBillaccessoriesByMahd().tongtien),'$',''),'.00','')+' VNĐ'}"/>
-                                                                <div class="help-block">Bao gồm VAT</div>
+                                                                   th:text="${#numbers.formatInteger(billdetail.get(0).getBillaccessoriesByMahd().tongtien+billdetail.get(0).getBillaccessoriesByMahd().getPhivanvchuyen(),0,'COMMA')+' VNĐ'}"/>
+
                                                             </td>
                                                         </tr>
                                                         <tr class="text-center order-stt"

@@ -29,6 +29,12 @@ public class Billaccessories {
     @Column(name = "Ngaynhan")
     private Date ngaynhan;
     @Basic
+    @Column(name="Phivanchuyen",columnDefinition = "float")
+    private Double phivanvchuyen;
+    @Basic
+    @Column(name="Vanchuyen",columnDefinition = "Nvarchar(50)")
+    private String vanchuyen;
+    @Basic
     @Column(name = "Tongtien")
     private Double tongtien;
     @Basic

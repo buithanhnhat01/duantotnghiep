@@ -52,8 +52,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
 </head>
 
-<body ng-app="myApp">
+<body ng-app="myApp" ng-controller="myctrl">
 
+<script>
+    var app = angular.module("myApp",[])
+    app.controller('myctrl', function ($scope, $http){
+        console.log("aaaaa");
+    });
+</script>
 
 <nav th:replace="site/layouts/nav::nav">
 

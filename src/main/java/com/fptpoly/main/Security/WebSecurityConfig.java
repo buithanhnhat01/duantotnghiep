@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests().and().formLogin().permitAll();
         http.authorizeRequests().antMatchers("/home","/home/listcar").permitAll()
-        .antMatchers("/Admin/**").hasAuthority("ADMIN").antMatchers("/home/member/shopping-cart","/Add","/home/dashboard").hasAuthority("USER")
+        .antMatchers("/Admin/**","/admin/**").hasAuthority("ADMIN").antMatchers("/home/member/shopping-cart","/Add","/home/dashboard").hasAuthority("USER")
         .and().exceptionHandling().accessDeniedPage("/403")
         .and().formLogin().loginPage("/home/login").defaultSuccessUrl("/home").permitAll().loginProcessingUrl("/data")
         .usernameParameter("username").passwordParameter("password")

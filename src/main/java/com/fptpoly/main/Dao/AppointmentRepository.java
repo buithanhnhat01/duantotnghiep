@@ -14,6 +14,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
     @Query("FROM Appointment a WHERE a.accountByMatv.matv=?1 ORDER BY a.ngayhen DESC")
     List<Appointment> fillappointment(String matv);
 
+    Appointment findByStt(int stt);
     @Query("SELECT a.khunggio FROM Appointment a where a.ngayhen=?1 and a.carByIdcar.idcar=?2")
     List<String> findNgayhenAndCarByIdcar(Date ngayhen, String idcar);
 }

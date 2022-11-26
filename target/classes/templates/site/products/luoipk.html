@@ -164,12 +164,12 @@
           <div class="category-products" ng-repeat="lk in pager.lks">
             <ol class="products-list" id="products-list" >
           <li class="item first" >
-            <div class="product-image"> <a th:href="@{/home/phukien-detail?idlk={{lk.malk}}}" title="HTC Rhyme Sense"> 
+            <div class="product-image"> <a th:href="@{/home/phukien-detail?idlk={{lk.malk}}}" title="{{lk.ten}}">
               <div class="new-label new-top-left">Đã sử dụng</div>
                     <div class="sale-label sale-top-left">-15%</div>
               <img class="small-image" src="/products-images/p31.jpg" alt="HTC Rhyme Sense"> </a> </div>
             <div class="product-shop">
-              <h2 class="product-name"><a href="product-detail.html" title="HTC Rhyme Sense"></a>{{lk.ten}}</h2>
+              <h2 class="product-name"><a th:href="@{/home/phukien-detail?idlk={{lk.malk}}}" title="{{lk.ten}}">{{lk.ten}}</a></h2>
               <div class="ratings">
                 <div class="rating-box">
                   <div style="width:50%" class="rating"></div>
@@ -181,8 +181,8 @@
                 <p>{{lk.ghichu}} <a class="link-learn" title="" href="#">Xem thêm</a> </p>
               </div>
               <div class="price-box">
-                <p class="old-price"> <span class="price-label"></span> <span id="old-price-212" class="price"> $442.99 </span> </p>
-                <p class="special-price"> <span class="price-label"></span> <span id="product-price-212" class="price"> ${{lk.gia}} </span> </p>
+                <p class="old-price"> <span class="price-label"></span> <span id="old-price-212" class="price">{{lk.gia/0.85|number:0}} VNĐ</span> </p>
+                <p class="special-price"> <span class="price-label"></span> <span id="product-price-212" class="price">{{lk.gia|currency:"":0}} VNĐ</span> </p>
               </div>
               <div class="add-to-box">
                 <div class="add-to-cart">

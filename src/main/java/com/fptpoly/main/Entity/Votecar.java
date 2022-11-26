@@ -3,9 +3,8 @@ package com.fptpoly.main.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 
 @Entity

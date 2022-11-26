@@ -120,23 +120,22 @@ public class AdminController {
     }
 
     // Product
-
+    
     @GetMapping("Admin/product-car")
     public String addProduct(Model model) {
-    	model.addAttribute("listCars", carService.getAllCars());
+    	model.addAttribute("listCars", carService.getAllCars());	
         return "admin/pages/E-commerce/products/product-car";
     }
-
+    
     @GetMapping("/Admin/add-car")
-    @RequestMapping("Admin/product-car")
     public String product_car(Model model) {
     	Car car =  new Car();
     	model.addAttribute("addBrand", brandRepository.findAll());
     	model.addAttribute("addType", typecarRepository.findAll());
-    	model.addAttribute("addCars", car);
+    	model.addAttribute("addCars", car);	
         return "admin/pages/E-commerce/products/add-car";
     }
-
+    
     @PostMapping("/saveCar")
     public String saveCar(@Validated @ModelAttribute("addCars") Car car,BindingResult bindingResult) {
     	if(bindingResult.hasErrors()){
@@ -145,26 +144,25 @@ public class AdminController {
     	carService.saveCars(car);
     	return "redirect:Admin/product-car";
     }
-
+    
     @GetMapping("/showFormUpdateCar/{id}")
     public String showFormUpdateCar(@PathVariable (value = "id") String id, Model model) {
     	// lấy car from service
     	Car car = carService.getCarById(id);
-
+    	
     	// set car as a model
     	model.addAttribute("addBrand", brandRepository.findAll());
     	model.addAttribute("addType", typecarRepository.findAll());
     	model.addAttribute("car", car);
-        model.addAttribute("listcar",carRepository.findAll());
-        System.out.println(carRepository.findAll().size());
-        return "admin/pages/E-commerce/products/product-car";
+    	return "admin/pages/E-commerce/products/UpdateCar";
+    	
     }
-
-    @RequestMapping(value = "/deleteCar", method = RequestMethod.GET)
-    public String deleteCar(@RequestParam("id") String id, Model model) {
+    
+    @RequestMapping(value = "/deleteCar", method = RequestMethod.GET)  
+    public String deleteCar(@RequestParam("id") String id, Model model) {  
       carService.deleteCar(id);
-      return "redirect:/Admin/product-car";
-    }
+      return "redirect:/Admin/product-car";  
+    }  
 
     //------------------- Accessories ---------------------
 

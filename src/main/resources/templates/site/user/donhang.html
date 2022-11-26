@@ -172,7 +172,7 @@
                                                                 </svg>
 
                                                                 <p class="whitespace-nowrap text-sm"><span class="price"
-                                                                th:text="${#numbers.formatInteger(donhang.tongtien+donhang.getPhivanvchuyen(),0,'COMMA')+' VNĐ'}"/>
+                                                                                                           th:text="${#strings.replace(#strings.replace(#numbers.formatCurrency(donhang.tongtien),'$',''),'.00','')+' VNĐ'}"/>
                                                                 </p>
                                                             </span>
 

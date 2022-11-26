@@ -361,7 +361,7 @@
                   </td>
                   <td class="table-column-pl-0">
                     <a class="media align-items-center" href="ecommerce-product-details.html">
-                      <img class="avatar avatar-lg mr-3" th:src="${Car.image}"
+                      <img class="avatar avatar-lg mr-3" th:src="@{Car.image}"
                         alt="Image Description" />
                       <div class="media-body">
                         <h5 class="text-hover-primary mb-0">
@@ -396,10 +396,8 @@
                   <td>
                     <div class="btn-group" role="group">
                       <a class="btn btn-sm btn-white"
-                    
-                      th:href="@{/showFormUpdateCar/{id}(id=${Car.idcar})}">
                         
-                        <i class="tio-edit" ></i> Edit
+                        <i class="tio-edit"></i> Edit
                       </a>
                     </div>
 

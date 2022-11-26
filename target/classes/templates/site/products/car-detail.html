@@ -25,6 +25,7 @@
                     status: 'success'
                 });
             }
+
             function _error(res) {
                 var data = res.data;
                 var status = res.status;
@@ -39,21 +40,21 @@
                             console.log($scope.ngay)
                         }*/
             /*$scope.min = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate();*/
-            if(new Date().getDate()>=10){
-                if((new Date().getMonth() + 1)>=10){
+            if (new Date().getDate() >= 10) {
+                if ((new Date().getMonth() + 1) >= 10) {
                     $scope.min = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate()
-                }else{
+                } else {
                     $scope.min = new Date().getFullYear() + "-0" + (new Date().getMonth() + 1) + "-" + new Date().getDate()
                 }
-            }else{
-                if((new Date().getMonth() + 1)>=10){
+            } else {
+                if ((new Date().getMonth() + 1) >= 10) {
                     $scope.min = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-0" + new Date().getDate()
-                }else{
+                } else {
                     $scope.min = new Date().getFullYear() + "-0" + (new Date().getMonth() + 1) + "-0" + new Date().getDate()
                 }
             }
             $scope.ngay = new Date();
-            document.getElementById("booklich").min=$scope.min
+            document.getElementById("booklich").min = $scope.min
             console.log(new Date().getHours())
             $scope.xacnhan = function () {
                 if (confirm("Bạn có muốn đặt lịch xem xe không!") == true) {
@@ -67,6 +68,66 @@
                 }
             }
             resetCheck()
+            function tb(ls){
+                $scope.totalStar = 0
+                angular.forEach(ls, function (item, key) {
+                    $scope.totalStar += item.danhgia
+                });
+                $scope.trungbinh = $scope.totalStar/$scope.votecar.length
+            }
+            $scope.addVote = function () {
+                if ($scope.body == null) {
+                    alert("Không Đc Trống Bình Luận")
+                } else {
+                    if($scope.star==null){
+                        alert("Vui Lòng Chọn Sao Đánh Giá")
+                    }else{
+                        $http.post('/Addvote?star='+$scope.star, $scope.body, {'Content-Type': 'application/json'}).then(response => {
+                            $scope.votecar = response.data;
+                            tb($scope.votecar)
+
+                        })
+                        $scope.star=null;
+                        $scope.body = null;
+                    }
+                }
+            }
+
+            function l() {
+                $http.get('/Addvote').then(response => {
+                    $scope.votecar = response.data;
+                    tb($scope.votecar)
+                    console.log($scope.votecar)
+                })
+            }
+
+            loadVote()
+
+            function loadVote() {
+                $http({
+                    method: "GET",
+                    url: "/Addvote",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }).then(l, _error);
+
+            }
+
+            $scope.begin = 0;
+            $scope.next = function () {
+                $scope.begin += 3;
+                if ($scope.begin >= $scope.votecar.length) {
+                    $scope.begin -= 3;
+                }
+            }
+            $scope.prev = function () {
+                $scope.begin -= 3;
+                if ($scope.begin < 0) {
+                    $scope.begin = 0;
+                }
+            }
+
             function resetCheck() {
                 for (i = 1; i <= 8; ++i) {
                     document.getElementById('gio' + i).checked = false;
@@ -74,34 +135,40 @@
                 }
 
                 $scope.checkDate = new Date();
-                console.log($scope.ngay.toDateString()+"     "+$scope.checkDate.toDateString())
-                if($scope.checkDate.toDateString()==$scope.ngay.toDateString()){
+                console.log($scope.ngay.toDateString() + "     " + $scope.checkDate.toDateString())
+                if ($scope.checkDate.toDateString() == $scope.ngay.toDateString()) {
                     console.log("Cũng Hợp lý")
-                    if(new Date().getHours()>=9){
+                    if (new Date().getHours() >= 9) {
                         document.getElementById('gio1').setAttribute('disabled', true);
-                    }if(new Date().getHours()>=10){
+                    }
+                    if (new Date().getHours() >= 10) {
                         document.getElementById('gio2').setAttribute('disabled', true);
-                    }if(new Date().getHours()>=11){
+                    }
+                    if (new Date().getHours() >= 11) {
                         document.getElementById('gio3').setAttribute('disabled', true);
-                    }if(new Date().getHours()>=12){
+                    }
+                    if (new Date().getHours() >= 12) {
                         document.getElementById('gio4').setAttribute('disabled', true);
-                    }if(new Date().getHours()>=14){
+                    }
+                    if (new Date().getHours() >= 14) {
                         document.getElementById('gio5').setAttribute('disabled', true);
-                    }if(new Date().getHours()>=15){
+                    }
+                    if (new Date().getHours() >= 15) {
                         document.getElementById('gio6').setAttribute('disabled', true);
-                    }if(new Date().getHours()>=16){
+                    }
+                    if (new Date().getHours() >= 16) {
                         document.getElementById('gio7').setAttribute('disabled', true);
-                    }if(new Date().getHours()>=17){
+                    }
+                    if (new Date().getHours() >= 17) {
                         document.getElementById('gio8').setAttribute('disabled', true);
                     }
-                }else{
+                } else {
                     console.log("Hợp lý")
                     for (i = 1; i <= 8; ++i) {
                         /*document.getElementById('gio' + i).checked = false;*/
                         document.getElementById('gio' + i).removeAttribute("disabled");
                     }
                 }
-
 
 
             }
@@ -230,7 +297,7 @@
                                         <div class="toll-free"><a href="#" sec:authorize="isAuthenticated()"><i
                                                 class="fa fa-phone"></i>0705182415</a>
                                         </div>
-                                        <div class="ask-question"><a onClick="ShowMe();"
+                                        <div th:disabled="${!Cardetail.trangthai.equalsIgnoreCase('Xe có sẵn')}" class="ask-question"><a onClick="ShowMe();"
                                                                      sec:authorize="isAuthenticated()"><i
                                                 class="fa fa-question" ng-click="Valuechage()"></i>Đặt lịch xem xe</a>
                                         </div>
@@ -246,9 +313,9 @@
                                         </div>
                                         <div class="ratings">
                                             <div class="rating-box">
-                                                <div style="width:60%" class="rating"></div>
+                                                <div style="width:{{trungbinh}}%" class="rating"></div>
                                             </div>
-                                            <p class="rating-links"><a href="#">1 Review</a> <span
+                                            <p class="rating-links"><a href="#">{{votecar.length}} Review</a> <span
                                                     class="separator">|</span> <a href="#">Add Your Review</a></p>
                                         </div>
                                         <div class="price-block">
@@ -256,7 +323,8 @@
 
                                                 <p class="special-price"><span class="price-label">Special Price</span>
                                                     <span id="product-price-48" class="price"
-                                                          th:text="${#strings.replace(#numbers.formatCurrency(Cardetail.gia),'$','')+' VNĐ'}"/>
+                                                          th:text="${#numbers.formatDecimal(Cardetail.gia, 1, 'COMMA', 0,'POINT' )+' VNĐ'}"/>
+                                                    <span id="product-price-48" style="color: black;margin-left: 10px" class="price"> ( <th:block th:text="${Cardetail.trangthai}" /> ) </span>
                                                 </p>
                                             </div>
                                         </div>
@@ -432,97 +500,164 @@
                                         </table>
                                     </div>
                                 </div>
+
+                                <!--Đánh giá xe-->
                                 <div class="tab-pane fade" id="reviews_tabs">
                                     <div class="woocommerce-Reviews">
                                         <div>
-                                            <h2 class="woocommerce-Reviews-title">2 reviews for <span>Bacca Bucci Men's Running Shoes</span>
+                                            <h2 class="woocommerce-Reviews-title">{{votecar.length}} Lượt đánh giá:
+                                                <span><th:block th:text="${Cardetail.tencar}"/></span>
                                             </h2>
                                             <ol class="commentlist">
-                                                <li class="comment">
+                                                <li class="comment" ng-repeat="vote in votecar|limitTo:3:begin">
                                                     <div><img alt="" src="/images/member1.png"
                                                               class="avatar avatar-60 photo">
                                                         <div class="comment-text">
                                                             <div class="ratings">
                                                                 <div class="rating-box">
-                                                                    <div style="width:100%" class="rating"></div>
+                                                                    <div style="width:{{vote.danhgia}}%"
+                                                                         class="rating"></div>
                                                                 </div>
                                                             </div>
-                                                            <p class="meta"><strong>John Doe</strong> <span>–</span>
-                                                                April 19, 2018 </p>
+                                                            <p class="meta"><strong>{{vote.accountByMatv.matv}}</strong>
+                                                                <span>–</span>
+                                                                {{vote.ngay|date:'MMMM dd, yyyy'}}</p>
                                                             <div class="description">
-                                                                <p>Vivamus magna justo, lacinia eget consectetur sed,
-                                                                    convallis at tellus. Nulla quis lorem ut libero
-                                                                    malesuada feugiat. Proin eget tortor risus. Donec
-                                                                    rutrum congue leo eget malesuada. Lorem ipsum dolor
-                                                                    sit amet, consectetur adipiscing elit.</p>
-                                                                <p>Donec sollicitudin molestie malesuada. Vivamus
-                                                                    suscipit tortor eget felis porttitor volutpat. Lorem
-                                                                    ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                    Nulla quis lorem ut libero malesuada feugiat.
-                                                                    Vivamus magna justo, lacinia eget consectetur sed,
-                                                                    convallis at tellus.</p>
+                                                                <p>{{vote.noidung}}.</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </li>
                                                 <!-- #comment-## -->
-                                                <li class="comment">
-                                                    <div><img alt="" src="/images/member2.png"
-                                                              class="avatar avatar-60 photo">
-                                                        <div class="comment-text">
-                                                            <div class="ratings">
-                                                                <div class="rating-box">
-                                                                    <div style="width:100%" class="rating"></div>
-                                                                </div>
-                                                            </div>
-                                                            <p class="meta"><strong>Stephen Smith</strong>
-                                                                <span>–</span> June 02, 2018 </p>
-                                                            <div class="description">
-                                                                <p>Donec rutrum congue leo eget malesuada. Lorem ipsum
-                                                                    dolor sit amet, consectetur adipiscing elit.</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </li>
                                                 <!-- #comment-## -->
                                             </ol>
+                                            <center>
+                                                <div class="pages">
+                                                    <ul class="pagination">
+                                                        <li><a href="" ng-click="prev()">&laquo;</a></li>
+                                                        <li><a href="">|</a></li>
+                                                        <li><a href="" ng-click="next()">&raquo;</a></li>
+                                                    </ul>
+                                                </div>
+                                            </center>
+
                                         </div>
                                         <div>
                                             <div>
-                                                <div class="comment-respond"><span class="comment-reply-title">Add a review </span>
-                                                    <form action="#" method="post" class="comment-form" novalidate>
-                                                        <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span>
-                                                            Required fields are marked <span class="required">*</span>
-                                                        </p>
-                                                        <div class="comment-form-rating">
-                                                            <label id="rating">Your rating</label>
-                                                            <p class="stars"><span> <a class="star-1" href="#">1</a> <a
-                                                                    class="star-2" href="#">2</a> <a class="star-3"
-                                                                                                     href="#">3</a> <a
-                                                                    class="star-4" href="#">4</a> <a class="star-5"
-                                                                                                     href="#">5</a> </span>
-                                                            </p>
-                                                        </div>
+                                                <div class="comment-respond"><span class="comment-reply-title">Đánh Giá Xe </span>
+                                                    <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span>
+                                                        Required fields are marked <span class="required">*</span>
+                                                    </p>
+                                                    <fieldset class="rate">
+                                                        <input ng-model="star" type="radio" id="rating10" name="rating"
+                                                               value="100"/><label for="rating10"
+                                                                                  title="5 stars"></label>
+                                                        <input ng-model="star" type="radio" id="rating9" name="rating"
+                                                               value="90"/><label class="half" for="rating9"
+                                                                                 title="4 1/2 stars"></label>
+                                                        <input ng-model="star" type="radio" id="rating8" name="rating"
+                                                               value="80"/><label for="rating8"
+                                                                                 title="4 stars"></label>
+                                                        <input ng-model="star" type="radio" id="rating7" name="rating"
+                                                               value="70"/><label class="half" for="rating7"
+                                                                                 title="3 1/2 stars"></label>
+                                                        <input ng-model="star" type="radio" id="rating6" name="rating"
+                                                               value="60"/><label for="rating6"
+                                                                                 title="3 stars"></label>
+                                                        <input ng-model="star" type="radio" id="rating5" name="rating"
+                                                               value="50"/><label class="half" for="rating5"
+                                                                                 title="2 1/2 stars"></label>
+                                                        <input ng-model="star" type="radio" id="rating4" name="rating"
+                                                               value="40"/><label for="rating4"
+                                                                                 title="2 stars"></label>
+                                                        <input ng-model="star" type="radio" id="rating3" name="rating"
+                                                               value="30"/><label class="half" for="rating3"
+                                                                                 title="1 1/2 stars"></label>
+                                                        <input ng-model="star" type="radio" id="rating2" name="rating"
+                                                               value="20"/><label for="rating2"
+                                                                                 title="1 star"></label>
+                                                        <input ng-model="star" type="radio" id="rating1" name="rating"
+                                                               value="10"/><label class="half" for="rating1"
+                                                                                 title="1/2 star"></label>
+                                                        <!--<input type="radio" id="rating0" name="rating"
+                                                               value="0"/><label for="rating0"
+                                                                                 title="No star"></label>-->
+                                                        <style>
+                                                            @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+                                                            .rate {
+                                                                display: inline-block;
+                                                                border: 0;
+                                                            }
+
+                                                            /* Hide radio */
+                                                            .rate > input {
+                                                                display: none;
+                                                            }
+
+                                                            /* Order correctly by floating highest to the right */
+                                                            .rate > label {
+                                                                float: right;
+                                                            }
+
+                                                            /* The star of the show */
+                                                            .rate > label:before {
+                                                                display: inline-block;
+                                                                font-size: 2rem;
+                                                                padding: .3rem .2rem;
+                                                                margin: 0;
+                                                                cursor: pointer;
+                                                                font-family: FontAwesome;
+                                                                content: "\f005 ";
+                                                                /* full star */
+                                                            }
+
+                                                            /* Zero stars rating */
+                                                            .rate > label:last-child:before {
+                                                                content: "\f006 ";
+                                                                /* empty star outline */
+                                                            }
+
+                                                            /* Half star trick */
+                                                            .rate .half:before {
+                                                                content: "\f089 ";
+                                                                /* half star no outline */
+                                                                position: absolute;
+                                                                padding-right: 0;
+                                                            }
+
+                                                            /* Click + hover color */
+                                                            .rate>input:checked ~ label,
+                                                                /* color current and previous stars on checked */
+                                                            .rate>label:hover,
+                                                            .rate>label:hover ~ label {
+                                                                color: yellow;
+                                                            }
+
+                                                            /* color previous stars on hover */
+
+                                                            /* Hover highlights */
+                                                            .rate>input:checked + label:hover,
+                                                            .rate>input:checked ~ label:hover,
+                                                                /* highlight current and previous stars */
+                                                            .rate>input:checked ~ label:hover ~ label,
+                                                                /* highlight previous selected stars for new rating */
+                                                            label:hover ~ input:checked ~ label {
+                                                                color: yellow;
+                                                            }
+                                                        </style>
+                                                    </fieldset>
+                                                    <form class="comment-form" novalidate>
                                                         <p class="comment-form-comment">
                                                             <label>Your review <span class="required">*</span></label>
-                                                            <textarea id="comment" name="comment" cols="45" rows="8"
-                                                                      required></textarea>
-                                                        </p>
-                                                        <p class="comment-form-author">
-                                                            <label for="author">Name <span
-                                                                    class="required">*</span></label>
-                                                            <input id="author" name="author" type="text" value=""
-                                                                   size="30" required>
-                                                        </p>
-                                                        <p class="comment-form-email">
-                                                            <label for="email">Email <span
-                                                                    class="required">*</span></label>
-                                                            <input id="email" name="email" type="email" value=""
-                                                                   size="30" required>
+                                                            <textarea ng-model="body" id="comment" name="comment"
+                                                                      cols="45" rows="10"
+                                                                      required
+                                                                      placeholder="Nội Dung Đánh Giá"></textarea>
                                                         </p>
                                                         <p class="form-submit">
                                                             <input name="submit" type="submit" id="submit"
-                                                                   class="submit" value="Submit">
+                                                                   class="submit" value="Submit" ng-click="addVote()">
                                                         </p>
                                                     </form>
                                                 </div>
@@ -1361,6 +1496,10 @@
     <!-- JavaScript -->
 
     <script type="text/javascript">
+
+        var key = document.getElementById('submit')
+        key.addEventListener("e")
+
         function HideMe() {
             jQuery('.popup1').hide();
             jQuery('#fade').hide();

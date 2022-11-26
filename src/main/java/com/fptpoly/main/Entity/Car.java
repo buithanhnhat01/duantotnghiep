@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.List;
 import java.util.Objects;

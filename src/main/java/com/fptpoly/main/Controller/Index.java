@@ -4,6 +4,7 @@ package com.fptpoly.main.Controller;
 import com.fptpoly.main.Dao.*;
 import com.fptpoly.main.Entity.Appointment;
 import com.fptpoly.main.Entity.Cartaccessories;
+import com.fptpoly.main.Entity.Votecar;
 import com.fptpoly.main.Util._CookieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -44,6 +45,8 @@ public class Index {
     CartaccessoriesRepository cartaccessoriesRepository;
     @Autowired
     AppointmentRepository appointmentRepository;
+    @Autowired
+    VotecarRepository votecarRepository;
 
     // hiển thị tất cả xe
     @GetMapping("CarsAll")
@@ -136,6 +139,34 @@ public class Index {
         /*return "Đặt lịch thành công";*/
     }
 
+    @PostMapping("Addvote")
+    public List addvote(@RequestBody String body,@RequestParam("star")int star,Principal principal){
+        WebMainController x= new WebMainController();
+        try {
+            Votecar votecar = new Votecar();
+            System.out.println("IDCAR: "+x.idcar);
+            votecar.setNgay(new Date());
+            votecar.setNoidung(body==null?"":body);
+            votecar.setCarByMaxe(carRepository.findCarsByIdcar(x.idcar));
+            votecar.setAccountByMatv(accountRepository.findAllByMatv(principal.getName()));
+            votecar.setDanhgia(star);
+            votecarRepository.save(votecar);
+            System.out.println("Lưu Đánh Giá Thành Công: "+body);
+        }catch (Exception ex){
+            System.out.println("Lỗi chi nè");
+        }
+        return votecarRepository.findAllByCarByMaxe_IdcarOrderByNgayDesc(x.idcar);
+    }
+    @GetMapping("Addvote")
+    public List votecar(){
+        WebMainController x= new WebMainController();
+        try {
+            return votecarRepository.findAllByCarByMaxe_IdcarOrderByNgayDesc(x.idcar);
+        }catch (Exception e){
+            System.out.println("Lỗi chi ri nè");
+            return votecarRepository.findAllByCarByMaxe_IdcarOrderByNgayDesc(x.idcar);
+        }
+    }
     @GetMapping("TotalPage")
     public  List totalpage() {
         return carRepository.findAll();

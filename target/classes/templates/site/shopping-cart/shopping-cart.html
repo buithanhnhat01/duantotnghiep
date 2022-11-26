@@ -36,7 +36,6 @@
                             $scope.total += (item.soluong * item.accessoriesByMalk.gia);
                         });
                         $scope.totalbill = parseInt($scope.total) + parseInt($scope.ship)
-                        console.log($scope.mycart.length)
                     })
                 }
 
@@ -619,14 +618,11 @@
                                 <div class="discount">
                                     <h3>2.Thanh toán và vận chuyển</h3>
                                     <div class="form-group ">
-                                        <select ng-model="ship" ng-change="input()"
+                                        <select ng-change="input()" ng-model="ship"
                                             class="form-control ng-pristine ng-valid ng-touched">
-                                            <option value="40000" label="Giao hàng tận nơi - 40,000" selected>
-                                                Giao hàng tận nơi - 40,000</option>
-                                            <option value="27000" label="Giao hàng Tiết Kiệm - 27,000">
-                                                Giao hàng Tiết Kiệm - 27,000</option>
-                                            <option value="25000" label="Giao hàng Tiêu Chuẩn - 25,000">
-                                                Giao hàng Tiêu Chuẩn - 25,000</option>
+                                            <option value="40000">Giao hàng tận nơi - 40,000</option>
+                                            <option value="27000">Giao hàng Tiết Kiệm - 27,000</option>
+                                            <option value="25000">Giao hàng Tiêu Chuẩn - 25,000</option>
                                         </select>
                                     </div>
                                     <h2 class="title">Thanh toán</h2>
@@ -871,8 +867,7 @@
                                         <!-- The button to open modal -->
                                         <ul class="checkout">
                                             <li><label for="my-modal" class="button btn-proceed-checkout"><span><span
-                                                            style="text-display:block;ecoration: none;">THANH
-                                                            TOÁN</span></span></label>
+                                                            style="text-display:block;ecoration: none;">THANH TOÁN</span></span></label>
                                                 <input type="checkbox" id="my-modal" class="modal-toggle" />
                                                 <div class="modal">
                                                     <div class="modal-box" style="font-size: 18px">

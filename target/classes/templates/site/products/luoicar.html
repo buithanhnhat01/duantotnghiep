@@ -110,9 +110,7 @@
                                             <label>Trang:</label>
                                             <ul class="pagination">
                                                 <li><a th:href="@{'/home/listcar?page='+${IndexPage-1<1?1:IndexPage-1}}">&laquo;</a></li>
-                                                <li class="active"><a href="#"><th:block th:text="${IndexPage}"/></a></li>
-                                                <li><a style="border: none;font-size: 15px;width: 10px" href="#">|</a></li>
-                                                <li class="active"><a href="#"><th:block th:text="${AllCar.getTotalPages()}"/></a></li>
+                                                <li><a href="#"><th:block th:text="${IndexPage+' OF '+AllCar.getTotalPages()}"/></a></li>
                                                 <li><a th:href="@{'/home/listcar?page='+${IndexPage+1>AllCar.getTotalPages()?AllCar.getTotalPages():IndexPage+1}}">&raquo;</a></li>
                                             </ul>
                                         </div>
@@ -135,11 +133,12 @@
                                                                             th:text="${Car.tencar}"/></h2>
                                                 <div class="ratings">
                                                     <div class="rating-box">
-                                                        <div style="width:50%" class="rating"></div>
+                                                        <div style="width:100%" class="rating">
+                                                        </div>
                                                     </div>
                                                     <p class="rating-links"><a
-                                                            href="#/review/product/list/id/167/category/35/">1 Đánh
-                                                        giá</a> <span class="separator">|</span> <a href="#review-form">Thêm
+                                                            href="#/review/product/list/id/167/category/35/">
+                                                        <th:block th:text="${Car.votecarsByIdcar.size()}" /> Đánh giá</a> <span class="separator">|</span> <a href="#review-form">Thêm
                                                         đánh giá</a></p>
                                                 </div>
                                                 <div class="desc std">
@@ -156,7 +155,7 @@
                                                     <!--<p class="old-price"> <span class="price-label"></span> <span id="old-price-212" class="price"> $442.99 </span> </p>-->
                                                     <p class="special-price"><span class="price-label"></span> <span
                                                             id="product-price-212" class="price"
-                                                            th:text="${'$ '+Car.gia}"/></p>
+                                                            th:text="${#numbers.formatInteger(Car.gia,0,'COMMA')+' VNĐ'}"/></p>
                                                 </div>
                                                 <div class="actions">
                                                     <button class="button btn-cart ajx-cart" title="Thêm vào giỏ hàng"

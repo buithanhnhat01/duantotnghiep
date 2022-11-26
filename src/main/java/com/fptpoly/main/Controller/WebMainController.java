@@ -50,6 +50,7 @@ public class WebMainController {
     public static String hangxe = null;
     public static fillCar fill;
     public static String idcar;
+    public static String user;
     public static boolean thongbao = false;
 
 
@@ -78,7 +79,7 @@ public class WebMainController {
              page = carRepository.findAll(PageRequest.of(indexPage-1, 10));
         }else {
             Pageable pageable = PageRequest.of(0,Integer.MAX_VALUE);
-            page = carRepository.searchAllByTencarLike("%"+search.get()+"%",pageable);
+            page = carRepository.searchAllByTencarLike(search.get()+"%",pageable);
         }
         if (indexPage==0){
             indexPage=1;
@@ -149,7 +150,6 @@ public class WebMainController {
     @GetMapping("home/addcart")
     public String addcart(@RequestParam("idlk") String id, Principal principal) {
         boolean check = false;
-        System.out.println(principal.getName());
         List<Cartaccessories> carts = cartaccessoriesRepository.findAllByAccount_Matv(principal.getName());
         for (int i = 0; i < carts.size(); ++i) {
             Cartaccessories cart = carts.get(i);
@@ -174,7 +174,6 @@ public class WebMainController {
     // cái ni đang định bỏ
     @PostMapping("home/listcar")
     public void listcar(Model model, @ModelAttribute("fill") fillCar fillcar) {
-        System.out.println("Data " + fillcar.getNam());
         fill = fillcar;
         /*return "site/products/listcar";*/
     }
@@ -187,6 +186,7 @@ public class WebMainController {
     @GetMapping(value = "home/car-detail")
     public String cardetail(Model model, @RequestParam("idcar") String id,Principal principal) {
         try {
+            user = principal.getName();
             model.addAttribute("Account",accountRepository.findAllByMatv(principal.getName()));
         }catch (Exception ex){
             model.addAttribute("Account",new Account());
@@ -194,7 +194,6 @@ public class WebMainController {
         }
         Date x = new Date();
         idcar = id;
-        System.out.println(appointmentRepository.findNgayhenAndCarByIdcar(x, id).size());
         /*carRepository.findCarsByIdcar(id).getImagescarsByIdcar().get(0).getHinh();*/
         model.addAttribute("thongtingio", appointmentRepository.findNgayhenAndCarByIdcar(x, id));
         model.addAttribute("Cardetail", carRepository.findCarsByIdcar(id));
@@ -265,7 +264,7 @@ public class WebMainController {
     }
 
     @GetMapping("home/Payorder")
-    public String payorder(Model model, Principal principal) {
+    public String payorder(Model model, Principal principal,@RequestParam("total")double total) {
         try {
             Random rn = new Random();
             int HoadonNumber = rn.nextInt(99999999) + 10000000;
@@ -279,6 +278,12 @@ public class WebMainController {
             for (Cartaccessories cartaccessories : cartaccessoriesRepository.findAllByAccount_Matv(principal.getName())) {
                 tongtien += cartaccessories.getSoluong() * cartaccessories.getAccessoriesByMalk().getGia();
             }
+            if (total-tongtien==27000){
+                billaccessories.setVanchuyen("Giao Hàng Tiết Kiệm");
+            }else if (total-tongtien==40000) {
+                billaccessories.setVanchuyen("Giao Hàng Tận Nơi");
+            }else {billaccessories.setVanchuyen("Giao hàng Tiêu Chuẩn"); }
+            billaccessories.setPhivanvchuyen(total-tongtien);
             billaccessories.setTongtien(tongtien);
             billaccessories.setTrangthai("PENDING");
             billaccessoriesRepository.save(billaccessories);
@@ -304,13 +309,7 @@ public class WebMainController {
     @GetMapping("home/{status}")
     public String pending(Model model,@PathVariable("status")String status,@RequestParam("idhd") String id) {
         try {
-           /* List<Billaccessoriesdetail> ls = billaccessoriesdetailRepository.findAllByBillaccessoriesByMahd_Mahd(id);
-            for (int i = 0; i < ls.size(); ++i) {
-                Billaccessoriesdetail billaccessoriesdetail = ls.get(0);
-                billaccessoriesdetailRepository.delete(ls.get(i));
-            }*/
             Billaccessories billaccessories = billaccessoriesRepository.findAllByMahd(id);
-
             if (status.equals("PENDING") || status.equals("PACKING")){
                 billaccessories.setTrangthai("CANCEL");
                 billaccessories.setNgaynhan(new Date());
@@ -338,36 +337,19 @@ public class WebMainController {
 
     @GetMapping("home/LichHen")
     public String appointment(Model model,Principal principal) {
-        System.out.println(appointmentRepository.fillappointment(principal.getName()).get(0).getLoai());
         model.addAttribute("appontments",appointmentRepository.fillappointment(principal.getName()));
+        return "site/user/lichhen";
+
+    }@GetMapping("home/LichHen/Huy")
+    public String cancelappointment(Model model,@RequestParam("ma")int ma){
+        appointmentRepository.delete(appointmentRepository.findByStt(ma));
         return "site/user/lichhen";
     }
     @GetMapping("home/dashboard")
     public String dashboard(Model model, Principal principal, @RequestParam("status") Optional<String> status) {
         String trangthai = status.orElse("PENDING");
-        switch (trangthai) {
-            case "PENDING": {
-                model.addAttribute("donhangs", billaccessoriesRepository.findAllByTrangthaiAndAccountByMatv_MatvOrderByMahdDesc("PENDING", principal.getName()));
-                break;
-            }
-            case "PACKING": {
-                model.addAttribute("donhangs", billaccessoriesRepository.findAllByTrangthaiAndAccountByMatv_MatvOrderByMahdDesc("PACKING", principal.getName()));
-                break;
-            }
-            case "SHIPING": {
-                model.addAttribute("donhangs", billaccessoriesRepository.findAllByTrangthaiAndAccountByMatv_MatvOrderByMahdDesc("SHIPING", principal.getName()));
-                break;
-            }
-            case "SUCCESS": {
-                model.addAttribute("donhangs", billaccessoriesRepository.findAllByTrangthaiAndAccountByMatv_MatvOrderByMahdDesc("SUCCESS", principal.getName()));
-                break;
-            }
-            default: {
-                model.addAttribute("donhangs", billaccessoriesRepository.findAllByTrangthaiAndAccountByMatv_MatvOrderByMahdDesc("CANCEL", principal.getName()));
-                break;
-            }
-        }
-        model.addAttribute("checked",status.orElse("PENDING"));
+        model.addAttribute("donhangs", billaccessoriesRepository.findAllByTrangthaiAndAccountByMatv_MatvOrderByNgaymuaDesc(trangthai, principal.getName()));
+        model.addAttribute("checked",trangthai);
         return "site/user/donhang";
     }
      //ordercar tai lam

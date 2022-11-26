@@ -104,6 +104,9 @@ public class AdminController {
             billaccessories.setNgaynhan(new Date());
             billaccessories.setTrangthai(sta);
             billaccessoriesRepository.save(billaccessories);
+            if(btn.equals("PENDING")){
+                mailService.sendEmail("longzu102@gmail.com","XÁC NHẬN ĐƠN HÀNG","Đơn Hàng Mã #"+mahds[i]+" Đã Được Xác Nhận");
+            }
         }
 
         return "redirect:/Admin?status=PENDING";
@@ -152,8 +155,6 @@ public class AdminController {
     	model.addAttribute("addBrand", brandRepository.findAll());
     	model.addAttribute("addType", typecarRepository.findAll());
     	model.addAttribute("car", car);
-    	return "admin/pages/E-commerce/products/UpdateCar";
-
         model.addAttribute("listcar",carRepository.findAll());
         System.out.println(carRepository.findAll().size());
         return "admin/pages/E-commerce/products/product-car";

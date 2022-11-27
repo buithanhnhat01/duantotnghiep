@@ -85,14 +85,7 @@
                                     </div>
                                     <div class="pager">
                                         <div id="limiter">
-                                            <div>
-                                                <form th:action="@{/home/listcar?page=1}" method="get">
-                                                    <input type="text" hidden name="page" value="1">
-                                                    <input type="text" placeholder="Search..." name="search">
-                                                    <button>Search</button>
-                                                </form>
-
-                                            </div>
+                                          
 
 
                                             <label>Tổng Số Trang: <th:block th:text="${AllCar.getTotalPages()}" /></label>
@@ -115,6 +108,24 @@
                                             </ul>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="searchcar">
+                                    <form th:action="@{/home/listcar?page=1}" method="get">
+                                        <input class="s12" type="text" hidden name="page" value="1">
+                                        <input class="s12" type="text" placeholder="Search..." name="search">
+                                        <button class="s12">Search</button>
+                                    </form>
+                                    <style>
+                                        .searchcar {
+                                            text-align: right;
+                                            padding-right: 25px;
+                                        }
+                                        .searchcar .s12{
+                                            border: none;
+                                            border: 1px solid #ccc;
+                                            height: 35px;
+                                        }
+                                    </style>
                                 </div>
                                 <div class="category-products">
                                     <ol class="products-list" id="products-list">
@@ -338,18 +349,7 @@
                                         <a class="button-asc left" href="#" title="Set Descending Direction"><span
                                                 class="top_arrow"></span></a></div>
                                     <div class="pager">
-                                        <div id="limiter">
-                                            <label>Lượt xem: </label>
-                                            <ul>
-                                                <li><a href="#">15<span class="right-arrow"></span></a>
-                                                    <ul>
-                                                        <li><a href="#">20</a></li>
-                                                        <li><a href="#">30</a></li>
-                                                        <li><a href="#">35</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                      
                                         <div class="pages">
                                             <label>Trang:</label>
                                             <ul class="pagination">
@@ -362,6 +362,18 @@
                                                 <li><a href="#">&raquo;</a></li>
                                             </ul>
                                         </div>
+                                    </div>
+                                    <div id="limiter">
+                                        <label>Lượt xem: </label>
+                                        <ul>
+                                            <li><a href="#">15<span class="right-arrow"></span></a>
+                                                <ul>
+                                                    <li><a href="#">20</a></li>
+                                                    <li><a href="#">30</a></li>
+                                                    <li><a href="#">35</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
 

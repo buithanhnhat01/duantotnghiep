@@ -160,6 +160,24 @@
               </div>
             </div>
           </div>
+          <div class="searchpk">
+            <form th:action="@{/home/listcar?page=1}" method="get">
+                <input class="s12" type="text" hidden name="page" value="1">
+                <input class="s12" type="text" placeholder="Search..." name="search">
+                <button class="s12">Search</button>
+            </form>
+            <style>
+                .searchpk {
+                    text-align: right;
+                    padding-right: 25px;
+                }
+                .searchpk .s12{
+                    border: none;
+                    border: 1px solid #ccc;
+                    height: 35px;
+                }
+            </style>
+        </div>
           <!-- Nhật làm -->
           <div class="category-products" ng-repeat="lk in pager.lks">
             <ol class="products-list" id="products-list" >
@@ -201,6 +219,11 @@
                         display: flex;
                         justify-content: space-around;
                       }
+                      .btn-cart {
+                        display: flex;
+                        align-items: center;
+                        
+                      }
                       .actions {
                         flex: 1;
                       }
@@ -231,18 +254,6 @@
               </ul>
               <a class="button-asc left" href="#" title="Set Descending Direction"><span class="top_arrow"></span></a> </div>
             <div class="pager">
-              <div id="limiter">
-                <label>Lượt xem: </label>
-                <ul>
-                  <li><a href="#">15<span class="right-arrow"></span></a>
-                    <ul>
-                      <li><a href="#">20</a></li>
-                      <li><a href="#">30</a></li>
-                      <li><a href="#">35</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
               <div class="pages">
                 <label>Trang:</label>
                 <ul class="pagination">
@@ -255,6 +266,18 @@
                   <li><a href="#">&raquo;</a></li>
                 </ul>
               </div>
+            </div>
+            <div id="limiter">
+              <label>Lượt xem: </label>
+              <ul>
+                <li><a href="#">15<span class="right-arrow"></span></a>
+                  <ul>
+                    <li><a href="#">20</a></li>
+                    <li><a href="#">30</a></li>
+                    <li><a href="#">35</a></li>
+                  </ul>
+                </li>
+              </ul>
             </div>
           </div>
           

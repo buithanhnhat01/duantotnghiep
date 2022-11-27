@@ -362,7 +362,7 @@
                   </td>
                   <td>[[${item.ngayban}]]</td>
                   <td>
-                    <a class="text-body" href="ecommerce-customer-details.html" th:text="${item.accountByMatv.matv}"></a>
+                    <a class="text-body" href="ecommerce-customer-details.html" >[[${item?.accountByMatv?.matv}]]</a>
                   </td>
                   <td>
                     <span class="badge badge-soft-success">
@@ -371,13 +371,13 @@
                   </td>
                   <td>
                     <span class="badge badge-soft-info">
-                      <span class="legend-indicator bg-info" th:text="${item.car.idcar}"></span>
+                      <span class="legend-indicator bg-info" >[[${item?.car?.idcar}]]</span>
                     </span>
                   </td>
                   <td>
                     <div class="d-flex align-items-center">
                       <img class="avatar avatar-xss avatar-4by3 mr-2" th:src="@{\assets\svg\brands\mastercard.svg}" alt="Image Description">
-                      <span class="text-dark" th:text="${item.accountByMatv.matv}"></span>
+                      <span class="text-dark" >[[${item?.accountByManv?.matv}]]</span>
                       <!-- &bull;&bull;&bull;&bull; -->
                     </div>
                   </td>

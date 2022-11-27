@@ -353,15 +353,15 @@ public class WebMainController {
         return "site/user/donhang";
     }
      //ordercar tai lam
- @GetMapping("admin/orders-car1")
- public String listCar(Model model) {
+ @GetMapping("Admin/orders-car")
+ public String billlistCar(Model model) {
      List<Billcar> list = billcarRepository.findAll();
-     model.addAttribute("billcar",list);
+     model.addAttribute("billcar", list);
      return "admin/pages/E-commerce/orders/orders-car";
      
  }
  //orderaccess tai lam
- @GetMapping("admin/orders-accessories1")
+ @GetMapping("Admin/orders-accessories")
  public String bill(Model model){
      Billaccessories bill = new Billaccessories();
      model.addAttribute("bill", bill);

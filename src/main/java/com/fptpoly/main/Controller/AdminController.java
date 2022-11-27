@@ -3,6 +3,7 @@ package com.fptpoly.main.Controller;
 
 import com.fptpoly.main.Dao.*;
 import com.fptpoly.main.Entity.Billaccessories;
+import com.fptpoly.main.Entity.Billcar;
 import com.fptpoly.main.Util._MailService;
 import com.fptpoly.main.Entity.Brand;
 import com.fptpoly.main.Entity.Car;
@@ -31,6 +32,8 @@ import java.util.Optional;
 @RequestMapping("/")
 public class AdminController {
 
+    @Autowired
+    BillcarRepository billcarRepository;
     @Autowired
     CarRepository carRepository;
     @Autowired
@@ -218,10 +221,7 @@ public class AdminController {
     // Oders
 
 
-    @RequestMapping("admin/orders-accessories")
-    public String orders_access(Model model) {
-        return "admin/pages/E-commerce/orders/orders-accessories";
-    }
+    
 
     //--------------- Employee----------------
     @GetMapping("Admin/users")
@@ -269,7 +269,26 @@ public class AdminController {
         return "admin/welcome-page";
     }
 
+    @GetMapping("Admin/billordercar")
+    public String billcar(Model model){
 
+        Billcar billcar = new Billcar();
+     
+        model.addAttribute("billcar", billcar);
+        model.addAttribute("ordercar", billcarRepository.findAll());
+         
+   
+    
+        return "admin/pages/E-commerce/orders/add-ordercar";
+    }
+
+      	
+    @PostMapping("/saveOrdercar")
+      public String SaveOrder(Model model ,@ModelAttribute("billcar" ) Billcar billcar) {
+   
+      	billcarRepository.save(billcar);
+      	return"admin/pages/E-commerce/orders/add-ordercar";
+      }
 
 
 }

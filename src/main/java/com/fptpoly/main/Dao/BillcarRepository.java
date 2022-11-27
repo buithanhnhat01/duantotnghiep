@@ -8,6 +8,7 @@ import java.util.List;
 
 @Repository
 public interface BillcarRepository extends JpaRepository<Billcar, String> {
+    Billcar findAllByMahd(String mahd);
 
     List<Billcar> findAllByTrangthaiAndAccountByMatv_Matv(String trangthai,String matv);
 }

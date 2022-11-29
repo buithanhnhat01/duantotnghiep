@@ -73,11 +73,12 @@ public class AdminController {
     }*/
 
     private int[] totalbll(){
-        int[] total = new int[4];
+        int[] total = new int[5];
         total[0] = billaccessoriesRepository.findAllByTrangthaiOrderByNgaymuaDesc("PENDING").size();
         total[1] = billaccessoriesRepository.findAllByTrangthaiOrderByNgaymuaDesc("PACKING").size();
-        total[2] = billaccessoriesRepository.findAllByTrangthaiOrderByNgaymuaDesc("SUCCESS").size();
-        total[3] = billaccessoriesRepository.findAllByTrangthaiOrderByNgaymuaDesc("CANCEL").size();
+        total[2] = billaccessoriesRepository.findAllByTrangthaiOrderByNgaymuaDesc("SHIPING").size();
+        total[3] = billaccessoriesRepository.findAllByTrangthaiOrderByNgaymuaDesc("SUCCESS").size();
+        total[4] = billaccessoriesRepository.findAllByTrangthaiOrderByNgaymuaDesc("CANCEL").size();
         return total;
     }
 

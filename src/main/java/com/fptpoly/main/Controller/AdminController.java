@@ -3,6 +3,7 @@ package com.fptpoly.main.Controller;
 
 import com.fptpoly.main.Dao.*;
 import com.fptpoly.main.Entity.Billaccessories;
+import com.fptpoly.main.Util.Mail;
 import com.fptpoly.main.Util._MailService;
 import com.fptpoly.main.Entity.Brand;
 import com.fptpoly.main.Entity.Car;
@@ -23,7 +24,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ServerWebInputException;
 
+import javax.naming.*;
 import java.util.Date;
+import java.util.Hashtable;
 import java.util.Optional;
 
 @Controller
@@ -61,7 +64,7 @@ public class AdminController {
     AccountService accountService;
 
     @Autowired
-    _MailService mailService;
+    Mail mailService;
 
     /*@GetMapping("/Admin")
     public String admin(Model model){
@@ -104,9 +107,17 @@ public class AdminController {
             billaccessories.setNgaynhan(new Date());
             billaccessories.setTrangthai(sta);
             billaccessoriesRepository.save(billaccessories);
-            if(btn.equals("PENDING")){
-                mailService.sendEmail("longzu102@gmail.com","XÁC NHẬN ĐƠN HÀNG","Đơn Hàng Mã #"+mahds[i]+" Đã Được Xác Nhận");
+            try {
+                if(btn.equals("PENDING")){
+                    mailService.sendHtmlMail("longzu102@gmail.com","XÁC NHẬN ĐƠN HÀNG","Đơn Hàng Mã <strong>#"+mahds[i]+"</strong> Đã Được Xác Nhận");
+/*
+                    mailService.sendEmail("longzu102@gmail.com","XÁC NHẬN ĐƠN HÀNG","Đơn Hàng Mã #"+mahds[i]+" Đã Được Xác Nhận");
+*/
+                }
+            }catch (Exception e){
+                System.out.println("Lỗi gửi Email");
             }
+
         }
 
         return "redirect:/Admin?status=PENDING";

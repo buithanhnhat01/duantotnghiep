@@ -859,8 +859,8 @@
                                         <label for="my-modal-4" class="modal cursor-pointer">
                                             <label class="modal-box relative" for="">
                                                 <h3 class="text-lg font-bold">THÔNG BÁO!</h3>
+                                                <img src="https://cdn.dribbble.com/users/2185205/screenshots/7886140/02-lottie-tick-01-instant-2.gif" alt="">
                                                 <p class="py-4">Đã đặt hàng thành công!</p><br>
-                                                <p class="py-4">Để biết trạng thái đơn hàng vui lòng vào trang chh tiết!
                                                 </p>
                                             </label>
                                         </label>
@@ -868,7 +868,7 @@
                                         <ul class="checkout">
                                             <li><label for="my-modal" class="button btn-proceed-checkout"><span><span
                                                             style="text-display:block;ecoration: none;">THANH TOÁN</span></span></label>
-                                                <input type="checkbox" id="my-modal" class="modal-toggle" />
+                                                <input ng-if="ship!=null?'disabled':''"  type="checkbox" id="my-modal" class="modal-toggle" />
                                                 <div class="modal">
                                                     <div class="modal-box" style="font-size: 18px">
                                                         <h3 class="font-bold text-lg">Xác Nhận Đơn Hàng!</h3>

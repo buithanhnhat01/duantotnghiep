@@ -3,7 +3,8 @@
       layout:decorate="~{site/layouts/dashboardLayout.html}">
 
 <head>
-
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.4/dist/flowbite.min.css" />
+    <script src="https://unpkg.com/flowbite@1.5.4/dist/flowbite.js"></script>
 </head>
 <body>
 <section layout:fragment="content" style="margin-top: 108px;" ng-controller="myctrl">
@@ -130,7 +131,10 @@
                                             <div class="product-shop">
                                                 <h2 class="product-name"><a th:href="@{'/home/car-detail?idcar='+${Car.idcar}}"
                                                                             th:title="${Car.tencar}"
-                                                                            th:text="${Car.tencar}"/></h2>
+                                                                            th:text="${Car.tencar}"/>
+                                                <span th:if="${Car.trangthai.equalsIgnoreCase('Xe có sẵn')}" class="bg-green-100 text-green-800 text-xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900"><th:block th:text="${Car.trangthai}"/></span>
+                                                <span th:if="${Car.trangthai.equalsIgnoreCase('Đã cọc')}" class="bg-yellow-100 text-yellow-800 text-xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900"><th:block th:text="${Car.trangthai}" /></span>
+                                                <span th:if="${Car.trangthai.equalsIgnoreCase('Đã bán')}" class="bg-red-100 text-red-800 text-xl font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900"><th:block th:text="${Car.trangthai}" /></span></h2>
                                                 <div class="ratings">
                                                     <div class="rating-box">
                                                         <div style="width:100%" class="rating">

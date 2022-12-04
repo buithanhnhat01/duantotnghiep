@@ -297,7 +297,7 @@
                                         <div class="toll-free"><a href="#" sec:authorize="isAuthenticated()"><i
                                                 class="fa fa-phone"></i>0705182415</a>
                                         </div>
-                                        <div th:disabled="${!Cardetail.trangthai.equalsIgnoreCase('Xe có sẵn')}" class="ask-question"><a onClick="ShowMe();"
+                                        <div th:if="${!Cardetail.trangthai.equalsIgnoreCase('Đã bán')}" class="ask-question"><a onClick="ShowMe();"
                                                                      sec:authorize="isAuthenticated()"><i
                                                 class="fa fa-question" ng-click="Valuechage()"></i>Đặt lịch xem xe</a>
                                         </div>

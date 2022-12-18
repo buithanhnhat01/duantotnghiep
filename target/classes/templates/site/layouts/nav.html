@@ -28,16 +28,14 @@
                                 <div class="col-lg-6 col-xs-12 col-sm-6 col-md-6">
                                     <div class="assetBlock">
                                         <div style="height: 20px; overflow: hidden;" id="slideshow">
-                                            <p style="display: block;">Giảm giá lên đến <span>50%</span> Hãy sẵn
-                                                sàng cho mùa hè! </p>
-                                            <p style="display: none;">Tiết kiệm lên đến <span>40%</span> u đãi có
-                                                hạn, nhanh tay!</p>
+                                            <p style="display: block;">[[#{header.content1}]] <span>50%</span> [[#{header.content2}]] </p>
+                                            <p style="display: none;">[[#{header.content3}]] <span>40%</span> [[#{header.content4}]]</p>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-lg-6 col-xs-12 col-sm-6 col-md-6 call-us"><i
-                                        class="fa fa-clock-o"></i> Th2 - Th6 : 9h sáng đến 6h chiều <i
-                                        class="fa fa-phone"></i> +1 800 789 0000
+                                        class="fa fa-clock-o">[[#{header.content5}]]</i><i
+                                        class="fa fa-phone"></i>+1900 9191
                                 </div>
                             </div>
                             <div class="fl-header-right">
@@ -46,13 +44,16 @@
                                         <div class="fl-nav-links">
                                             <div class="language-currency">
                                                 <div class="fl-language">
-                                                    <h3>Ngôn Ngữ</h3>
+                                                    <h3 th:text="#{menulv2.content1}">Ngôn Ngữ</h3>
                                                     <ul class="lang">
-                                                        <li><a href="#"> <img th:src="@{/images/english.png}"
-                                                                              alt="English"> <span>Tiếng Anh</span> </a>
+                                                        <li><a href="/home?lang=en"> 
+                                                            <!-- <img th:src="@{/images/english.png}"   alt="English"> -->
+                                                                            <span th:text="#{menulv2.content11}">Tiếng Anh</span> </a>
                                                         </li>
-                                                        <li><a href="#"> <img th:src="@{/images/francais.png}"
-                                                                              alt="French"> <span>Tiếng Việt</span> </a>
+                                                        <li><a href="/home?lang=vi">
+                                                             <!-- <img th:src="@{/images/vietnam.png}" width="8%"
+                                                                              alt="French"> -->
+                                                                               <span th:text="#{menulv2.content12}">Tiếng Việt</span> </a>
                                                         </li>
                                                         <!-- <li><a href="#"> <img th:src="@{/images/german.png}" alt="German">
                                                                 <span>Tiếng Đức</span> </a></li> -->
@@ -62,25 +63,24 @@
                                                 <!-- END For version 1,2,3,4,6 -->
                                                 <!-- For version 1,2,3,4,6 -->
                                                 <div class="fl-currency">
-                                                    <h3>Tiền tệ</h3>
+                                                    <h3 th:text="#{menulv2.content2}">Tiền tệ</h3>
                                                     <ul class="currencies_list">
-                                                        <li><a href="#" title="EGP"> <strong>£</strong> Bảng Anh</a>
+                                                        <li><a href="#" title="dola"> <strong>£</strong>[[#{menulv2.content21}]] </a>
                                                         </li>
-                                                        <li><a href="#" title="EUR"> <strong>€</strong> Euro</a>
+                                                        <li><a href="#" title="vn"> <strong>đ</strong>[[#{menulv2.content22}]] </a>
                                                         </li>
-                                                        <li><a href="#" title="USD"> <strong>$</strong> Đô la Mỹ</a>
-                                                        </li>
+                                                      
                                                     </ul>
                                                 </div>
                                                 <!--fl-currency-->
                                                 <!-- END For version 1,2,3,4,6 -->
                                             </div>
-                                            <h3>Tài khoản của tôi</h3>
+                                            <h3 th:text="#{menulv2.content3}">Tài khoản của tôi</h3>
                                             <ul class="links">
-                                                <li><a th:href="@{/home/login}" title="My Account">Đăng nhập</a>
+                                                <li><a th:href="@{/home/login}" title="My Account"th:text="#{menulv2.content31}">Đăng nhập</a>
                                                 </li>
-                                                <li><a th:href="@{/home/dangky}" title="Wishlist">Đăng ký</a></li>
-                                                <li><a th:href="@{/logout}" title="Wishlist">Đăng Xuất</a></li>
+                                                <li><a th:href="@{/home/dangky}" title="Wishlist"th:text="#{menulv2.content32}">Đăng ký</a></li>
+                                                <li><a th:href="@{/logout}" title="Wishlist"th:text="#{menulv2.content33}">Đăng Xuất</a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -178,234 +178,20 @@
                                     <div class="nav-inner">
                                         <!-- BEGIN NAV -->
                                         <ul id="nav" class="hidden-xs">
-                                            <li class="active"><a class="level-top" th:href="@{/home}"><span>Trang
+                                            <li class="active"><a class="level-top" th:href="@{/home}" ><span th:text="#{menu.home}">Trang
                                                             chủ</span></a></li>
-                                            <li class="mega-menu"><a class="level-top" href="grid1.html"><span>Phụ
+                                            <li class="mega-menu"><a class="level-top" th:href="@{/home/luoipk}" ><span th:text="#{menu.phukien}">Phụ
                                                             kiện</span></a>
-                                                <div class="level0-wrapper dropdown-6col"
-                                                     style="left: 0px; display: none;">
-                                                    <div class="container">
-                                                        <div class="level0-wrapper2">
-                                                            <div class="nav-block nav-block-center">
-                                                                <!--mega menu-->
-                                                                <ul class="level0">
-                                                                    <li class="level3 nav-6-1 parent item"><a
-                                                                            href="grid.html"><span>Âm
-                                                                                    thanh</span></a>
-                                                                        <!--sub sub category-->
-                                                                        <ul class="level1">
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Bộ khuếch
-                                                                                            đại</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Bộ phận
-                                                                                            lắp đặt</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Diễn
-                                                                                            giả</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Âm thanh
-                                                                                            nổi</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Loa siêu
-                                                                                            trầm</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                        </ul>
-                                                                        <!--level1-->
-                                                                        <!--sub sub category-->
-                                                                    </li>
-                                                                    <!--level3 nav-6-1 parent item-->
-                                                                    <li class="level3 nav-6-1 parent item"><a
-                                                                            href="grid.html"><span>Phụ kiện thân
-                                                                                    xe</span></a>
-                                                                        <!--sub sub category-->
-                                                                        <ul class="level1">
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Bộ
-                                                                                            đệm</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Cửa</span></a>
-                                                                            </li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Chắn
-                                                                                            bùn</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Lưới</span></a>
-                                                                            </li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Máy hút
-                                                                                            mùi</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                        </ul>
-                                                                        <!--level1-->
-                                                                        <!--sub sub category-->
-                                                                    </li>
-                                                                    <!--level3 nav-6-1 parent item-->
-                                                                    <li class="level3 nav-6-1 parent item"><a
-                                                                            href="grid.html"><span>Ngoại
-                                                                                    thất</span></a>
-                                                                        <!--sub sub category-->
-                                                                        <ul class="level1">
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Phụ kiện
-                                                                                            giường ngủ</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Đồ bó
-                                                                                            sát</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Lưới tùy
-                                                                                            chỉnh</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Bao
-                                                                                            xe</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Bộ đệm
-                                                                                            địa hình</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                        </ul>
-                                                                        <!--level1-->
-                                                                        <!--sub sub category-->
-                                                                    </li>
-                                                                    <!--level3 nav-6-1 parent item-->
-                                                                    <li class="level3 nav-6-1 parent item"><a
-                                                                            href="grid.html"><span>Nội
-                                                                                    thất</span></a>
-                                                                        <!--sub sub category-->
-                                                                        <ul class="level1">
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Đồng hồ
-                                                                                            đo tùy chỉnh</span></a>
-                                                                            </li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Bộ dụng
-                                                                                            cụ Dash</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Bọc
-                                                                                            ghế</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Tay
-                                                                                            lái</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Sun
-                                                                                            Shades</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                        </ul>
-                                                                        <!--level1-->
-                                                                        <!--sub sub category-->
-                                                                    </li>
-                                                                    <!--level3 nav-6-1 parent item-->
-                                                                    <li class="level3 nav-6-1 parent item"><a
-                                                                            href="grid.html"><span>Thắp
-                                                                                    sáng</span></a>
-                                                                        <!--sub sub category-->
-                                                                        <ul class="level1">
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Đèn sương
-                                                                                            mù</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Đèn
-                                                                                            pha</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Đèn
-                                                                                            LED</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span> Đèn địa
-                                                                                            hình</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Đèn tín
-                                                                                            hiệu</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                        </ul>
-                                                                        <!--level1-->
-                                                                        <!--sub sub category-->
-                                                                    </li>
-                                                                    <!--level3 nav-6-1 parent item-->
-                                                                    <li class="level3 nav-6-1 parent item"><a
-                                                                            href="grid.html"><span>Hiệu
-                                                                                    suất</span></a>
-                                                                        <!--sub sub category-->
-                                                                        <ul class="level1">
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Hệ thống
-                                                                                            lấy khí</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Phanh</span></a>
-                                                                            </li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Hệ thống
-                                                                                            ống xả</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Power
-                                                                                            Adders</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                            <li class="level2 nav-6-1-1"><a
-                                                                                    href="grid.html"><span>Đồ bảo
-                                                                                            hộ</span></a></li>
-                                                                            <!--level2 nav-6-1-1-->
-                                                                        </ul>
-                                                                        <!--level1-->
-                                                                        <!--sub sub category-->
-                                                                    </li>
-                                                                    <!--level3 nav-6-1 parent item-->
-                                                                </ul>
-                                                                <!--level0-->
-                                                            </div>
-                                                            <!--nav-block nav-block-center-->
-
-                                                        </div>
-                                                        <!--level0-wrapper2-->
-                                                    </div>
-                                                    <!--container-->
-                                                </div>
+                                                
                                                 <!--level0-wrapper dropdown-6col-->
                                                 <!--mega menu-->
                                             </li>
                                             <li class="level0 parent drop-menu"><a class="level-top"
-                                                                                   href="#"><span>Danh sách‎</span></a>
-                                                <ul class="level1">
-                                                    <!-- <li class="level1 first"><a href="grid.html"><span>Lưới
-                                                                ôtô</span></a></li> -->
-                                                    <li class="level1 nav-10-2"><a th:href="@{/home/listcar?page=1}">
-                                                                <span>Danh
-                                                                    sách xe</span> </a></li>
-                                                    <!-- <li class="level1 nav-10-3"> <a href="grid1.html"> <span>Lưới
-                                                                phụ kiện</span> </a> </li> -->
-                                                    <li class="level1 nav-10-4"><a th:href="@{/home/luoipk}">
-                                                                <span>Danh
-                                                                    sách phụ kiện</span> </a></li>
-                                                    <!-- <li class="level1 first parent"><a
-                                                            href="car-detail.html"><span>Chi tiết xe</span></a>
-                                                    </li> -->
-                                                    <!-- <li class="level1 first parent"><a
-                                                            href="accessories-detail.html"><span>Chi tiết phụ
-                                                                kiện</span></a> </li> -->
-                                                </ul>
+                                                th:href="@{/home/listcar?page=1}" ><span th:text="#{menu.danhsach}">Xe‎</span></a>
+                                                
                                             </li>
                                             <li class="level0 parent drop-menu"><a class="level-top"
-                                                                                   th:href="@{/home/blog}"><span>Diễn đàn</span></a>
+                                                                                   th:href="@{/home/blog}" ><span th:text="#{menu.diendan}">Diễn đàn</span></a>
                                                 <!-- <ul class="level1">
                                                     <li class="level1 first"><a href="blog.html"><span>Danh sách
                                                                 diễn đàn</span></a></li>
@@ -415,18 +201,18 @@
                                             </li>
                                             <!-- <li class="mega-menu hidden-sm"> <a class="level-top"
                                                     href="compare.html"><span>So sánh ô tô‎</span></a> </li> -->
-                                            <li class="level0 parent drop-menu"><a href="#"><span>Pages</span> </a>
+                                            <li class="level0 parent drop-menu"><a href="#"><span th:text="#{menu.pages}">Danh sách</span> </a>
                                                 <!--sub sub category-->
                                                 <ul class="level1">
-                                                    <li class="level1"><a th:href="@{/home/about}"> <span>Về chúng
+                                                    <li class="level1"><a th:href="@{/home/about}"> <span th:text="#{menulv1.content1}">Về chúng
                                                                     tôi</span> </a></li>
                                                     <li class="level1" sec:authorize="isAuthenticated()"><a
-                                                            th:href="@{/home/dashboard}"> <span>Trang Cá Nhân</span> </a></li>
+                                                            th:href="@{/home/dashboard}"> <span th:text="#{menulv1.content2}">Trang Cá Nhân</span> </a></li>
                                                     <li sec:authorize="hasAuthority('USER')" class="level1 nav-10-4"><a
                                                             th:href="@{/home/member/shopping-cart}">
-                                                        <span>Trang giỏ hàng</span> </a></li>
+                                                        <span th:text="#{menulv1.content3}">Trang giỏ hàng</span> </a></li>
                                                     <li class="level1 first parent"><a
-                                                            th:href="@{/home/checkout}"><span>Thanh toán</span></a>
+                                                            th:href="@{/home/checkout}"><span th:text="#{menulv1.content4}">Thanh toán</span></a>
                                                         <!--sub sub category-->
                                                         <!-- <ul class="level2 right-sub">
                                                             <li class="level2 nav-2-1-1 first"><a
@@ -439,10 +225,10 @@
                                                         <!--sub sub category-->
                                                     </li>
                                                     <li class="level1 nav-10-4"><a th:href="@{/home/wishlist}">
-                                                                <span>Danh
+                                                                <span th:text="#{menulv1.content5}">Danh
                                                                     sách yêu thích</span> </a></li>
                                                     <!-- <li class="level1"> <a th:href="@{multiple-addresses.html"> <span>Các chi nhánh</span> </a> </li> -->
-                                                    <li class="level1"><a th:href="@{/home/contact}"><span>Liên hệ
+                                                    <li class="level1"><a th:href="@{/home/contact}"><span th:text="#{menulv1.content6}">Liên hệ
                                                                     chúng
                                                                     tôi</span></a></li>
                                                     <!-- <li class="level1"><a href="404error.html"><span>Không tìm thấy trang</span></a> </li> -->
@@ -452,7 +238,7 @@
                                                 </ul>
                                             </li>
                                             <li class="fl-custom-tabmenulink mega-menu"><a href="#"
-                                                                                           class="level-top"> <span>Tùy chọn</span>
+                                                                                           class="level-top"> <span th:text="#{menu.tuychon}">Tùy chọn</span>
                                             </a>
                                                 <div class="level0-wrapper fl-custom-tabmenu"
                                                      style="left: 0px; display: none;">

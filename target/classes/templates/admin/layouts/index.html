@@ -50,7 +50,7 @@
                     </div>
                 </div>
 
-                <input class="form-control rounded-0" type="search" placeholder="Search in front"
+                <input class="form-control rounded-0" type="search" placeholder="Nhập để tìm kiếm"
                     aria-label="Search in front">
 
                 <div class="input-group-append">
@@ -103,7 +103,7 @@
                         <!-- Card -->
                         <a class="card card-hover-shadow h-100" th:href="@{/Admin?status=PENDING}">
                             <div class="card-body">
-                                <h6 class="card-subtitle">TOTAL PENDING</h6>
+                                <h6 class="card-subtitle">TỔNG TIỀN ĐANG CHỜ</h6>
 
                                 <div class="row align-items-center gx-2 mb-1">
                                     <div class="col-6">
@@ -157,7 +157,7 @@
                                 <span class="badge badge-soft-success">
                                     <i class="tio-trending-up"></i> 12.5%
                                 </span>
-                                <span class="text-body font-size-sm ml-1">from 70,104</span>
+                                <span class="text-body font-size-sm ml-1">từ 70,104</span>
                             </div>
                         </a>
                         <!-- End Card -->
@@ -167,7 +167,7 @@
                         <!-- Card -->
                         <a class="card card-hover-shadow h-100" th:href="@{/Admin?status=PACKING}">
                             <div class="card-body">
-                                <h6 class="card-subtitle">TOTAL PACKING</h6>
+                                <h6 class="card-subtitle">TỔNG SỐ ĐÓNG GÓI</h6>
 
                                 <div class="row align-items-center gx-2 mb-1">
                                     <div class="col-6">
@@ -221,7 +221,7 @@
                                 <span class="badge badge-soft-success">
                                     <i class="tio-trending-up"></i> 1.7%
                                 </span>
-                                <span class="text-body font-size-sm ml-1">from 29.1%</span>
+                                <span class="text-body font-size-sm ml-1">từ 29.1%</span>
                             </div>
                         </a>
                         <!-- End Card -->
@@ -231,7 +231,7 @@
                         <!-- Card -->
                         <a class="card card-hover-shadow h-100" th:href="@{/Admin?status=SHIPING}">
                             <div class="card-body">
-                                <h6 class="card-subtitle">SHIPING</h6>
+                                <h6 class="card-subtitle">TỔNG SỐ VẬN CHUYỂN</h6>
 
                                 <div class="row align-items-center gx-2 mb-1">
                                     <div class="col-6">
@@ -285,7 +285,7 @@
                                 <span class="badge badge-soft-success">
                                     <i class="tio-trending-up"></i> 1.7%
                                 </span>
-                                <span class="text-body font-size-sm ml-1">from 29.1%</span>
+                                <span class="text-body font-size-sm ml-1">từ 29.1%</span>
                             </div>
                         </a>
                         <!-- End Card -->
@@ -295,7 +295,7 @@
                         <!-- Card -->
                         <a class="card card-hover-shadow h-100" th:href="@{/Admin?status=SUCCESS}">
                             <div class="card-body">
-                                <h6 class="card-subtitle">TOTAL SUCCESS</h6>
+                                <h6 class="card-subtitle">TỔNG ĐƠN THÀNH CÔNG</h6>
 
                                 <div class="row align-items-center gx-2 mb-1">
                                     <div class="col-6">
@@ -349,7 +349,7 @@
                                 <span class="badge badge-soft-danger">
                                     <i class="tio-trending-down"></i> 4.4%
                                 </span>
-                                <span class="text-body font-size-sm ml-1">from 61.2%</span>
+                                <span class="text-body font-size-sm ml-1">từ 61.2%</span>
                             </div>
                         </a>
                         <!-- End Card -->
@@ -359,7 +359,7 @@
                         <!-- Card -->
                         <a class="card card-hover-shadow h-100" th:href="@{/Admin?status=CANCEL}">
                             <div class="card-body">
-                                <h6 class="card-subtitle">CANCEL|FAIL</h6>
+                                <h6 class="card-subtitle">ĐƠN HÀNG HỦY BỎ</h6>
 
                                 <div class="row align-items-center gx-2 mb-1">
                                     <div class="col-6">
@@ -411,7 +411,7 @@
                                 <!-- End Row -->
 
                                 <span class="badge badge-soft-secondary">0.0%</span>
-                                <span class="text-body font-size-sm ml-1">from 2,913</span>
+                                <span class="text-body font-size-sm ml-1">từ 2,913</span>
                             </div>
                         </a>
                         <!-- End Card -->
@@ -435,7 +435,7 @@
                                                 </div>
                                             </div>
                                             <input id="datatableSearch" type="search" class="form-control"
-                                                placeholder="Search orders" aria-label="Search orders">
+                                                placeholder="Tìm đơn hàng" aria-label="Search orders">
                                         </div>
                                         <!-- End Search -->
                                     </form>
@@ -469,26 +469,26 @@
                          "target": "#usersExportDropdown",
                          "type": "css-animation"
                        }'>
-                                                <i class="tio-download-to mr-1"></i> Export
+                                                <i class="tio-download-to mr-1"></i> Xuất
                                             </a>
 
                                             <div id="usersExportDropdown"
                                                 class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
-                                                <span class="dropdown-header">Options</span>
+                                                <span class="dropdown-header">Tùy chọn</span>
                                                 <a id="export-copy" class="dropdown-item" href="javascript:;">
                                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                         th:src="@{\assets\svg\illustrations\copy.svg}"
                                                         alt="Image Description">
-                                                    Copy
+                                                    Sao chép
                                                 </a>
                                                 <a id="export-print" class="dropdown-item" href="javascript:;">
                                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                         th:src="@{\assets\svg\illustrations\print.svg}"
                                                         alt="Image Description">
-                                                    Print
+                                                    In
                                                 </a>
                                                 <div class="dropdown-divider"></div>
-                                                <span class="dropdown-header">Download options</span>
+                                                <span class="dropdown-header">Tùy chọn tải xuống</span>
                                                 <a id="export-excel" class="dropdown-item" href="javascript:;">
                                                     <img class="avatar avatar-xss avatar-4by3 mr-2"
                                                         th:src="@{\assets\svg\brands\excel.svg}"
@@ -517,7 +517,7 @@
                          "target": "#showHideDropdown",
                          "type": "css-animation"
                        }'>
-                                                <i class="tio-table mr-1"></i> Columns <span
+                                                <i class="tio-table mr-1"></i> Cột <span
                                                     class="badge badge-soft-dark rounded-circle ml-1">7</span>
                                             </a>
 
@@ -528,7 +528,7 @@
                                                     <div class="card-body">
                                                         <div
                                                             class="d-flex justify-content-between align-items-center mb-3">
-                                                            <span class="mr-2">Order</span>
+                                                            <span class="mr-2">Hóa đơn</span>
 
                                                             <!-- Checkbox Switch -->
                                                             <label class="toggle-switch toggle-switch-sm"
@@ -544,7 +544,7 @@
 
                                                         <div
                                                             class="d-flex justify-content-between align-items-center mb-3">
-                                                            <span class="mr-2">Date</span>
+                                                            <span class="mr-2">Ngày</span>
 
                                                             <!-- Checkbox Switch -->
                                                             <label class="toggle-switch toggle-switch-sm"
@@ -560,7 +560,7 @@
 
                                                         <div
                                                             class="d-flex justify-content-between align-items-center mb-3">
-                                                            <span class="mr-2">Customer</span>
+                                                            <span class="mr-2">Khách hàng</span>
 
                                                             <!-- Checkbox Switch -->
                                                             <label class="toggle-switch toggle-switch-sm"
@@ -576,7 +576,7 @@
 
                                                         <div
                                                             class="d-flex justify-content-between align-items-center mb-3">
-                                                            <span class="mr-2">Payment status</span>
+                                                            <span class="mr-2">Trạng thái thanh toán</span>
 
                                                             <!-- Checkbox Switch -->
                                                             <label class="toggle-switch toggle-switch-sm"
@@ -592,7 +592,7 @@
 
                                                         <div
                                                             class="d-flex justify-content-between align-items-center mb-3">
-                                                            <span class="mr-2">Fulfillment status</span>
+                                                            <span class="mr-2">Tình trạng hoàn thành</span>
 
                                                             <!-- Checkbox Switch -->
                                                             <label class="toggle-switch toggle-switch-sm"
@@ -608,7 +608,7 @@
 
                                                         <div
                                                             class="d-flex justify-content-between align-items-center mb-3">
-                                                            <span class="mr-2">Payment method</span>
+                                                            <span class="mr-2">Phương thức thanh toán</span>
 
                                                             <!-- Checkbox Switch -->
                                                             <label class="toggle-switch toggle-switch-sm"
@@ -624,7 +624,7 @@
 
                                                         <div
                                                             class="d-flex justify-content-between align-items-center mb-3">
-                                                            <span class="mr-2">Total</span>
+                                                            <span class="mr-2">Tổng</span>
 
                                                             <!-- Checkbox Switch -->
                                                             <label class="toggle-switch toggle-switch-sm"
@@ -639,7 +639,7 @@
                                                         </div>
 
                                                         <div class="d-flex justify-content-between align-items-center">
-                                                            <span class="mr-2">Actions</span>
+                                                            <span class="mr-2">Hành động</span>
 
                                                             <!-- Checkbox Switch -->
                                                             <label class="toggle-switch toggle-switch-sm"
@@ -830,7 +830,7 @@
                                 <div class="row align-items-sm-center">
                                     <div class="col-sm-auto">
                                         <div class="d-flex align-items-center mr-2">
-                                            <span class="text-secondary mr-2">Status:</span>
+                                            <span class="text-secondary mr-2">Trạng thái:</span>
 
                                             <!-- Select -->
                                             <select class="js-select2-custom js-datatable-filter custom-select-sm"
@@ -841,10 +841,10 @@
                                 "dropdownAutoWidth": true,
                                 "width": true
                               }'>
-                                                <option value="">All</option>
-                                                <option value="successful">Successful</option>
-                                                <option value="overdue">Overdue</option>
-                                                <option value="pending">Pending</option>
+                                                <option value="">Tất cả</option>
+                                                <option value="successful">Thành công</option>
+                                                <option value="overdue">Quá hạn</option>
+                                                <option value="pending">Đang chờ</option>
                                             </select>
                                             <!-- End Select -->
                                         </div>
@@ -852,7 +852,7 @@
 
                                     <div class="col-sm-auto">
                                         <div class="d-flex align-items-center mr-2">
-                                            <span class="text-secondary mr-2">Signed up:</span>
+                                            <span class="text-secondary mr-2">Đăng ký:</span>
 
                                             <!-- Select -->
                                             <select class="js-select2-custom js-datatable-filter custom-select-sm"
@@ -863,9 +863,9 @@
                                 "dropdownAutoWidth": true,
                                 "width": true
                               }'>
-                                                <option value="">All</option>
-                                                <option value="1 year ago">1 year ago</option>
-                                                <option value="6 months ago">6 months ago</option>
+                                                <option value="">Tất cả</option>
+                                                <option value="1 year ago">1 năm trước</option>
+                                                <option value="6 months ago">6 tháng trước</option>
                                             </select>
                                             <!-- End Select -->
                                         </div>
@@ -881,7 +881,7 @@
                                                     </div>
                                                 </div>
                                                 <input id="datatableSearch" type="search" class="form-control"
-                                                    placeholder="Search users" aria-label="Search users">
+                                                    placeholder="Tìm người dùng" aria-label="Search users">
                                             </div>
                                             <!-- End Search -->
                                         </form>
@@ -922,7 +922,7 @@
                                         </div>
                                     </th>
                                     <th class="table-column-pl-0">Người Mua</th>
-                                    <th>Status</th>
+                                    <th>Trạng thái</th>
                                     <th>Ngày Mua</th>
                                     <th>Email</th>
                                     <th>Ngày Nhận</th>
@@ -983,7 +983,7 @@
                         <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
                             <div class="col-sm mb-2 mb-sm-0">
                                 <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
-                                    <span class="mr-2">Showing:</span>
+                                    <span class="mr-2">Hiển thị:</span>
 
                                     <!-- Select -->
                                     <select id="datatableEntries" class="js-select2-custom" data-hs-select2-options='{
@@ -999,7 +999,7 @@
                                     </select>
                                     <!-- End Select -->
 
-                                    <span class="text-secondary mr-2">of</span>
+                                    <span class="text-secondary mr-2">của</span>
 
                                     <!-- Pagination Quantity -->
                                     <span id="datatableWithPaginationInfoTotalQty"></span>
@@ -1026,7 +1026,7 @@
                         <div class="card h-100">
                             <!-- Header -->
                             <div class="card-header">
-                                <h5 class="card-header-title">Import data into Front Dashboard</h5>
+                                <h5 class="card-header-title">Nhập dữ liệu vào Bảng điều khiển</h5>
 
                                 <!-- Unfold -->
                                 <div class="hs-unfold">
@@ -1040,16 +1040,16 @@
 
                                     <div id="reportsOverviewDropdown2"
                                         class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                                        <span class="dropdown-header">Settings</span>
+                                        <span class="dropdown-header">Cài đặt</span>
 
                                         <a class="dropdown-item" href="#">
-                                            <i class="tio-share dropdown-item-icon"></i> Share chart
+                                            <i class="tio-share dropdown-item-icon"></i> Chia se biểu đồ
                                         </a>
                                         <a class="dropdown-item" href="#">
-                                            <i class="tio-download-to dropdown-item-icon"></i> Download
+                                            <i class="tio-download-to dropdown-item-icon"></i> Tải xuống
                                         </a>
                                         <a class="dropdown-item" href="#">
-                                            <i class="tio-alt dropdown-item-icon"></i> Connect other apps
+                                            <i class="tio-alt dropdown-item-icon"></i> Kết nối với ứng dụng khác
                                         </a>
 
                                         <div class="dropdown-divider"></div>
@@ -1057,7 +1057,7 @@
                                         <span class="dropdown-header">Feedback</span>
 
                                         <a class="dropdown-item" href="#">
-                                            <i class="tio-chat-outlined dropdown-item-icon"></i> Report
+                                            <i class="tio-chat-outlined dropdown-item-icon"></i> Báo cáo
                                         </a>
                                     </div>
                                 </div>
@@ -1067,13 +1067,12 @@
 
                             <!-- Body -->
                             <div class="card-body">
-                                <p>See and talk to your users and leads immediately by importing your data into the
-                                    Front
-                                    Dashboard platform.</p>
+                                <p>Xem và nói chuyện với người dùng và khách hàng tiềm năng của bạn ngay lập tức
+                                    bằng cách nhập dữ liệu của bạn vào nền tảng Bảng điều khiển.</p>
 
                                 <ul class="list-group list-group-flush list-group-no-gutters">
                                     <li class="list-group-item py-3">
-                                        <h5 class="modal-title">Import users from:</h5>
+                                        <h5 class="modal-title">Nhập người dùng từ:</h5>
                                     </li>
 
                                     <!-- List Group Item -->
@@ -1087,7 +1086,7 @@
                                                 <div class="row align-items-center">
                                                     <div class="col">
                                                         <h5 class="mb-0">Capsule</h5>
-                                                        <span class="d-block font-size-sm">Users</span>
+                                                        <span class="d-block font-size-sm">Người dùng</span>
                                                     </div>
 
                                                     <div class="col-auto">
@@ -1116,7 +1115,7 @@
                                                 <div class="row align-items-center">
                                                     <div class="col">
                                                         <h5 class="mb-0">Mailchimp</h5>
-                                                        <span class="d-block font-size-sm">Users</span>
+                                                        <span class="d-block font-size-sm">Người dùng</span>
                                                     </div>
 
                                                     <div class="col-auto">
@@ -1145,7 +1144,7 @@
                                                 <div class="row align-items-center">
                                                     <div class="col">
                                                         <h5 class="mb-0">Webdev</h5>
-                                                        <span class="d-block font-size-sm">Users</span>
+                                                        <span class="d-block font-size-sm">Người dùng</span>
                                                     </div>
 
                                                     <div class="col-auto">
@@ -1177,17 +1176,17 @@
                         <div class="card h-100">
                             <!-- Header -->
                             <div class="card-header">
-                                <h5 class="card-header-title">Monthly expenses</h5>
+                                <h5 class="card-header-title">Chi tiêu hằng tháng</h5>
 
                                 <!-- Nav -->
                                 <ul class="nav nav-segment" id="expensesTab" role="tablist">
                                     <li class="nav-item" data-toggle="chart-bar" data-datasets="thisWeek"
                                         data-trigger="click" data-action="toggle">
-                                        <a class="nav-link active" href="javascript:;" data-toggle="tab">This week</a>
+                                        <a class="nav-link active" href="javascript:;" data-toggle="tab">Tuần trước</a>
                                     </li>
                                     <li class="nav-item" data-toggle="chart-bar" data-datasets="lastWeek"
                                         data-trigger="click" data-action="toggle">
-                                        <a class="nav-link" href="javascript:;" data-toggle="tab">Last week</a>
+                                        <a class="nav-link" href="javascript:;" data-toggle="tab">Tháng trước</a>
                                     </li>
                                 </ul>
                                 <!-- End Nav -->
@@ -1210,10 +1209,10 @@
                                         <!-- Legend Indicators -->
                                         <div class="row font-size-sm">
                                             <div class="col-auto">
-                                                <span class="legend-indicator bg-primary"></span> New
+                                                <span class="legend-indicator bg-primary"></span> Mới
                                             </div>
                                             <div class="col-auto">
-                                                <span class="legend-indicator"></span> Overdue
+                                                <span class="legend-indicator"></span> Quá hạn
                                             </div>
                                         </div>
                                         <!-- End Legend Indicators -->
@@ -1302,7 +1301,7 @@
                         <div class="card h-100">
                             <!-- Header -->
                             <div class="card-header">
-                                <h5 class="card-header-title">Transactions</h5>
+                                <h5 class="card-header-title">Giao dịch</h5>
 
                                 <!-- Daterangepicker -->
                                 <button id="js-daterangepicker-predefined"
@@ -1386,16 +1385,16 @@
                                 <!-- Legend Indicators -->
                                 <div class="row justify-content-center">
                                     <div class="col-auto">
-                                        <span class="legend-indicator bg-primary"></span> New
+                                        <span class="legend-indicator bg-primary"></span> Mới
                                     </div>
 
                                     <div class="col-auto">
                                         <span class="legend-indicator" style="background-color: #7000f2;"></span>
-                                        Pending
+                                        Đang chờ
                                     </div>
 
                                     <div class="col-auto">
-                                        <span class="legend-indicator bg-info"></span> Failed
+                                        <span class="legend-indicator bg-info"></span> Thất bại
                                     </div>
                                 </div>
                                 <!-- End Legend Indicators -->
@@ -1410,7 +1409,7 @@
                         <div class="card h-100">
                             <!-- Header -->
                             <div class="card-header">
-                                <h5 class="card-header-title">Reports overview</h5>
+                                <h5 class="card-header-title">Tổng quan về báo cáo</h5>
 
                                 <!-- Unfold -->
                                 <div class="hs-unfold">
@@ -1424,16 +1423,16 @@
 
                                     <div id="reportsOverviewDropdown1"
                                         class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right mt-1">
-                                        <span class="dropdown-header">Settings</span>
+                                        <span class="dropdown-header">Cài đặt</span>
 
                                         <a class="dropdown-item" href="#">
-                                            <i class="tio-share dropdown-item-icon"></i> Share reports
+                                            <i class="tio-share dropdown-item-icon"></i> Chia sẻ biểu đồ
                                         </a>
                                         <a class="dropdown-item" href="#">
-                                            <i class="tio-download-to dropdown-item-icon"></i> Download
+                                            <i class="tio-download-to dropdown-item-icon"></i> Tải xuống
                                         </a>
                                         <a class="dropdown-item" href="#">
-                                            <i class="tio-alt dropdown-item-icon"></i> Connect other apps
+                                            <i class="tio-alt dropdown-item-icon"></i> Kết nối với ứng dụng khác
                                         </a>
 
                                         <div class="dropdown-divider"></div>
@@ -1477,7 +1476,7 @@
                                     <table class="table table-lg table-nowrap card-table mb-0">
                                         <tr>
                                             <th scope="row">
-                                                <span class="legend-indicator bg-primary"></span>Gross value
+                                                <span class="legend-indicator bg-primary"></span>Tổng giá trị
                                             </th>
                                             <td>$3,500.71</td>
                                             <td>
@@ -1487,8 +1486,7 @@
 
                                         <tr>
                                             <th scope="row">
-                                                <span class="legend-indicator bg-primary opacity"></span>Net volume from
-                                                sales
+                                                <span class="legend-indicator bg-primary opacity"></span>Doanh thu thuần từ bán hàng
                                             </th>
                                             <td>$2,980.45</td>
                                             <td>
@@ -1498,9 +1496,7 @@
 
                                         <tr>
                                             <th scope="row">
-                                                <span class="legend-indicator bg-primary opacity-xs"></span>New volume
-                                                from
-                                                sales
+                                                <span class="legend-indicator bg-primary opacity-xs"></span>Doanh thu từ bán hàng mới
                                             </th>
                                             <td>$950.00</td>
                                             <td>
@@ -1510,7 +1506,7 @@
 
                                         <tr>
                                             <th scope="row">
-                                                <span class="legend-indicator"></span>Other
+                                                <span class="legend-indicator"></span>Khác
                                             </th>
                                             <td>32</td>
                                             <td>
@@ -2034,9 +2030,9 @@
                                     <p class="font-size-sm mb-1">Marked <a class="text-uppercase" href="#"><i
                                                 class="tio-folder-bookmarked"></i> Fr-6</a> as <span
                                             class="badge badge-soft-success badge-pill"><span
-                                                class="legend-indicator bg-success"></span>"Completed"</span></p>
+                                                class="legend-indicator bg-success"></span>"Hoàn thành"</span></p>
 
-                                    <small class="text-muted text-uppercase">Today</small>
+                                    <small class="text-muted text-uppercase">Hôm nay</small>
                                 </div>
                             </div>
                         </li>
@@ -2264,7 +2260,7 @@
                                 </div>
 
                                 <input type="text" class="form-control" name="fullName"
-                                    placeholder="Search name or emails" aria-label="Search name or emails"
+                                    placeholder="Tìm tên hoặc email" aria-label="Search name or emails"
                                     aria-describedby="fullName">
 
                                 <div class="input-group-append input-group-append-last-sm-down-none">
@@ -2505,7 +2501,7 @@
                                 <input type="hidden" id="inviteUserPublicClipboard"
                                     value="https://themes.getbootstrap.com/product/front-multipurpose-responsive-template/">
 
-                                <p class="modal-footer-text">The public share <a href="#">link settings</a>
+                                <p class="modal-footer-text">Chia sẻ  <a href="#">Cài đặt link </a>
                                     <i class="tio-help-outlined" data-toggle="tooltip" data-placement="top"
                                         title="The public share link allows people to view the project without giving access to full collaboration features."></i>
                                 </p>
@@ -2520,7 +2516,7 @@
                     "contentTarget": "#inviteUserPublicClipboard",
                     "container": "#inviteUserModal"
                    }'>
-                                    <i class="tio-link mr-1"></i> Copy link</a>
+                                    <i class="tio-link mr-1"></i> Sao chép link</a>
                             </div>
                         </div>
                     </div>

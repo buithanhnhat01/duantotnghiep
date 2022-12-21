@@ -1,6 +1,5 @@
 package com.fptpoly.main.Security;
 
-
 import com.fptpoly.main.Dao.AccountRepository;
 import com.fptpoly.main.Entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,11 +24,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (account == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
+        List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();// xet quyen`
         GrantedAuthority authority = new SimpleGrantedAuthority(account.getRole());
         grantList.add(authority);
-        System.out.println("Role: "+authority.getAuthority());
-        UserDetails userDetails = (UserDetails) new User(account.getMatv(),account.getPassword(),grantList);
+        System.out.println("Role: " + authority.getAuthority());
+        UserDetails userDetails = (UserDetails) new User(account.getMatv(), account.getPassword(), grantList);// quan
+                                                                                                              // trong
         return userDetails;
     }
 }

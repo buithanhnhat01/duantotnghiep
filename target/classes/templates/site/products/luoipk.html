@@ -10,6 +10,7 @@
   <script>
     var app = angular.module('myApp', []);
     app.controller('myctrl', function ($scope, $http) {
+      $scope.lks = [];
       function _success(res) {
         UIkit.modal.dialog('<p class="uk-modal-body">Thêm Sản Phẩm vào giỏ thành công!</p>');
         reload();
@@ -31,7 +32,18 @@
       function reload(){
         $http.get('/LinhKien').then(response =>{
           $scope.lks = response.data;
+         
         })
+        $scope.find = function (ten) {
+        //load  search
+        console.log(ten)
+        $http.get('/LinhKien/Search?ten='+ten).then(resp => {
+
+            $scope.lks = resp.data;
+        
+        });      
+
+    }
         $http.get('/Inforcart').then(response =>{
           $scope.mycart = response.data;
           console.log("hai "+$scope.mycart.length)
@@ -41,6 +53,8 @@
           });
         })
       }
+     
+          
       reload();
       $scope.addcart= function(idlk){
         $http({
@@ -51,10 +65,15 @@
           }
         }).then(_success, _error);
       }
+
+
+
 // Nhật làm
-      $scope.pager = {
+$scope.size = 10;
+      $scope.load= function (){
+        $scope.pager = {
         page: 0,
-        size: 10,
+        size: $scope.size,
         get lks(){
             var start = this.page * this.size;
             return $scope.lks.slice(start, start + this.size);
@@ -80,8 +99,12 @@
         last(){
             this.page = this.count - 1;
         }
-    }
-
+        }
+        
+      }
+     
+      
+      $scope.load();
     });
 
 
@@ -138,16 +161,19 @@
               <a class="button-asc left" href="#" title="Set Descending Direction"><span class="top_arrow"></span></a> </div>
             <div class="pager">
               <div id="limiter">
-                <label>Lượt xem: </label>
-                <ul>
-                  <li><a href="#">15<span class="right-arrow"></span></a>
-                    <ul>
-                      <li><a href="#">20</a></li>
-                      <li><a href="#">30</a></li>
-                      <li><a href="#">35</a></li>
-                    </ul>
-                  </li>
-                </ul>
+                
+                <label for="luotxem" class="required"><em>*</em>Lượt xem:</label>
+                <select class="luotxem" ng-change="load()"  ng-model="size"  name="" id="" placeholder="10">
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="30">30</option>
+                </select>
+                <style>
+                  .luotxem {
+                    width: 60px;
+                    height: 40px;
+                  }
+                </style>
               </div>
               <!-- Nhật làm -->
               <div class="pages">
@@ -161,84 +187,87 @@
             </div>
           </div>
           <div class="searchpk">
-            <form th:action="@{/home/listcar?page=1}" method="get">
-                <input class="s12" type="text" hidden name="page" value="1">
-                <input class="s12" type="text" placeholder="Search..." name="search">
-                <button class="s12">Search</button>
-            </form>
-            <style>
-                .searchpk {
-                    text-align: right;
-                    padding-right: 25px;
-                }
-                .searchpk .s12{
-                    border: none;
-                    border: 1px solid #ccc;
-                    height: 35px;
-                }
-            </style>
-        </div>
+             
+               
+            <input class="s12" ng-model="ten" type="Ten:" id="ten" placeholder="Search..." name="ten">
+            <button ng-click="find(ten)" class="s12">Search</button>
+       
+        <style>
+            .searchpk {
+                text-align: right;
+                padding-right: 25px;
+            }
+            .searchpk .s12{
+                border: none;
+                border: 1px solid #ccc;
+                height: 35px;
+            }
+        </style>
+    </div>
           <!-- Nhật làm -->
-          <div class="category-products" ng-repeat="lk in pager.lks">
-            <ol class="products-list" id="products-list" >
-          <li class="item first" >
-            <div class="product-image"> <a th:href="@{/home/phukien-detail?idlk={{lk.malk}}}" title="{{lk.ten}}">
-              <div class="new-label new-top-left">Đã sử dụng</div>
-                    <div class="sale-label sale-top-left">-15%</div>
-              <img class="small-image" src="/products-images/p31.jpg" alt="HTC Rhyme Sense"> </a> </div>
-            <div class="product-shop">
-              <h2 class="product-name"><a th:href="@{/home/phukien-detail?idlk={{lk.malk}}}" title="{{lk.ten}}">{{lk.ten}}</a></h2>
-              <div class="ratings">
-                <div class="rating-box">
-                  <div style="width:50%" class="rating"></div>
-                </div>
-                <p class="rating-links"> <a href="#/review/product/list/id/167/category/35/">1 Đánh giá</a> <span class="separator">|</span> <a href="#review-form">Thêm đánh giá</a> </p>
-              </div>
-              <div class="desc std">
-                <p>Số lượng: {{lk.soluong}}</p>
-                <p>{{lk.ghichu}} <a class="link-learn" title="" href="#">Xem thêm</a> </p>
-              </div>
-              <div class="price-box">
-                <p class="old-price"> <span class="price-label"></span> <span id="old-price-212" class="price">{{lk.gia/0.85|number:0}} VNĐ</span> </p>
-                <p class="special-price"> <span class="price-label"></span> <span id="product-price-212" class="price">{{lk.gia|currency:"":0}} VNĐ</span> </p>
-              </div>
-              <div class="add-to-box">
-                <div class="add-to-cart">
-                  <div class="pull-left">
-                    <div class="custom pull-left">
-                      <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
-                      <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
-                      <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
-                    </div>
+         
+           
+            <div class="category-products" ng-repeat="lk in pager.lks">
+              <ol class="products-list" id="products-list" >
+            <li class="item first" >
+              <div class="product-image"> <a th:href="@{/home/phukien-detail?idlk={{lk.malk}}}" title="{{lk.ten}}">
+                <div class="new-label new-top-left">Đã sử dụng</div>
+                      <div class="sale-label sale-top-left">-15%</div>
+                <img class="small-image" src="{{lk.image !=null?lk.image:'/products-images/p35.jpg'}}" alt="HTC Rhyme Sense"> </a> </div>
+              <div class="product-shop">
+                <h2 class="product-name"><a th:href="@{/home/phukien-detail?idlk={{lk.malk}}}" title="{{lk.ten}}">{{lk.ten}}</a></h2>
+                <div class="ratings">
+                  <div class="rating-box">
+                    <div style="width:50%" class="rating"></div>
                   </div>
-                  <div class="add_cart" sec:authorize="isAuthenticated()">
-                     <a sec:authorize="isAuthenticated()" th:href="@{/home/addcart?idlk= {{lk.malk}}}" class="button btn-cart" title="Add to Cart" type="button">Thêm vào giỏ hàng</a>
-                    <div class="actions" sec:authorize="isAuthenticated()"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
-                    <style>
-                      .add_cart {
-                        display: flex;
-                        justify-content: space-around;
-                      }
-                      .btn-cart {
-                        display: flex;
-                        align-items: center;
-                        
-                      }
-                      .actions {
-                        flex: 1;
-                      }
-                    </style>
+                  <p class="rating-links"> <a href="#/review/product/list/id/167/category/35/">1 Đánh giá</a> <span class="separator">|</span> <a href="#review-form">Thêm đánh giá</a> </p>
+                </div>
+                <div class="desc std">
+                  <p>Số lượng: {{lk.soluong}}</p>
+                  <p>{{lk.ghichu}} <a class="link-learn" title="" href="#">Xem thêm</a> </p>
+                </div>
+                <div class="price-box">
+                  <p class="old-price"> <span class="price-label"></span> <span id="old-price-212" class="price">{{lk.gia/0.85|number:0}} VNĐ</span> </p>
+                  <p class="special-price"> <span class="price-label"></span> <span id="product-price-212" class="price">{{lk.gia|currency:"":0}} VNĐ</span> </p>
+                </div>
+                <div class="add-to-box">
+                  <div class="add-to-cart">
+                    <div class="pull-left">
+                      <div class="custom pull-left">
+                        <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty > 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
+                        <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                        <button onclick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
+                      </div>
+                    </div>
+                    <div class="add_cart" sec:authorize="isAuthenticated()">
+                       <a sec:authorize="isAuthenticated()" th:href="@{/home/addcart?idlk= {{lk.malk}}}" class="button btn-cart" title="Add to Cart" type="button">Thêm vào giỏ hàng</a>
+                      <div class="actions" sec:authorize="isAuthenticated()"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> </span> </div>
+                      <style>
+                        .add_cart {
+                          display: flex;
+                          justify-content: space-around;
+                        }
+                        .btn-cart {
+                          display: flex;
+                          align-items: center;
+                          
+                        }
+                        .actions {
+                          flex: 1;
+                        }
+                      </style>
+                    </div>
+                    
+                    <button sec:authorize="!isAuthenticated()" class="button btn-cart" title="Add to Cart" type="button"><a th:href="@{/home/login}">Đăng Nhập Để Thêm Vào Giỏ</a> </button>
                   </div>
                   
-                  <button sec:authorize="!isAuthenticated()" class="button btn-cart" title="Add to Cart" type="button"><a th:href="@{/home/login}">Đăng Nhập Để Thêm Vào Giỏ</a> </button>
                 </div>
-                
               </div>
+            </li>
+            
+          </ol>
             </div>
-          </li>
           
-        </ol>
-          </div>
           <div class="toolbar bottom">
             
             <div id="sort-by">

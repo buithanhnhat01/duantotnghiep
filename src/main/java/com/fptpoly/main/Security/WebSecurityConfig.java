@@ -17,6 +17,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
+    // ma hoa du lieu
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -27,15 +28,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         super.configure(auth);
     }
 
+    // HttpSecurity http
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests().and().formLogin().permitAll();
-        http.authorizeRequests().antMatchers("/home","/home/listcar").permitAll()
-        .antMatchers("/Admin/**","/admin/**").hasAuthority("ADMIN").antMatchers("/home/member/shopping-cart","/Add","/home/dashboard").hasAuthority("USER")
-        .and().exceptionHandling().accessDeniedPage("/403")
-        .and().formLogin().loginPage("/home/login").defaultSuccessUrl("/home").permitAll().loginProcessingUrl("/data")
-        .usernameParameter("username").passwordParameter("password")
-        .and().logout().permitAll().logoutUrl("/login").logoutSuccessUrl("/home");
+        // gui yeu cau`
+        http.authorizeRequests().antMatchers("/home", "/home/listcar").permitAll()
+                // phan quyen` admin
+                .antMatchers("/Admin/**", "/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/home/member/shopping-cart", "/Add", "/home/dashboard").hasAuthority("USER")
+                .and().exceptionHandling().accessDeniedPage("/403")
+                .and().formLogin().loginPage("/home/login").defaultSuccessUrl("/home").permitAll()
+                .loginProcessingUrl("/data")
+                .usernameParameter("username").passwordParameter("password")
+                .and().logout().permitAll().logoutUrl("/login").logoutSuccessUrl("/home");
     }
 }

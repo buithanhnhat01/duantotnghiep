@@ -34,6 +34,8 @@ public class Accessories {
     @Basic
     @Column(name = "Xuatxu")
     private String xuatxu;
+    @Column(name = "image")
+    private String image;
     @ManyToOne
     @JoinColumn(name = "Idcar", referencedColumnName = "Idcar")
     private Car carByMacar;

@@ -53,7 +53,6 @@ public class WebMainController {
     public static String user;
     public static boolean thongbao = false;
 
-
     // trang mặc định
     @GetMapping("home")
     public String main(Model model) {
@@ -70,24 +69,28 @@ public class WebMainController {
 
     // danh sách tất cả các xe
     @GetMapping("home/listcar")
-    public String listcar(Model model,@RequestParam("page")int indexPage,@RequestParam("search")Optional<String> search) {
-        /*_CookieService cookieService = new _CookieService();
-        cookieService.add("page",indexPage+"",1);*/
+    public String listcar(Model model, @RequestParam("page") int indexPage,
+            @RequestParam("search") Optional<String> search) {
+        /*
+         * _CookieService cookieService = new _CookieService();
+         * cookieService.add("page",indexPage+"",1);
+         */
         String check = search.orElse(null);
         Page<Car> page = null;
-        if(check==null || check.isEmpty()){
-             page = carRepository.findAll(PageRequest.of(indexPage-1, 10));
-        }else {
-            Pageable pageable = PageRequest.of(0,Integer.MAX_VALUE);
-            page = carRepository.searchAllByTencarLike(search.get()+"%",pageable);
+        if (check == null || check.isEmpty()) {
+            page = carRepository.findAll(PageRequest.of(indexPage - 1, 10));
+        } else {
+            Pageable pageable = PageRequest.of(0, Integer.MAX_VALUE);
+            page = carRepository.searchAllByTencarLike(search.get() + "%", pageable);
         }
-        if (indexPage==0){
-            indexPage=1;
-        }if (indexPage>=page.getTotalPages()){
+        if (indexPage == 0) {
+            indexPage = 1;
+        }
+        if (indexPage >= page.getTotalPages()) {
             indexPage = page.getTotalPages();
         }
-        model.addAttribute("AllCar",page);
-        model.addAttribute("IndexPage",indexPage);
+        model.addAttribute("AllCar", page);
+        model.addAttribute("IndexPage", indexPage);
         model.addAttribute("Brands", brandRepository.findAll());
         model.addAttribute("Types", typecarRepository.findAll());
         model.addAttribute("fill", new fillCar());
@@ -96,19 +99,18 @@ public class WebMainController {
     }
 
     @GetMapping("home/listcar/sreach")
-    public String search(Model model,@RequestParam("search")String search){
+    public String search(Model model, @RequestParam("search") String search) {
         int totalpage = 0;
-        if(carRepository.findAll().size()%10>0){
-            totalpage = carRepository.findAll().size()/10+1;
-        }else{
-            totalpage =carRepository.findAll().size()/10;
+        if (carRepository.findAll().size() % 10 > 0) {
+            totalpage = carRepository.findAll().size() / 10 + 1;
+        } else {
+            totalpage = carRepository.findAll().size() / 10;
         }
-        model.addAttribute("totalPage",totalpage);
+        model.addAttribute("totalPage", totalpage);
         model.addAttribute("Brands", brandRepository.findAll());
         model.addAttribute("Types", typecarRepository.findAll());
         return "site/products/luoicar";
     }
-
 
     // chức năng đăng xuất
     @GetMapping("logout")
@@ -118,33 +120,37 @@ public class WebMainController {
     }
 
     // chức năng lọc xem theo loại xe và hãng xe
-    /*@GetMapping("home/listcar/{filler}")
-    public String listcar(Model model, @PathVariable("filler") String fil) {
-        try {
-            if (fil.startsWith("LX")) {
-                model.addAttribute("fillCar", carRepository.findAllByTypecarByLoaixe(fil));
-            } else {
-                model.addAttribute("fillCar", carRepository.findAllByBrandByMa(fil));
-            }
-        } catch (Exception e) {
-            model.addAttribute("fillCar", carRepository.findAll());
-        } finally {
-            model.addAttribute("Brands", brandRepository.findAll());
-            model.addAttribute("Types", typecarRepository.findAll());
-            model.addAttribute("fill", new fillCar());
-            return "site/products/listcar";
-        }
-
-    }*/
-    /*@GetMapping("home/listcar/{filler}")
-    public String listcar(Model model) {
-        *//*model.addAttribute("namsx",x);*//*
-        model.addAttribute("Brands", brandRepository.findAll());
-        model.addAttribute("Types", typecarRepository.findAll());
-        model.addAttribute("fill", new fillCar());
-        return "site/products/luoicar";
-
-    }*/
+    /*
+     * @GetMapping("home/listcar/{filler}")
+     * public String listcar(Model model, @PathVariable("filler") String fil) {
+     * try {
+     * if (fil.startsWith("LX")) {
+     * model.addAttribute("fillCar", carRepository.findAllByTypecarByLoaixe(fil));
+     * } else {
+     * model.addAttribute("fillCar", carRepository.findAllByBrandByMa(fil));
+     * }
+     * } catch (Exception e) {
+     * model.addAttribute("fillCar", carRepository.findAll());
+     * } finally {
+     * model.addAttribute("Brands", brandRepository.findAll());
+     * model.addAttribute("Types", typecarRepository.findAll());
+     * model.addAttribute("fill", new fillCar());
+     * return "site/products/listcar";
+     * }
+     * 
+     * }
+     */
+    /*
+     * @GetMapping("home/listcar/{filler}")
+     * public String listcar(Model model) {
+     *//* model.addAttribute("namsx",x); *//*
+                                            * model.addAttribute("Brands", brandRepository.findAll());
+                                            * model.addAttribute("Types", typecarRepository.findAll());
+                                            * model.addAttribute("fill", new fillCar());
+                                            * return "site/products/luoicar";
+                                            * 
+                                            * }
+                                            */
 
     // chức năng thêm sản phẩm vào giỏ hàng trực tiếp bằng thymeleaf
     @GetMapping("home/addcart")
@@ -175,7 +181,7 @@ public class WebMainController {
     @PostMapping("home/listcar")
     public void listcar(Model model, @ModelAttribute("fill") fillCar fillcar) {
         fill = fillcar;
-        /*return "site/products/listcar";*/
+        /* return "site/products/listcar"; */
     }
 
     @GetMapping("home/luoicar")
@@ -184,17 +190,17 @@ public class WebMainController {
     }
 
     @GetMapping(value = "home/car-detail")
-    public String cardetail(Model model, @RequestParam("idcar") String id,Principal principal) {
+    public String cardetail(Model model, @RequestParam("idcar") String id, Principal principal) {
         try {
             user = principal.getName();
-            model.addAttribute("Account",accountRepository.findAllByMatv(principal.getName()));
-        }catch (Exception ex){
-            model.addAttribute("Account",new Account());
+            model.addAttribute("Account", accountRepository.findAllByMatv(principal.getName()));
+        } catch (Exception ex) {
+            model.addAttribute("Account", new Account());
             logger.info("Không Sao Vẫn Ổn 😘👌");
         }
         Date x = new Date();
         idcar = id;
-        /*carRepository.findCarsByIdcar(id).getImagescarsByIdcar().get(0).getHinh();*/
+        /* carRepository.findCarsByIdcar(id).getImagescarsByIdcar().get(0).getHinh(); */
         model.addAttribute("thongtingio", appointmentRepository.findNgayhenAndCarByIdcar(x, id));
         model.addAttribute("Cardetail", carRepository.findCarsByIdcar(id));
         return "site/products/car-detail";
@@ -211,7 +217,6 @@ public class WebMainController {
     public String luoipk(Model model) {
         return "site/products/luoipk";
     }
-
 
     // hiển thị chi tiết sản phẩm
     @GetMapping("home/phukien-detail")
@@ -243,28 +248,34 @@ public class WebMainController {
         return "site/about-us";
     }
 
-    //Shop Cart
+    // Shop Cart
     @GetMapping("home/member/shopping-cart")
     public String giohang(Model model) {
-          /*UserDetails userDetail =(UserDetails) authentication.getPrincipal();
-          System.out.println("Tên Đăng Nhập: "+userDetail.getUsername()+"Pass "+userDetail.getAuthorities());
-          model.addAttribute("Mycarts",cartaccessoriesRepository.findAllByMatv(userDetail.getUsername()));*/
+        /*
+         * UserDetails userDetail =(UserDetails) authentication.getPrincipal();
+         * System.out.println("Tên Đăng Nhập: "+userDetail.getUsername()+"Pass "
+         * +userDetail.getAuthorities());
+         * model.addAttribute("Mycarts",cartaccessoriesRepository.findAllByMatv(
+         * userDetail.getUsername()));
+         */
         model.addAttribute("thongbao", thongbao);
         thongbao = false;
         return "site/shopping-cart/shopping-cart";
     }
 
-    /*@GetMapping("home/o")
-    public String quenmatkhau(Model model){
-         return "site/security/quenmatkhau";
-    }*/
+    /*
+     * @GetMapping("home/o")
+     * public String quenmatkhau(Model model){
+     * return "site/security/quenmatkhau";
+     * }
+     */
     @GetMapping("home/checkout")
     public String checkout(Model model) {
         return "site/oders/check";
     }
 
     @GetMapping("home/Payorder")
-    public String payorder(Model model, Principal principal,@RequestParam("total")double total) {
+    public String payorder(Model model, Principal principal, @RequestParam("total") double total) {
         try {
             Random rn = new Random();
             int HoadonNumber = rn.nextInt(99999999) + 10000000;
@@ -274,21 +285,25 @@ public class WebMainController {
             Billaccessories billaccessories = new Billaccessories();
             billaccessories.setMahd(Mahoadon);
             billaccessories.setAccountByMatv(accountRepository.findAllByMatv(principal.getName()));
-            /*billaccessories.setNgaynhan(null);*/
-            for (Cartaccessories cartaccessories : cartaccessoriesRepository.findAllByAccount_Matv(principal.getName())) {
+            /* billaccessories.setNgaynhan(null); */
+            for (Cartaccessories cartaccessories : cartaccessoriesRepository
+                    .findAllByAccount_Matv(principal.getName())) {
                 tongtien += cartaccessories.getSoluong() * cartaccessories.getAccessoriesByMalk().getGia();
             }
-            if (total-tongtien==27000){
+            if (total - tongtien == 27000) {
                 billaccessories.setVanchuyen("Giao Hàng Tiết Kiệm");
-            }else if (total-tongtien==40000) {
+            } else if (total - tongtien == 40000) {
                 billaccessories.setVanchuyen("Giao Hàng Tận Nơi");
-            }else {billaccessories.setVanchuyen("Giao hàng Tiêu Chuẩn"); }
-            billaccessories.setPhivanvchuyen(total-tongtien);
+            } else {
+                billaccessories.setVanchuyen("Giao hàng Tiêu Chuẩn");
+            }
+            billaccessories.setPhivanvchuyen(total - tongtien);
             billaccessories.setTongtien(tongtien);
             billaccessories.setTrangthai("PENDING");
             billaccessoriesRepository.save(billaccessories);
             // tạo vào lưu hoá đơn chi tiết
-            for (Cartaccessories cartaccessories : cartaccessoriesRepository.findAllByAccount_Matv(principal.getName())) {
+            for (Cartaccessories cartaccessories : cartaccessoriesRepository
+                    .findAllByAccount_Matv(principal.getName())) {
                 Billaccessoriesdetail billaccessoriesdetail = new Billaccessoriesdetail();
                 billaccessoriesdetail.setBillaccessoriesByMahd(billaccessoriesRepository.findAllByMahd(Mahoadon));
                 billaccessoriesdetail.setAccessoriesByMalk(cartaccessories.getAccessoriesByMalk());
@@ -307,14 +322,14 @@ public class WebMainController {
     }
 
     @GetMapping("home/{status}")
-    public String pending(Model model,@PathVariable("status")String status,@RequestParam("idhd") String id) {
+    public String pending(Model model, @PathVariable("status") String status, @RequestParam("idhd") String id) {
         try {
             Billaccessories billaccessories = billaccessoriesRepository.findAllByMahd(id);
-            if (status.equals("PENDING") || status.equals("PACKING")){
+            if (status.equals("PENDING") || status.equals("PACKING")) {
                 billaccessories.setTrangthai("CANCEL");
                 billaccessories.setNgaynhan(new Date());
                 logger.info("Huỷ Đơn Thành Công");
-            }else if(status.equals("CANCEL")){
+            } else if (status.equals("CANCEL")) {
                 billaccessories.setTrangthai("PENDING");
                 billaccessories.setNgaymua(new Date());
                 billaccessories.setNgaynhan(null);
@@ -324,52 +339,55 @@ public class WebMainController {
         } catch (Exception e) {
             System.out.println(e);
         }
-        return "redirect:/home/dashboard?status="+status;
+        return "redirect:/home/dashboard?status=" + status;
     }
-
 
     @GetMapping("home/hoadon")
     public String hoadon(Model model, @RequestParam("idhd") String idhd) {
         model.addAttribute("billdetail", billaccessoriesdetailRepository.findAllByBillaccessoriesByMahd_Mahd(idhd));
         return "site/user/hoadon-detail";
     }
-    
 
     @GetMapping("home/LichHen")
-    public String appointment(Model model,Principal principal) {
-        model.addAttribute("appontments",appointmentRepository.fillappointment(principal.getName()));
+    public String appointment(Model model, Principal principal) {
+        model.addAttribute("appontments", appointmentRepository.fillappointment(principal.getName()));
         return "site/user/lichhen";
 
-    }@GetMapping("home/LichHen/Huy")
-    public String cancelappointment(Model model,@RequestParam("ma")int ma){
+    }
+
+    @GetMapping("home/LichHen/Huy")
+    public String cancelappointment(Model model, @RequestParam("ma") int ma) {
         appointmentRepository.delete(appointmentRepository.findByStt(ma));
         return "site/user/lichhen";
     }
+
     @GetMapping("home/dashboard")
     public String dashboard(Model model, Principal principal, @RequestParam("status") Optional<String> status) {
         String trangthai = status.orElse("PENDING");
-        model.addAttribute("donhangs", billaccessoriesRepository.findAllByTrangthaiAndAccountByMatv_MatvOrderByNgaymuaDesc(trangthai, principal.getName()));
-        model.addAttribute("checked",trangthai);
+        model.addAttribute("donhangs", billaccessoriesRepository
+                .findAllByTrangthaiAndAccountByMatv_MatvOrderByNgaymuaDesc(trangthai, principal.getName()));
+        model.addAttribute("checked", trangthai);
         return "site/user/donhang";
     }
-     //ordercar tai lam
- @GetMapping("Admin/orders-car")
- public String billlistCar(Model model) {
-     List<Billcar> list = billcarRepository.findAll();
-     model.addAttribute("billcar", list);
-     return "admin/pages/E-commerce/orders/orders-car";
-     
- }
- //orderaccess tai lam
- @GetMapping("Admin/orders-accessories")
- public String bill(Model model){
-     Billaccessories bill = new Billaccessories();
-     model.addAttribute("bill", bill);
-     List<Billaccessories> bills = billaccessoriesRepository.findAll();
-     model.addAttribute("bills", bills);
-      return "admin/pages/E-commerce/orders/orders-accessories";
- }
 
+    // ordercar tai lam
+    @GetMapping("Admin/orders-car")
+    public String billlistCar(Model model) {
+        List<Billcar> list = billcarRepository.findAll();
+        model.addAttribute("billcar", list);
+        return "admin/pages/E-commerce/orders/orders-car";
+
+    }
+
+    // orderaccess tai lam
+    @GetMapping("Admin/orders-accessories")
+    public String bill(Model model) {
+        Billaccessories bill = new Billaccessories();
+        model.addAttribute("bill", bill);
+        List<Billaccessories> bills = billaccessoriesRepository.findAll();
+        model.addAttribute("bills", bills);
+        return "admin/pages/E-commerce/orders/orders-accessories";
+    }
 
     @GetMapping("home/donhang")
     public String donhang(Model model) {
@@ -406,5 +424,6 @@ public class WebMainController {
     public String quenmatkhau(Model model) {
         return "site/security/quenmatkhau";
     }
+    // Nhật làm thêm search
 
 }

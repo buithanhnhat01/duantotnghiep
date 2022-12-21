@@ -1,7 +1,7 @@
 package com.fptpoly.main.Controller;
 
-
 import com.fptpoly.main.Dao.*;
+import com.fptpoly.main.Entity.Accessories;
 import com.fptpoly.main.Entity.Appointment;
 import com.fptpoly.main.Entity.Cartaccessories;
 import com.fptpoly.main.Entity.Votecar;
@@ -24,7 +24,6 @@ import java.util.Optional;
 public class Index {
 
     WebMainController controller = new WebMainController();
-
 
     @Autowired
     _CookieService cookieService;
@@ -51,7 +50,7 @@ public class Index {
     // hiển thị tất cả xe
     @GetMapping("CarsAll")
     public List Allcar() {
-        /*System.out.println("Số lượng mãng:"+carRepository.findAll().size());*/
+        /* System.out.println("Số lượng mãng:"+carRepository.findAll().size()); */
         return carRepository.findAll();
     }
 
@@ -89,10 +88,13 @@ public class Index {
     public void addlk(@RequestParam("idlk") String id, Principal principal) {
         System.out.println("Mã Sinh Kiện: " + id);
         boolean check = false;
-        List<Cartaccessories> carts = cartaccessoriesRepository.findAllByAccount_Matv(principal.getName());  // kiểm tra sảm phẩm đã thêm chưa
+        List<Cartaccessories> carts = cartaccessoriesRepository.findAllByAccount_Matv(principal.getName()); // kiểm tra
+                                                                                                            // sảm phẩm
+                                                                                                            // đã thêm
+                                                                                                            // chưa
         for (int i = 0; i < carts.size(); ++i) {
             Cartaccessories cart = carts.get(i);
-            if (cart.getAccessoriesByMalk().getMalk().equals(id)) {      // sản phẩm đã có trong giỏ thì tăng 1
+            if (cart.getAccessoriesByMalk().getMalk().equals(id)) { // sản phẩm đã có trong giỏ thì tăng 1
                 cart.setSoluong(cart.getSoluong() + 1);
                 cartaccessoriesRepository.save(cart);
                 check = true;
@@ -100,7 +102,7 @@ public class Index {
             }
         }
         if (!check) {
-            Cartaccessories cart = new Cartaccessories();  // sản phẩm chưa thêm thì thêm sản phẩm vào giỏ hàng
+            Cartaccessories cart = new Cartaccessories(); // sản phẩm chưa thêm thì thêm sản phẩm vào giỏ hàng
             cart.setAccessoriesByMalk(accessoriesRepository.findAllByMalk(id));
             cart.setAccount(accountRepository.findAllByMatv(principal.getName()));
             cart.setSoluong(1);
@@ -117,9 +119,10 @@ public class Index {
     }
 
     @GetMapping("/Appointment/Add")
-    public void book(@RequestParam("ngayhen")Date ngayhen, @RequestParam("khunggio")String khunggio, Principal principal) throws ParseException {
+    public void book(@RequestParam("ngayhen") Date ngayhen, @RequestParam("khunggio") String khunggio,
+            Principal principal) throws ParseException {
         try {
-            System.out.println("Ngày Hẹn: "+ngayhen+"  KHung Giờ: "+khunggio);
+            System.out.println("Ngày Hẹn: " + ngayhen + "  KHung Giờ: " + khunggio);
             Appointment create = new Appointment();
             SimpleDateFormat x = new SimpleDateFormat("yyyy-MM-dd");
             System.out.println(x.format(ngayhen));
@@ -133,42 +136,44 @@ public class Index {
             create.setGhichu("Không Có Chi");
             appointmentRepository.save(create);
             System.out.println("Đặt thành công");
-        }catch (Exception ex){
-            System.out.println("Lỗi:"+ex);
+        } catch (Exception ex) {
+            System.out.println("Lỗi:" + ex);
         }
-        /*return "Đặt lịch thành công";*/
+        /* return "Đặt lịch thành công"; */
     }
 
     @PostMapping("Addvote")
-    public List addvote(@RequestBody String body,@RequestParam("star")int star,Principal principal){
-        WebMainController x= new WebMainController();
+    public List addvote(@RequestBody String body, @RequestParam("star") int star, Principal principal) {
+        WebMainController x = new WebMainController();
         try {
             Votecar votecar = new Votecar();
-            System.out.println("IDCAR: "+x.idcar);
+            System.out.println("IDCAR: " + x.idcar);
             votecar.setNgay(new Date());
-            votecar.setNoidung(body==null?"":body);
+            votecar.setNoidung(body == null ? "" : body);
             votecar.setCarByMaxe(carRepository.findCarsByIdcar(x.idcar));
             votecar.setAccountByMatv(accountRepository.findAllByMatv(principal.getName()));
             votecar.setDanhgia(star);
             votecarRepository.save(votecar);
-            System.out.println("Lưu Đánh Giá Thành Công: "+body);
-        }catch (Exception ex){
+            System.out.println("Lưu Đánh Giá Thành Công: " + body);
+        } catch (Exception ex) {
             System.out.println("Lỗi chi nè");
         }
         return votecarRepository.findAllByCarByMaxe_IdcarOrderByNgayDesc(x.idcar);
     }
+
     @GetMapping("Addvote")
-    public List votecar(){
-        WebMainController x= new WebMainController();
+    public List votecar() {
+        WebMainController x = new WebMainController();
         try {
             return votecarRepository.findAllByCarByMaxe_IdcarOrderByNgayDesc(x.idcar);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Lỗi chi ri nè");
             return votecarRepository.findAllByCarByMaxe_IdcarOrderByNgayDesc(x.idcar);
         }
     }
+
     @GetMapping("TotalPage")
-    public  List totalpage() {
+    public List totalpage() {
         return carRepository.findAll();
     }
 
@@ -177,7 +182,20 @@ public class Index {
     public List accessories() {
         return accessoriesRepository.findAll();
     }
-// Nhật làm
+
+    // @GetMapping("LinhKien/Search")
+    // public Accessories getOne(@PathVariable("ten") String ten) {
+    // return accessoriesRepository.findByName(ten);
+    // }
+    @GetMapping("LinhKien/Search")
+    public List<Accessories> findName1(@RequestParam("ten") String ten) {
+        if (ten.isEmpty()) {
+            return accessoriesRepository.findAll();
+        }
+        return accessoriesRepository.findAllByTenLike("%" + ten + "%");
+    }
+
+    // Nhật làm
     // danh sách tất cả lich hen
     @GetMapping("LichHen")
     public List lichs() {

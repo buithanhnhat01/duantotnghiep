@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
@@ -239,10 +240,10 @@
   <div class="navbar-nav-wrap">
     <div class="navbar-brand-wrapper">
       <!-- Logo -->
-      <!-- <a class="navbar-brand" th:href="@{/Admin}" aria-label="Front">
-        <img class="navbar-brand-logo" th:src="@{\assets\svg\logos\logo.svg}" alt="Logo">
-        <img class="navbar-brand-logo-mini" th:src="@{\assets\svg\logos\logo-short.svg}" alt="Logo">
-      </a> -->
+      <a class="navbar-brand" th:href="@{/Admin}" aria-label="Front">
+        <img class="navbar-brand-logo" th:src="@{\assets\img\logo1.png}" alt="Logo">
+        <img class="navbar-brand-logo-mini" th:src="@{\assets\img\logo1.png}" alt="Logo">
+      </a>
       <!-- End Logo -->
     </div>
 
@@ -887,9 +888,9 @@
       <!-- Logo -->
       
       
-        <!-- <a class="navbar-brand" th:href="@{/Admin}"  aria-label="Front">
-          <img class="navbar-brand-logo" th:src="@{\assets\svg\logos\logo.svg}" alt="Logo">
-        </a> -->
+        <a class="navbar-brand" th:href="@{/Admin}"  aria-label="Front">
+          <img class="navbar-brand-logo" th:src="@{\assets\img\logo1.png}" alt="Logo">
+        </a> 
       
       <!-- End Logo -->
     </div>
@@ -1700,9 +1701,9 @@
       <div class="navbar-nav-wrap">
         <div class="navbar-brand-wrapper">
           <!-- Logo -->
-          <!-- <a class="navbar-brand" href="index.html" aria-label="Front">
-            <img class="navbar-brand-logo" th:src="@{\assets\svg\logos\logo-white.svg}" alt="Logo">
-          </a> -->
+          <a class="navbar-brand" href="index.html" aria-label="Front">
+            <img class="navbar-brand-logo" th:src="@{\assets\img\logo1.png}" alt="Logo">
+          </a>
           <!-- End Logo -->
         </div>
 
@@ -2714,10 +2715,10 @@
         <!-- Logo -->
         
         
-          <!-- <a class="navbar-brand" th:href="@{/Admin}"  aria-label="Front">
-            <img class="navbar-brand-logo" th:src="@{\assets\svg\logos\logo.svg}" alt="Logo">
-            <img class="navbar-brand-logo-mini" th:src="@{\assets\svg\logos\logo-short.svg}" alt="Logo">
-          </a> -->
+         <a class="navbar-brand" th:href="@{/Admin}"  aria-label="Front">
+            <img class="navbar-brand-logo" th:src="@{\assets\img\logo1.png}" alt="Logo">
+            <img class="navbar-brand-logo-mini" th:src="@{\assets\img\logo1.png}" alt="Logo">
+          </a> 
         
         <!-- End Logo -->
 
@@ -2827,109 +2828,97 @@
               <li class="navbar-vertical-aside-has-menu ">
                 <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="E-commerce">
                   <span class="tio-circle nav-indicator-icon"></span>
-                  <span class="text-truncate">Quản lý</span>
+                  <span class="text-truncate">Quản lý sản phẩm</span>
                 </a>
-
                 <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
                  
 
                   <li class="navbar-vertical-aside-has-menu ">
-                    <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="Products">
-                      <span class="tio-circle-outlined nav-indicator-icon"></span>
-                      <span class="text-truncate">Sản phẩm</span>
+                    
+                    <a class="nav-link " th:href="@{/Admin/product-car}" title="Products">
+                      <span class="tio-circle nav-indicator-icon"></span>
+                      <span class="text-truncate">Xe</span>
                     </a>
-<!-- 5 -->
-                    <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-                      <li class="nav-item">
-                        <a class="nav-link " th:href="@{/Admin/product-car}" title="Products">
-                          <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Xe</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link " th:href="@{/Admin/product-phukien}" title="Products">
-                          <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Linh kiện</span>
-                        </a>
-                      </li>
-                     
-                     
-                      <li class="nav-item">
-                        <a class="nav-link " th:href="@{/Admin/add-car}" title="Add car">
-                          <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Thêm xe</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link " th:href="@{/Admin/add-accessories}" title="Add access">
-                          <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Thêm linh kiện</span>
-                        </a>
-                      </li>
-                    </ul>
+                    <a class="nav-link " th:href="@{/Admin/product-phukien}" title="Products">
+                      <span class="tio-circle nav-indicator-icon"></span>
+                      <span class="text-truncate">Linh kiện</span>
+                    </a>
+                    <a class="nav-link " th:href="@{/Admin/add-car}" title="Add car">
+                      <span class="tio-circle nav-indicator-icon"></span>
+                      <span class="text-truncate">Thêm xe</span>
+                    </a>
+                    <a class="nav-link " th:href="@{/Admin/add-accessories}" title="Add access">
+                      <span class="tio-circle nav-indicator-icon"></span>
+                      <span class="text-truncate">Thêm linh kiện</span>
+                    </a>
+                    <!-- 5 -->
+   
                     <!--  6-->
-                  </li>
-
-                  <li class="navbar-vertical-aside-has-menu ">
-                    <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="Orders">
-                      <span class="tio-circle-outlined nav-indicator-icon"></span>
-                      <span class="text-truncate">Hóa đơn</span>
-                    </a>
-
-                    <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-                      <li class="nav-item">
-                        <a class="nav-link " th:href="@{/Admin/orders-car}" title="Orders">
-                          <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Hóa đơn xe</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link " th:href="@{/Admin/orders-accessories}" title="Orders">
-                          <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Thêm hóa đơn</span>
-                        </a>
-                      </li>
-                     
-                    </ul>
-                  </li>
-
-                  <li class="navbar-vertical-aside-has-menu ">
-                    <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="Customers">
-                      <span class="tio-circle-outlined nav-indicator-icon"></span>
-                      <span class="text-truncate">Customers</span>
-                    </a>
-
-                    <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-                      <li class="nav-item">
-                        <a class="nav-link " href="ecommerce-customers.html" title="Customers">
-                          <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Customers</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link " href="ecommerce-customer-details.html" title="Customer Details">
-                          <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Customer Details</span>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a class="nav-link " href="ecommerce-add-customers.html" title="Add Customers">
-                          <span class="tio-circle nav-indicator-icon"></span>
-                          <span class="text-truncate">Add Customers</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-
-                  
+                  </li>  
                 </ul>
               </li>
-
-              
-
-             
-
-             
+              <li class="navbar-vertical-aside-has-menu ">
+                <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="E-commerce">
+                  <span class="tio-circle nav-indicator-icon"></span>
+                  <span class="text-truncate">Quản lý hóa đơn</span>
+                </a>
+                <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+                  <li class="navbar-vertical-aside-has-menu ">
+                   
+                    <a class="nav-link " th:href="@{/Admin/orders-car}" title="Orders">
+                      <span class="tio-circle nav-indicator-icon"></span>
+                      <span class="text-truncate">Hóa đơn xe</span>
+                    </a>
+                    <a class="nav-link " th:href="@{/Admin/orders-accessories}" title="Orders">
+                      <span class="tio-circle nav-indicator-icon"></span>
+                      <span class="text-truncate">Thêm hóa đơn</span>
+                    </a>
+                <!-- aaa -->             
+                  </li>             
+                </ul>
+              </li>
+              <li class="navbar-vertical-aside-has-menu ">
+                <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="E-commerce">
+                  <span class="tio-circle nav-indicator-icon"></span>
+                  <span class="text-truncate">Quản lý người dùng</span>
+                </a>
+               <!-- 4 -->
+                <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
+                  <li class="navbar-vertical-aside-has-menu ">                 
+                    <a class="nav-link " href="ecommerce-customers.html" title="Customers">
+                      <span class="tio-circle nav-indicator-icon"></span>
+                      <span class="text-truncate">Customers</span>
+                    </a>
+                    <a class="nav-link " href="ecommerce-customer-details.html" title="Customer Details">
+                      <span class="tio-circle nav-indicator-icon"></span>
+                      <span class="text-truncate">Customer Details</span>
+                    </a>
+                    <a class="nav-link " href="ecommerce-add-customers.html" title="Add Customers">
+                      <span class="tio-circle nav-indicator-icon"></span>
+                      <span class="text-truncate">Add Customers</span>
+                    </a>
+                    <!-- ----- -->               
+                  </li>               
+                </ul>
+              </li>
+              <li class="navbar-vertical-aside-has-menu ">
+                <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="E-commerce">
+                  <span class="tio-circle nav-indicator-icon"></span>
+                  <span class="text-truncate">Quản lý lịch hẹn</span>
+                </a>
+              </li><li class="navbar-vertical-aside-has-menu ">
+                <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="E-commerce">
+                  <span class="tio-circle nav-indicator-icon"></span>
+                  <span class="text-truncate">Quản lý Feedback</span>
+                </a>
+              </li>
+              <li class="navbar-vertical-aside-has-menu ">
+                <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle" href="javascript:;" title="E-commerce">
+                  <span class="tio-circle nav-indicator-icon"></span>
+                  <span class="text-truncate">Thống kê</span>
+                </a>
+              </li>
+     
             </ul>
           </li>
           <!-- End Pages -->
@@ -2942,19 +2931,10 @@
          
           <!-- End Authentication -->
 
-         
-
-          
 
           <li class="nav-item">
             <div class="nav-divider"></div>
           </li>
-
-          
-
-          
-
-          
 
           <li class="nav-item">
             <small class="tio-more-horizontal nav-subtitle-replacer"></small>
@@ -2979,40 +2959,7 @@
           <!-- End Front Builder -->
 
           <!-- Help -->
-          <li class="navbar-vertical-aside-has-menu nav-footer-item ">
-            <a class="js-navbar-vertical-aside-menu-link nav-link nav-link-toggle " href="javascript:;" title="Help">
-              <i class="tio-home-vs-1-outlined nav-icon"></i>
-              <span class="navbar-vertical-aside-mini-mode-hidden-elements text-truncate">Hỗ trợ</span>
-            </a>
 
-            <ul class="js-navbar-vertical-aside-submenu nav nav-sub">
-              <li class="nav-item">
-                <a class="nav-link" href="#" title="Resources &amp; tutorials">
-                  <i class="tio-book-outlined dropdown-item-icon"></i> Tài nguyên &amp; hướng dẫn
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" title="Keyboard shortcuts">
-                  <i class="tio-command-key dropdown-item-icon"></i> Các phím tắt bàn phím
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" title="Connect other apps">
-                  <i class="tio-alt dropdown-item-icon"></i> Kết nối với ứng dụng khác
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" title="What's new?">
-                  <i class="tio-gift dropdown-item-icon"></i> Có gì mới?
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#" title="Contact support">
-                  <i class="tio-chat-outlined dropdown-item-icon"></i> Liên kết hỗ trợ
-                </a>
-              </li>
-            </ul>
-          </li>
           <!-- End Help -->
 
           <!-- Language -->
@@ -3088,42 +3035,7 @@
 
           <li class="navbar-vertical-footer-list-item">
             <!-- Other Links -->
-            <div class="hs-unfold">
-              <a class="js-hs-unfold-invoker btn btn-icon btn-ghost-secondary rounded-circle" href="javascript:;" data-hs-unfold-options='{
-                  "target": "#otherLinksDropdown",
-                  "type": "css-animation",
-                  "animationIn": "slideInDown",
-                  "hideOnScroll": true
-                 }'>
-                <i class="tio-help-outlined"></i>
-              </a>
 
-              <div id="otherLinksDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu navbar-vertical-footer-dropdown">
-                <span class="dropdown-header">Hỗ trợ</span>
-                <a class="dropdown-item" href="#">
-                  <i class="tio-book-outlined dropdown-item-icon"></i>
-                  <span class="text-truncate pr-2" title="Resources &amp; tutorials">Tài nguyên &amp; hướng dẫn</span>
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="tio-command-key dropdown-item-icon"></i>
-                  <span class="text-truncate pr-2" title="Keyboard shortcuts">Phím tắt bàn phím</span>
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="tio-alt dropdown-item-icon"></i>
-                  <span class="text-truncate pr-2" title="Connect other apps">Kết nới với ứng dụng khác</span>
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="tio-gift dropdown-item-icon"></i>
-                  <span class="text-truncate pr-2" title="What's new?">Có gì mới</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                <span class="dropdown-header">Kết nối</span>
-                <a class="dropdown-item" href="#">
-                  <i class="tio-chat-outlined dropdown-item-icon"></i>
-                  <span class="text-truncate pr-2" title="Contact support">Liên kết hỗ trợ</span>
-                </a>
-              </div>
-            </div>
             <!-- End Other Links -->
           </li>
 
@@ -3181,10 +3093,10 @@
       <!-- Logo -->
       
       
-        <!-- <a class="navbar-brand" href="index.html" aria-label="Front">
-          <img class="navbar-brand-logo-short" th:src="@{\assets\svg\logos\logo-short.svg}" alt="Logo">
+        <a class="navbar-brand" href="index.html" aria-label="Front">
+          <img class="navbar-brand-logo-short" th:src="@{\assets\img\logo1.png}" alt="Logo">
         </a>
-       -->
+      
       <!-- End Logo -->
     </div>
 

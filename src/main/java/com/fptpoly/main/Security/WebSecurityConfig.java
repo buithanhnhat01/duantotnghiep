@@ -17,12 +17,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    // ma hoa du lieu
+    // ma hoa mat khau
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    // có một object quan trọng đó là UserDetailsService. Đây là object của Spring,
+    // nó nắm giữ thông tin quan trọng như Username này là ai trong hệ thống ,
+    // UserName này có quyền gì.
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         super.configure(auth);

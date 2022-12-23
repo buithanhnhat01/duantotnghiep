@@ -33,3 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         return userDetails;
     }
 }
+// định nghĩa cách kiểm tra username , password và quyền của user có hợp lệ hay
+// không Khi
+// user login vào hệ thống ta sẽ query xuống database để kiểm tra user có đúng
+// trong database không và quyền là gì ?
